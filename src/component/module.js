@@ -1,6 +1,5 @@
-import React from "react";
 import Sidebar from "./sidebar";
-import Image from "./applelogo.jpg";
+import Image from "../applelogo.jpg"
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns';
 
@@ -27,6 +26,7 @@ function Module({ position, company, location ,date}) {
     const daysAgo = differenceInDays(new Date(currentDate), new Date(date));
     return daysAgo;
   };
+
 
   return (
     <div>

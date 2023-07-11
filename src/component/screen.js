@@ -7,32 +7,36 @@ import { differenceInDays } from 'date-fns';
 
 
 function Screen() {
-  const getAllURL = "jobs";
+  const getAllURL = "http://localhost:3005/job";
   const [searchQuery, setSearchQuery] = useState("");
   const [alljob, setAllJob] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsPerPage] = useState(2);
+  const [filters, setFilters] = useState({});
 
   const handleSearch = () => {
     const filteredResults = alljob.filter(
       (job) =>
-        job.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        job.location.toLowerCase().includes(searchQuery.toLowerCase())
+        job.position.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        Object.entries(filters).every(([filterKey, filterValues]) =>
+          filterValues.length === 0 ? true : filterValues.includes(job[filterKey])
+        )
     );
     setSearchResults(filteredResults);
     if (filteredResults.length === 0) {
       alert("No results found");
     }
   };
+
   
   const getAllPost = () => {
-    fetch(getAllURL)
-      .then((response) => response.json())
-      .then((data) => {
-        setAllJob(data);
+    axios
+      .get("job")
+      .then((response) => {
+        console.log(response.data);
+        setAllJob(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -43,6 +47,7 @@ function Screen() {
   useEffect(() => {
     getAllPost();
   }, []);
+
 
   const comparePositions = (a, b) => {
     if (a.position < b.position) return sortAscending ? -1 : 1;
