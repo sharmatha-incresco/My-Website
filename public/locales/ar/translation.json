@@ -1,0 +1,77 @@
+{
+    "screen": {
+      "searchResults": "نتائج البحث / الوظائف",
+      "sortBy": "فرز حسب",
+      "ascending": "أ-ي",
+      "descending": "ي-أ",
+      "noResults": "لم يتم العثور على نتائج",
+      "filterBy": "تصفية حسب"
+    },
+    "sidebar": {
+      "companies": {
+        "companyName": "الشركة",
+        "options": [
+          { "id": 1, "name": "أمازون" },
+          { "id": 2, "name": "CVS HEALTH" },
+          { "id": 3, "name": "تويوتا" },
+          { "id": 4, "name": "آبل" }
+        ]
+      },
+      "locations": {
+        "companyName": "الموقع",
+        "options": [
+          { "id": 4, "name": "مومباي" },
+          { "id": 5, "name": "تشانديغار" },
+          { "id": 6, "name": "كارناتاكا" },
+          { "id": 7, "name": "بنغالور" }
+        ]
+      },
+      "datePosted": {
+        "companyName": "تاريخ النشر",
+        "options": [
+          { "id": 4, "name": "آخر 24 ساعة" },
+          { "id": 5, "name": "آخر 48 ساعة" },
+          { "id": 6, "name": "آخر 7 أيام" },
+          { "id": 7, "name": "آخر 14 يومًا" }
+        ]
+      },
+      "skills": {
+        "companyName": "المهارات",
+        "options": [
+          { "id": 4, "name": "جافا سكريبت" },
+          { "id": 5, "name": "تعلم الآلة" },
+          { "id": 6, "name": "جي كويري" },
+          { "id": 7, "name": "الذكاء الاصطناعي" }
+        ]
+      },
+      "experience": {
+        "companyName": "الخبرة",
+        "options": [
+          { "id": 4, "name": "0-2 سنوات" },
+          { "id": 5, "name": "3-5 سنوات" },
+          { "id": 6, "name": "5-8 سنوات" },
+          { "id": 7, "name": "أكثر من 8 سنوات" }
+        ]
+      },
+      "education": {
+        "companyName": "التعليم",
+        "options": [
+          { "id": 4, "name": "بكالوريوس" },
+          { "id": 5, "name": "ماجستير" },
+          { "id": 6, "name": "دكتوراة" },
+          { "id": 7, "name": "دبلوم" }
+        ]
+      }
+    },
+    "topbar": {
+      "jobs": "وظائف",
+      "searchPlaceholder": "ابحث عن وظائف...",
+      "notifications": "5 إشعارات",
+      "sharmatha": "شرماتا",
+      "email": "sharmatha1823@gmail.com"
+    },
+    "module": {
+      "skillMatch": "مطابقة المهارات"
+    }
+  }
+  

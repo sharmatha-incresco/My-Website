@@ -1,0 +1,77 @@
+{
+    "screen": {
+      "searchResults": "தேடல் முடிவுகள் / வேலைகள்",
+      "sortBy": "வரிசைப்படுத்து",
+      "ascending": "ஆசிரியாகும் வடிவம்",
+      "descending": "இறங்கிய வடிவம்",
+      "noResults": "முடிவுகள் எதுவும் இல்லை",
+      "filterBy": "படிப்பு வடிவமைப்பு"
+    },
+    "sidebar": {
+      "companies": {
+        "companyName": "நிறுவனம்",
+        "options": [
+          { "id": 1, "name": "அமேசான்" },
+          { "id": 2, "name": "CVS HEALTH" },
+          { "id": 3, "name": "டோயோட்டா" },
+          { "id": 4, "name": "ஆப்பிள்" }
+        ]
+      },
+      "locations": {
+        "companyName": "இடம்",
+        "options": [
+          { "id": 4, "name": "மும்பை" },
+          { "id": 5, "name": "சண்டிகர்க்" },
+          { "id": 6, "name": "கர்நாடகா" },
+          { "id": 7, "name": "பெங்களூர்" }
+        ]
+      },
+      "datePosted": {
+        "companyName": "தேதி அனுப்பப்பட்டது",
+        "options": [
+          { "id": 4, "name": "கடந்த 24 மணி நேரத்தில்" },
+          { "id": 5, "name": "கடந்த 48 மணி நேரத்தில்" },
+          { "id": 6, "name": "கடந்த 7 நாட்களில்" },
+          { "id": 7, "name": "கடந்த 14 நாட்களில்" }
+        ]
+      },
+      "skills": {
+        "companyName": "திறமைகள்",
+        "options": [
+          { "id": 4, "name": "ஜாவாஸ்கிரிப்ட்" },
+          { "id": 5, "name": "மெஷின் லெர்னிங்" },
+          { "id": 6, "name": "ஜேவாய்க்வேரி" },
+          { "id": 7, "name": "கணித அறிவியல்" }
+        ]
+      },
+      "experience": {
+        "companyName": "அனுபவம்",
+        "options": [
+          { "id": 4, "name": "0-2 ஆண்டுகள்" },
+          { "id": 5, "name": "3-5 ஆண்டுகள்" },
+          { "id": 6, "name": "5-8 ஆண்டுகள்" },
+          { "id": 7, "name": "8 ஆண்டுகளுக்கு மேல்" }
+        ]
+      },
+      "education": {
+        "companyName": "கல்வி",
+        "options": [
+          { "id": 4, "name": "பட்சலர்" },
+          { "id": 5, "name": "மாஸ்டர்ஸ்" },
+          { "id": 6, "name": "பி.ஹெட்" },
+          { "id": 7, "name": "டிப்ளோமா" }
+        ]
+      }
+    },
+    "topbar": {
+      "jobs": "வேலைகள்",
+      "searchPlaceholder": "வேலைகளை தேடு...",
+      "notifications": "5 அறிவிப்புகள்",
+      "sharmatha": "ஷர்மதா",
+      "email": "sharmatha1823@gmail.com"
+    },
+    "module": {
+      "skillMatch": "திறமை பொருத்து"
+    }
+  }
+  

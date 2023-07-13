@@ -1,0 +1,77 @@
+{
+    "screen": {
+      "searchResults": "SEARCH RESULTS/JOBS",
+      "sortBy": "Sort By",
+      "ascending": "A-Z",
+      "descending": "Z-A",
+      "noResults": "No results found",
+      "filterBy": "Filter By"
+    },
+    "sidebar": {
+      "companies": {
+        "companyName": "Company",
+        "options": [
+          { "id": 1, "name": "Amazon" },
+          { "id": 2, "name": "CVS HEALTH" },
+          { "id": 3, "name": "TOYOTA" },
+          { "id": 4, "name": "Apple" }
+        ]
+      },
+      "locations": {
+        "companyName": "Location",
+        "options": [
+          { "id": 4, "name": "Mumbai" },
+          { "id": 5, "name": "Chandigarh" },
+          { "id": 6, "name": "Karnataka" },
+          { "id": 7, "name": "Bangalore" }
+        ]
+      },
+      "datePosted": {
+        "companyName": "Date Posted",
+        "options": [
+          { "id": 4, "name": "Last 24 hours" },
+          { "id": 5, "name": "Last 48 hours" },
+          { "id": 6, "name": "Last 7 days" },
+          { "id": 7, "name": "Last 14 days" }
+        ]
+      },
+      "skills": {
+        "companyName": "Skills",
+        "options": [
+          { "id": 4, "name": "Javascript" },
+          { "id": 5, "name": "Machine Learning" },
+          { "id": 6, "name": "JQuery" },
+          { "id": 7, "name": "Artificial Intelligence" }
+        ]
+      },
+      "experience": {
+        "companyName": "Experience",
+        "options": [
+          { "id": 4, "name": "0-2 years" },
+          { "id": 5, "name": "3-5 years" },
+          { "id": 6, "name": "5-8 years" },
+          { "id": 7, "name": "Above 8 years" }
+        ]
+      },
+      "education": {
+        "companyName": "Education",
+        "options": [
+          { "id": 4, "name": "Bachelors" },
+          { "id": 5, "name": "Masters" },
+          { "id": 6, "name": "Phd" },
+          { "id": 7, "name": "Diploma" }
+        ]
+      }
+    },
+    "topbar": {
+      "jobs": "JOBS",
+      "searchPlaceholder": "Search jobs...",
+      "notifications": "5 notifications",
+      "sharmatha": "Sharmatha",
+      "email": "sharmatha1823@gmail.com"
+    },
+    "module": {
+      "skillMatch": "Skillmatch"
+    }
+  }
+  

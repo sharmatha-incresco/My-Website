@@ -2,7 +2,7 @@ import Sidebar from "./sidebar";
 import Image from "../applelogo.jpg"
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns';
-
+import { useTranslation } from "react-i18next";
 function Module({ position, company, location ,date}) {
   const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ function Module({ position, company, location ,date}) {
     const daysAgo = differenceInDays(new Date(currentDate), new Date(date));
     return daysAgo;
   };
+  const{t,i18n}=useTranslation(); 
 
 
   return (
@@ -48,7 +49,7 @@ function Module({ position, company, location ,date}) {
             </div>
             <div class=" flex-1 inline-flex place-items-center pr-3 justify-end">
               <div>
-                <div className=" text-white ">Skillmatch</div>
+                <div className=" text-white ">{t('module.skillMatch')}</div>
               </div>
               <div class="">
                 <svg width="73" height="74" viewBox="0 0 73 74" fill="none" xmlns="http://www.w3.org/2000/svg">

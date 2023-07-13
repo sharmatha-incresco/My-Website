@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useTranslation} from "react-i18next";
 function Topbar({ searchQuery, setSearchQuery, handleSearch }) {
   const [isHovering, setIsHovering] = useState(false);
   const handleMouseOver = () => {
@@ -9,11 +10,12 @@ function Topbar({ searchQuery, setSearchQuery, handleSearch }) {
   const handleMouseOut = () => {
     setIsHovering(false);
   };
+  const{t,i18n}=useTranslation();  
   return (
     <div class="col-span-12 rounded-lg border  border-gray-400 bg-gray-600 p-4">
       <div class="flex pt-2 allign-justify place-items-center text-sm text-gray-400">
       <div class="text-white">
-          JOBS
+      {t('topbar.jobs')}
         </div>
         <div class="  flex-1 inline-flex place-items-center pr-10 justify-end">
         <div className=" inline-flex">
@@ -21,7 +23,7 @@ function Topbar({ searchQuery, setSearchQuery, handleSearch }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search jobs..."
+            placeholder= {t('topbar.searchPlaceholder')}
             className="px-2 py-1 border bg-slate-700 border-slate-800 rounded"
           />
           <button
@@ -55,8 +57,8 @@ function Topbar({ searchQuery, setSearchQuery, handleSearch }) {
     </svg>
     {isHovering && (
             <div class="bg-slate-700 text-bold text-xs uppercase text-white">
-              <h2> Sharmatha</h2>
-              <h2 class="inline-flex"> sharmatha1823@gmail.com</h2>
+              <h2>{t('topbar.sharmatha')}</h2>
+              <h2 class="inline-flex"> {t('topbar.email')}</h2>
             </div>
           )}
           </div>
@@ -78,7 +80,7 @@ function Topbar({ searchQuery, setSearchQuery, handleSearch }) {
     </svg>
     {isHovering && (
             <div class="bg-slate-700 text-bold text-xs uppercase text-white">
-              <h2>5 notifications</h2>
+              <h2>{t('topbar.notifications')}</h2>
             </div>
           )}
     </div>
