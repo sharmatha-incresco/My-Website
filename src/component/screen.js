@@ -138,6 +138,46 @@ function Screen() {
     setSearchResults(filteredResults);
     setCurrentPage(1);
   };
+  
+  const pageNumbers = Array(Math.ceil(sortedJobs.length / jobsPerPage))
+    .fill()
+    .map((_, index) => index + 1);
+
+  const renderPageNumbers = () => {
+    if (pageNumbers.length <= 1) {
+      return null; // Hide the page numbers if there is only one page
+    }
+
+    const minViewPages = 3; // Minimum number of pages to show in the view
+    const ellipsis = "...";
+
+    let visiblePages = pageNumbers;
+
+    if (pageNumbers.length > minViewPages) {
+      const middleIndex = Math.ceil(minViewPages / 2);
+      const startPages = pageNumbers.slice(0, middleIndex);
+      const endPages = pageNumbers.slice(-middleIndex);
+
+      if (currentPage <= middleIndex) {
+        visiblePages = [...startPages, ellipsis, pageNumbers.length];
+      } else if (currentPage > pageNumbers.length - middleIndex) {
+        visiblePages = [1, ellipsis, ...endPages];
+      } else {
+        visiblePages = [1, ellipsis, currentPage, ellipsis, pageNumbers.length];
+      }
+    }
+
+    return visiblePages.map((number) => (
+      <button
+        key={number}
+        onClick={() => paginate(number)}
+        className={`mx-1 px-3 py-2 rounded ${currentPage === number ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
+          }`}
+      >
+        {number === ellipsis ? ellipsis : number}
+      </button>
+    ));
+  };
 
   return (
     <div className="mx-auto gap-4 w-full bg-slate-800 min-h-screen">
@@ -205,18 +245,63 @@ function Screen() {
             ))}
           </div>
           <div className="flex justify-center my-4">
-            {Array(Math.ceil(sortedJobs.length / jobsPerPage))
-              .fill()
-              .map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => paginate(index + 1)}
-                  className={`mx-1 px-3 py-2 rounded ${currentPage === index + 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-                    }`}
-                >
-                  {index + 1}
-                </button>
-              ))}
+            {currentPage !== 1 && (
+              <button
+                onClick={() => paginate(currentPage - 1)}
+                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
+              >
+                Previous
+              </button>
+            )}
+            <button
+              onClick={() => paginate(1)}
+              className={`mx-1 px-3 py-2 rounded ${currentPage === 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
+                }`}
+            >
+              1
+            </button>
+            {currentPage > 2 && (
+              <button
+                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
+                disabled={true}
+              >
+                ...
+              </button>
+            )}
+            {currentPage > 1 && currentPage < pageNumbers.length && (
+              <button
+                onClick={() => paginate(currentPage)}
+                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
+                  }`}
+              >
+                {currentPage}
+              </button>
+            )}
+            {currentPage < pageNumbers.length - 1 && (
+              <button
+                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
+                disabled={true}
+              >
+                ...
+              </button>
+            )}
+            {pageNumbers.length > 1 && (
+              <button
+                onClick={() => paginate(pageNumbers.length)}
+                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
+                  }`}
+              >
+                {pageNumbers.length}
+              </button>
+            )}
+            {currentPage !== pageNumbers.length && (
+              <button
+                onClick={() => paginate(currentPage + 1)}
+                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
+              >
+                Next
+              </button>
+            )}
           </div>
         </div>
       </div>

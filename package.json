@@ -2,7 +2,7 @@
   "name": "job",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3000/",
+  "proxy": "https://vercel.live/link/mongo-db-git-main-sharmatha-incresco.vercel.app?via=deployment-domains-list-branch/",
   "dependencies": {
     "@nestjs/elasticsearch": "^10.0.1",
     "@sentry/react": "^7.57.0",
