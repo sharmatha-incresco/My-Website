@@ -1,15 +1,14 @@
-import { SimpleDB } from "aws-sdk";
 import React from "react";
 import DropdownList from "./dropdownlist";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
-function Sidebar()
-{
+
+function Sidebar({ handleFilterChange }) {
   const { t } = useTranslation();
 
-  const companies = [
+  const filterOptions = [
     {
-      companyName: t('sidebar.companies.companyName'),
+      name: t('sidebar.companies.companyName'),
+      filterKey: 'company',
       options: [
         { id: 1, name: t('sidebar.companies.options.0.name') },
         { id: 2, name: t('sidebar.companies.options.1.name') },
@@ -18,7 +17,8 @@ function Sidebar()
       ],
     },
     {
-      companyName: t('sidebar.locations.companyName'),
+      name: t('sidebar.locations.companyName'),
+      filterKey: 'location',
       options: [
         { id: 4, name: t('sidebar.locations.options.0.name') },
         { id: 5, name: t('sidebar.locations.options.1.name') },
@@ -27,7 +27,8 @@ function Sidebar()
       ],
     },
     {
-      companyName: t('sidebar.datePosted.companyName'),
+      name: t('sidebar.datePosted.companyName'),
+      filterKey: 'datePosted',
       options: [
         { id: 4, name: t('sidebar.datePosted.options.0.name') },
         { id: 5, name: t('sidebar.datePosted.options.1.name') },
@@ -36,7 +37,8 @@ function Sidebar()
       ],
     },
     {
-      companyName: t('sidebar.skills.companyName'),
+      name: t('sidebar.skills.companyName'),
+      filterKey: 'skills',
       options: [
         { id: 4, name: t('sidebar.skills.options.0.name') },
         { id: 5, name: t('sidebar.skills.options.1.name') },
@@ -45,7 +47,8 @@ function Sidebar()
       ],
     },
     {
-      companyName: t('sidebar.experience.companyName'),
+      name: t('sidebar.experience.companyName'),
+      filterKey: 'experience',
       options: [
         { id: 4, name: t('sidebar.experience.options.0.name') },
         { id: 5, name: t('sidebar.experience.options.1.name') },
@@ -54,7 +57,8 @@ function Sidebar()
       ],
     },
     {
-      companyName: t('sidebar.education.companyName'),
+      name: t('sidebar.education.companyName'),
+      filterKey: 'education',
       options: [
         { id: 4, name: t('sidebar.education.options.0.name') },
         { id: 5, name: t('sidebar.education.options.1.name') },
@@ -63,40 +67,25 @@ function Sidebar()
       ],
     },
   ];
-const [selectedFilters, setSelectedFilters] = useState({});
-
-  const handleOptionToggle = (filterKey, optionId) => {
-    if (selectedFilters[filterKey]?.includes(optionId)) {
-      setSelectedFilters((prevSelectedFilters) => ({
-        ...prevSelectedFilters,
-        [filterKey]: prevSelectedFilters[filterKey].filter((item) => item !== optionId),
-      }));
-    } else {
-      setSelectedFilters((prevSelectedFilters) => ({
-        ...prevSelectedFilters,
-        [filterKey]: [...(prevSelectedFilters[filterKey] || []), optionId],
-      }));
-    }
+const handleOptionToggle = (filterKey, optionId, optionName) => {
+    handleFilterChange(filterKey, optionId, optionName);
   };
-    return(
-        
-        //<div className="-mx-3 space-y-6 bg-black">
-        <div className="w-full bg-slate-800">
-        <div className="h-fit w-fit">
-          <div className="mt-5 w-20 items-center justify-between ">
-            {companies.map((company) => (
-              <DropdownList
-                key={company.companyName}
-                companyName={company.companyName}
-                options={company.options}
-                handleOptionToggle={handleOptionToggle}
-                selectedOptions={selectedFilters[company.companyName] || []}
-              />
-            ))}
-          </div>
-        </div>
+
+  return (
+    <div className="w-full bg-slate-800">
+      <div className="mt-5">
+        {filterOptions.map((filter) => (
+          <DropdownList
+            key={filter.name}
+            companyName={filter.name}
+            options={filter.options}
+            handleOptionToggle={handleOptionToggle}
+            filterKey={filter.filterKey}
+          />
+        ))}
       </div>
-    );
+    </div>
+  );
 }
+
 export default Sidebar;
-              

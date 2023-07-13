@@ -3,6 +3,7 @@ import axios from "axios";
 import Topbar from "./topbar";
 import Sidebar from "./sidebar";
 import Module from "./module";
+import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 
 const languageOptions = {
@@ -13,13 +14,23 @@ const languageOptions = {
 
 function Screen() {
   const { t, i18n } = useTranslation();
-  const getAllURL = "job";
+  const getAllURL = "http://localhost:3000/job/all";
   const [searchQuery, setSearchQuery] = useState("");
   const [alljob, setAllJob] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const jobsPerPage = 2;
+  const [jobsPerPage] = useState(2);
+  const [language, setLanguage] = useState('');
+  const [filterOptions, setFilterOptions] = useState({}); // Initialize with an empty object
+
+  useEffect(() => {
+    changeLanguage(language || 'en');
+  }, [language]);
+
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
 
   const handleSearch = () => {
     const filteredResults = alljob.filter(
@@ -34,13 +45,28 @@ function Screen() {
     }
   };
 
-  const getAllPost = async () => {
-    try {
-      const response = await axios.get(getAllURL);
-      setAllJob(response.data);
-    } catch (error) {
-      console.log(error);
+  const getAllPost = () => {
+    let endpoint = "/job/all";
+
+    // Check if there are selected filter options
+    const selectedFilters = Object.values(filterOptions).flat();
+    if (selectedFilters.length > 0) {
+      endpoint = "/job/filter";
+
+      // Construct the query parameters based on selected filters
+      const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
+      endpoint += `?${queryParams.join("&")}`;
     }
+
+    axios
+      .get(endpoint)
+      .then((response) => {
+        setAllJob(response.data);
+        setSearchResults(response.data); // Set the initial search results to all jobs
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   useEffect(() => {
@@ -50,12 +76,10 @@ function Screen() {
   const comparePositions = (a, b) => {
     if (a.position < b.position) return sortAscending ? -1 : 1;
     if (a.position > b.position) return sortAscending ? 1 : -1;
-    return 0;
+    console.log(a.position);
   };
 
-  const sortedJobs = [
-    ...(searchResults.length > 0 ? searchResults : alljob),
-  ].sort(comparePositions);
+  const sortedJobs = [...(searchResults.length > 0 ? searchResults : alljob)].sort(comparePositions);
 
   const handleSortBy = () => {
     setSortAscending(!sortAscending);
@@ -67,9 +91,52 @@ function Screen() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleLanguageChange = (event) => {
-    const selectedLanguage = event.target.value;
-    i18n.changeLanguage(selectedLanguage);
+  const handleFilterChange = (filterKey, optionId, optionName) => {
+    // Update the filter options
+    const updatedFilterOptions = { ...filterOptions };
+
+    // Check if the filter key already exists in the filter options
+    if (!updatedFilterOptions[filterKey]) {
+      updatedFilterOptions[filterKey] = [];
+    }
+
+    // Check if the optionId already exists in the filter options for the filter key
+    const existingOptionIndex = updatedFilterOptions[filterKey].findIndex((option) => option.id === optionId);
+
+    if (existingOptionIndex !== -1) {
+      // Remove the option from the filter options if it already exists
+      updatedFilterOptions[filterKey].splice(existingOptionIndex, 1);
+    } else {
+      // Add the option to the filter options if it doesn't exist
+      updatedFilterOptions[filterKey].push({ id: optionId, value: optionName });
+    }
+
+    // Update the filter options state
+    setFilterOptions(updatedFilterOptions);
+
+    // Call the API with the updated filter options
+    const queryParams = Object.entries(updatedFilterOptions)
+      .flatMap(([key, options]) => options.map((option) => `${key}=${option.value}`))
+      .join("&");
+
+    const endpoint = queryParams ? `/job/filter?${queryParams}` : "/job/all";
+
+    axios
+      .get(endpoint)
+      .then((response) => {
+        setAllJob(response.data);
+        setSearchResults(response.data);
+        setCurrentPage(1);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const filterByDate = (date) => {
+    const filteredResults = alljob.filter((job) => job.date === date);
+    setSearchResults(filteredResults);
+    setCurrentPage(1);
   };
 
   return (
@@ -85,53 +152,34 @@ function Screen() {
         ))}
       </select>
       <div className="header rounded-lg w-full border border-black bg-slate-800 py-5">
-        <Topbar
-          searchQuery={searchQuery}
-          setSearchQuery={setSearchQuery}
-          handleSearch={handleSearch}
-        />
+        <Topbar searchQuery={searchQuery} setSearchQuery={setSearchQuery} handleSearch={handleSearch} />
       </div>
-      <div className="grid  grid-cols-12">
-        <div className="col-span-2 p-3 px-8 pl-2 bottom-20 sm:col-span-2  rounded-lg border border-black bg-slate-800">
+      <div className="grid grid-cols-12">
+        <div className="col-span-2 p-3 px-8 pl-2 bottom-20 sm:col-span-2 rounded-lg border border-black bg-slate-800">
           <label className="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">{t('screen.filterBy')}</label>
           <hr className="h-px w-32 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-          <Sidebar />
+          <Sidebar handleFilterChange={handleFilterChange} filterByDate={filterByDate} />
         </div>
         <div className="col-span-10 pl-2 w-full sm:col-span-10 rounded-lg border border-black bg-slate-800">
           <div className="pt-2 w-full inline-flex pl-3 justify-between text-sm text-white">
-            <div className="text-white text-base inline-flex pt-6">
-              {t('screen.searchResults')} - {searchResults.length}
-            </div>
+            <div className="text-white text-base inline-flex pt-6 ">{t('screen.searchResults')}-{searchResults.length}</div>
             <div className="pt-3 flex-1 inline-flex place-items-center pr-4 flex-end justify-end">
               <button
                 onClick={handleSortBy}
                 className="bg-slate-700 hover:bg-slate-500 text-white font-bold py-2 px-3 rounded"
               >
-                {t('screen.sortBy')} {sortAscending ? "A-Z" : "Z-A"}
+                {t('screen.sortBy')}{sortAscending ? "A-Z" : "Z-A"}
               </button>
             </div>
           </div>
           <div className="pb-2 w-2 content-center">
-            <svg
-              width="250"
-              height="48"
-              viewBox="0 0 652 48"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+            <svg width="250" height="48" viewBox="0 0 652 48" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M24 0.5H651.5V47.5H24C11.0213 47.5 0.5 36.9787 0.5 24C0.5 11.0213 11.0213 0.5 24 0.5Z"
                 stroke="url(#paint0_linear_0_12)"
               />
               <defs>
-                <linearGradient
-                  id="paint0_linear_0_12"
-                  x1="-1.21445e-06"
-                  y1="24"
-                  x2="652"
-                  y2="23.9999"
-                  gradientUnits="userSpaceOnUse"
-                >
+                <linearGradient id="paint0_linear_0_12" x1="-1.21445e-06" y1="24" x2="652" y2="23.9999" gradientUnits="userSpaceOnUse">
                   <stop stopColor="#566292" />
                   <stop offset="1" stopColor="#566292" stopOpacity="0" />
                 </linearGradient>
@@ -164,9 +212,7 @@ function Screen() {
                   key={index}
                   onClick={() => paginate(index + 1)}
                   className={`mx-1 px-3 py-2 rounded ${
-                    currentPage === index + 1
-                      ? "bg-blue-500 text-white"
-                      : "bg-gray-300 text-gray-800"
+                    currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-800"
                   }`}
                 >
                   {index + 1}
