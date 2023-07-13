@@ -12,7 +12,7 @@
         "companyName": "الشركة",
         "options": [
           { "id": 1, "name": "أمازون" },
-          { "id": 2, "name": "CVS HEALTH" },
+          { "id": 2, "name": "صحة السير الذاتية" },
           { "id": 3, "name": "تويوتا" },
           { "id": 4, "name": "آبل" }
         ]

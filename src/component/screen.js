@@ -212,7 +212,7 @@ function Screen() {
                   key={index}
                   onClick={() => paginate(index + 1)}
                   className={`mx-1 px-3 py-2 rounded ${
-                    currentPage === index + 1 ? "bg-blue-500 text-white" : "bg-gray-300 text-gray-800"
+                    currentPage === index + 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
                   }`}
                 >
                   {index + 1}
