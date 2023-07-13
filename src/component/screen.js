@@ -14,7 +14,7 @@ const languageOptions = {
 
 function Screen() {
   const { t, i18n } = useTranslation();
-  const getAllURL = "http://localhost:3000/job/all";
+  const getAllURL = "https://vercel.live/link/mongo-db-git-main-sharmatha-incresco.vercel.app?via=deployment-domains-list-branch";
   const [searchQuery, setSearchQuery] = useState("");
   const [alljob, setAllJob] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
@@ -211,9 +211,8 @@ function Screen() {
                 <button
                   key={index}
                   onClick={() => paginate(index + 1)}
-                  className={`mx-1 px-3 py-2 rounded ${
-                    currentPage === index + 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-                  }`}
+                  className={`mx-1 px-3 py-2 rounded ${currentPage === index + 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
+                    }`}
                 >
                   {index + 1}
                 </button>
