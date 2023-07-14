@@ -30,7 +30,7 @@ function Module({ position, company, location ,date}) {
 
 
   return (
-    <div>
+    <div className=" w-844 h-204 top-316 left-478 mb-5">
       <div class="header col-span-12 rounded-lg border border-gray-400 bg-gray-700 py-6 ">
         
         <div class="flex pt-2 allign-justify text-sm text-gray-400">
