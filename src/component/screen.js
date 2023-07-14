@@ -14,7 +14,7 @@ const languageOptions = {
 
 function Screen() {
   const { t, i18n } = useTranslation();
-  const getAllURL = "https://vercel.live/link/mongo-db-git-main-sharmatha-incresco.vercel.app?via=deployment-domains-list-branch";
+  const getAllURL = "http://ec2-13-127-141-235.ap-south-1.compute.amazonaws.com:3000/";
   const [searchQuery, setSearchQuery] = useState("");
   const [alljob, setAllJob] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
