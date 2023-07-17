@@ -109,7 +109,7 @@ function Screen() {
       .flatMap(([key, options]) => options.map((option) => `${key}=${option.value}`))
       .join("&");
 
-    const endpoint = queryParams ? `/job/filter?${queryParams}` : "/job/all";
+    const endpoint = queryParams ? `job/filter?${queryParams}` : "/job/all";
 
     axios
       .get(getAllURL + endpoint)
