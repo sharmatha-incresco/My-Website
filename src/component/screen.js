@@ -56,7 +56,7 @@ function Screen() {
     }
 
     axios
-      .get(endpoint)
+      .get(getAllURL + endpoint)  // Use geturl here
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
@@ -111,7 +111,7 @@ function Screen() {
     const endpoint = queryParams ? `/job/filter?${queryParams}` : "/job/all";
 
     axios
-      .get(endpoint)
+      .get(getAllURL + endpoint)  // Use geturl here
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
