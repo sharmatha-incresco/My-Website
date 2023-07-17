@@ -46,11 +46,11 @@ function Screen() {
   };
 
   const getAllPost = () => {
-    let endpoint = "/job/all";
+    let endpoint = "job/all";
 
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
-      endpoint = "/job/filter";
+      endpoint = "job/filter";
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
       endpoint += `?${queryParams.join("&")}`;
     }
