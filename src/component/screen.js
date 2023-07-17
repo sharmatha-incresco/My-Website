@@ -56,7 +56,7 @@ function Screen() {
     }
 
     axios
-      .get(endpoint)  // Use geturl here
+      .get("job/all")  // Use geturl here
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
