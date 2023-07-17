@@ -10,7 +10,6 @@ const languageOptions = {
   en: 'English',
   ta: 'Tamil',
   ar: 'Arabic',
-  
 };
 
 function Screen() {
@@ -23,7 +22,7 @@ function Screen() {
   const [currentPage, setCurrentPage] = useState(1);
   const [jobsPerPage] = useState(2);
   const [language, setLanguage] = useState('');
-  const [filterOptions, setFilterOptions] = useState({}); // Initialize with an empty object
+  const [filterOptions, setFilterOptions] = useState({});
 
   useEffect(() => {
     changeLanguage(language || 'en');
@@ -49,12 +48,9 @@ function Screen() {
   const getAllPost = () => {
     let endpoint = "job/all";
 
-    // Check if there are selected filter options
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
       endpoint = "job/filter";
-
-      // Construct the query parameters based on selected filters
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
       endpoint += `?${queryParams.join("&")}`;
     }
@@ -63,7 +59,7 @@ function Screen() {
       .get(endpoint)
       .then((response) => {
         setAllJob(response.data);
-        setSearchResults(response.data); // Set the initial search results to all jobs
+        setSearchResults(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -77,7 +73,6 @@ function Screen() {
   const comparePositions = (a, b) => {
     if (a.position < b.position) return sortAscending ? -1 : 1;
     if (a.position > b.position) return sortAscending ? 1 : -1;
-    console.log(a.position);
   };
 
   const sortedJobs = [...(searchResults.length > 0 ? searchResults : alljob)].sort(comparePositions);
@@ -93,29 +88,22 @@ function Screen() {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleFilterChange = (filterKey, optionId, optionName) => {
-    // Update the filter options
     const updatedFilterOptions = { ...filterOptions };
 
-    // Check if the filter key already exists in the filter options
     if (!updatedFilterOptions[filterKey]) {
       updatedFilterOptions[filterKey] = [];
     }
 
-    // Check if the optionId already exists in the filter options for the filter key
     const existingOptionIndex = updatedFilterOptions[filterKey].findIndex((option) => option.id === optionId);
 
     if (existingOptionIndex !== -1) {
-      // Remove the option from the filter options if it already exists
       updatedFilterOptions[filterKey].splice(existingOptionIndex, 1);
     } else {
-      // Add the option to the filter options if it doesn't exist
       updatedFilterOptions[filterKey].push({ id: optionId, value: optionName });
     }
 
-    // Update the filter options state
     setFilterOptions(updatedFilterOptions);
 
-    // Call the API with the updated filter options
     const queryParams = Object.entries(updatedFilterOptions)
       .flatMap(([key, options]) => options.map((option) => `${key}=${option.value}`))
       .join("&");
@@ -139,17 +127,17 @@ function Screen() {
     setSearchResults(filteredResults);
     setCurrentPage(1);
   };
-  
+
   const pageNumbers = Array(Math.ceil(sortedJobs.length / jobsPerPage))
     .fill()
     .map((_, index) => index + 1);
 
   const renderPageNumbers = () => {
     if (pageNumbers.length <= 1) {
-      return null; // Hide the page numbers if there is only one page
+      return null;
     }
 
-    const minViewPages = 3; // Minimum number of pages to show in the view
+    const minViewPages = 3;
     const ellipsis = "...";
 
     let visiblePages = pageNumbers;
@@ -172,8 +160,7 @@ function Screen() {
       <button
         key={number}
         onClick={() => paginate(number)}
-        className={`mx-1 px-3 py-2 rounded ${currentPage === number ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-          }`}
+        className={`mx-1 px-3 py-2 rounded ${currentPage === number ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
       >
         {number === ellipsis ? ellipsis : number}
       </button>
@@ -256,8 +243,7 @@ function Screen() {
             )}
             <button
               onClick={() => paginate(1)}
-              className={`mx-1 px-3 py-2 rounded ${currentPage === 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-                }`}
+              className={`mx-1 px-3 py-2 rounded ${currentPage === 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
             >
               1
             </button>
@@ -272,8 +258,7 @@ function Screen() {
             {currentPage > 1 && currentPage < pageNumbers.length && (
               <button
                 onClick={() => paginate(currentPage)}
-                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-                  }`}
+                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
               >
                 {currentPage}
               </button>
@@ -289,8 +274,7 @@ function Screen() {
             {pageNumbers.length > 1 && (
               <button
                 onClick={() => paginate(pageNumbers.length)}
-                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"
-                  }`}
+                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
               >
                 {pageNumbers.length}
               </button>
