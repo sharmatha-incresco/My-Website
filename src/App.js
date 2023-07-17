@@ -11,12 +11,13 @@ import DropdownList from './component/dropdownlist';
 import Apply from './component/applyform';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
+import ErrorBoundary from "./ErrorBoundary";
 function App() {
  //changeLanguage('ta');
   return (
-    <div>
-      <Screen/>
-    </div>
+    <ErrorBoundary>
+        <Screen />
+      </ErrorBoundary>
   );
 }
 

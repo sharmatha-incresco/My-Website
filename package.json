@@ -2,7 +2,7 @@
   "name": "job",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://ec2-13-127-141-235.ap-south-1.compute.amazonaws.com:3000/",
+  "proxy": "https://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/",
   "dependencies": {
     "@nestjs/elasticsearch": "^10.0.1",
     "@sentry/react": "^7.57.0",
