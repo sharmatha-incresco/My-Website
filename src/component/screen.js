@@ -46,17 +46,17 @@ function Screen() {
   };
 
   const getAllPost = () => {
-    let endpoint = "job/all";
+    let endpoint = "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/all";
 
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
-      endpoint = "job/filter";
+      endpoint = "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/filter";
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
       endpoint += `?${queryParams.join("&")}`;
     }
 
     axios
-      .get(getAllURL + endpoint)  // Use geturl here
+      .get(endpoint)  // Use geturl here
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
