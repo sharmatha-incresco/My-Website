@@ -46,12 +46,12 @@ function Screen() {
   };
 
   const getAllPost = () => {
-    let endpoint = "/job/all";
+    let endpoint = "job/all";
 
     // Check if there are selected filter options
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
-      endpoint = "/job/filter";
+      endpoint = "job/filter";
 
       // Construct the query parameters based on selected filters
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
