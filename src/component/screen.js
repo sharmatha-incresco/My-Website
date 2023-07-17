@@ -46,17 +46,17 @@ function Screen() {
   };
 
   const getAllPost = () => {
-    let endpoint = "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/all";
+    let endpoint = "/job/all";
 
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
-      endpoint = "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/filter";
+      endpoint = "/job/filter";
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
       endpoint += `?${queryParams.join("&")}`;
     }
 
     axios
-      .get(endpoint)  // Use geturl here
+      .get(getAllURL + endpoint)
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
@@ -73,6 +73,7 @@ function Screen() {
   const comparePositions = (a, b) => {
     if (a.position < b.position) return sortAscending ? -1 : 1;
     if (a.position > b.position) return sortAscending ? 1 : -1;
+    return 0;
   };
 
   const sortedJobs = [...(searchResults.length > 0 ? searchResults : alljob)].sort(comparePositions);
@@ -111,7 +112,7 @@ function Screen() {
     const endpoint = queryParams ? `/job/filter?${queryParams}` : "/job/all";
 
     axios
-      .get(getAllURL + endpoint)  // Use geturl here
+      .get(getAllURL + endpoint)
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
