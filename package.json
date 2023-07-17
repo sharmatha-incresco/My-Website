@@ -1,7 +1,6 @@
 {
   "name": "job",
   "version": "0.1.0",
-  "proxy": "https://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/",
   "private": true,
   "dependencies": {
     "@nestjs/elasticsearch": "^10.0.1",
