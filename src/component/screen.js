@@ -10,6 +10,7 @@ const languageOptions = {
   en: 'English',
   ta: 'Tamil',
   ar: 'Arabic',
+  
 };
 
 function Screen() {
