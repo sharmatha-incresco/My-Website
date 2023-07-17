@@ -14,7 +14,7 @@ const languageOptions = {
 
 function Screen() {
   const { t, i18n } = useTranslation();
-  const getAllURL = "https://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/";
+  const getAllURL = "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/";
   const [searchQuery, setSearchQuery] = useState("");
   const [alljob, setAllJob] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
