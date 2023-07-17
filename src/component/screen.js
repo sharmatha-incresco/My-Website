@@ -56,7 +56,7 @@ function Screen() {
     }
 
     axios
-      .get(endpoint)
+      .get("http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/all")
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
