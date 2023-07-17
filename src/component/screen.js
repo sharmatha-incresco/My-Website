@@ -56,7 +56,7 @@ function Screen() {
     }
 
     axios
-      .get("job/all")
+      .get(endpoint)
       .then((response) => {
         setAllJob(response.data);
         setSearchResults(response.data);
