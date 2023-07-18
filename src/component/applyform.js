@@ -22,7 +22,7 @@ function Applyform({ setApplicantsCount, setShowForm }) {
   
       try {
         const response = await fetch(
-          "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/create",
+          "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/post/create",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

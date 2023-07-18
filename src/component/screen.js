@@ -46,11 +46,11 @@ function Screen() {
   };
 
   const getAllPost = () => {
-    let endpoint = "job/all";
+    let endpoint = "job/get/all";
 
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
-      endpoint = "job/filter";
+      endpoint = "job/get/filter";
       const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
       endpoint += `?${queryParams.join("&")}`;
     }
@@ -109,7 +109,7 @@ function Screen() {
       .flatMap(([key, options]) => options.map((option) => `${key}=${option.value}`))
       .join("&");
 
-    const endpoint = queryParams ? `job/filter?${queryParams}` : "/job/all";
+    const endpoint = queryParams ? `job/get/filter?${queryParams}` : "job/get/all";
 
     axios
       .get(getAllURL + endpoint)
