@@ -3,12 +3,19 @@ import Image from "../applelogo.jpg"
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns';
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import Applyform from "./applyform";
 function Module({ position, company, location ,date}) {
   const navigate = useNavigate();
-
-  const nav = ()=>{
-      navigate('/applyform');
+  const [showForm, setShowForm] = useState(false);
+  const [applicantsCount, setApplicantsCount] = useState(0);
+  const nav = () => {
+    setShowForm(true);
   };
+  const updateApplicantsCount = (count) => {
+    setApplicantsCount(count);
+  };
+
   let postedAgo = '';
   if (date) {
     const parsedDate = parseISO(date);
@@ -77,7 +84,7 @@ function Module({ position, company, location ,date}) {
           <div class="flex-1 inline-flex items-center">
             <p class="pl-2"> Posted {calculateDaysAgo(date)} days ago</p>
 
-            <p class="pl-7"><span>.10 applicants</span></p>
+            <p class="pl-7"><span>.{applicantsCount} applicants</span></p>
           </div>
           <div class="  flex-1 inline-flex place-items-center justify-end">
             <div>
@@ -96,6 +103,12 @@ function Module({ position, company, location ,date}) {
           </div>
         </div>
       </div>
+      {showForm && (
+        <Applyform
+          setApplicantsCount={updateApplicantsCount}
+          setShowForm={setShowForm}
+        />
+      )}
     </div>
 
   );

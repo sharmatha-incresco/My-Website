@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Applyform() {
+function Applyform({ setApplicantsCount, setShowForm }) {
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -8,19 +8,27 @@ function Applyform() {
     experience: "",
     language: "",
   });
-
+  const [emailError, setEmailError] = useState("");
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch("http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/create", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      if (!validateEmail(formData.email)) {
+        setEmailError("Invalid email address");
+        return;
+      }
+  
+      try {
+        const response = await fetch(
+          "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/create",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+          }
+        );
 
       if (response.ok) {
         alert("Application Submitted Successfully");
@@ -31,6 +39,8 @@ function Applyform() {
           experience: "",
           language: "",
         });
+        setApplicantsCount((prevCount) => prevCount + 1);
+        setShowForm(false);
       } else {
         alert("Failed to submit application");
       }
@@ -38,6 +48,11 @@ function Applyform() {
       console.error("Error submitting application", error);
       alert("Failed to submit application");
     }
+  };
+  const validateEmail = (email) => {
+    // Email validation regular expression
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   return (
@@ -73,16 +88,21 @@ function Applyform() {
                   rows='4'
                   placeholder='max 100 words'
                 ></textarea>
-                <label className='uppercase text-sm font-bold opacity-70'>
+                <label className="uppercase text-sm font-bold opacity-70">
                   Email
                 </label>
                 <input
-                  type='text'
-                  name='email'
+                  type="text"
+                  name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className='p-3 mt-2 mb-4 w-full bg-slate-200 rounded'
+                  className={`p-3 mt-2 mb-4 w-full bg-slate-200 rounded ${
+                    emailError ? "border-red-500" : "border-slate-200"
+                  } focus:border-slate-600 focus:outline-none`}
                 />
+                {emailError && (
+                  <p className="text-red-500 text-xs mt-1">{emailError}</p>
+                )}
                 <label className='uppercase text-sm font-bold opacity-70'>
                   Experience
                 </label>
