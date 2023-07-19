@@ -163,15 +163,39 @@ function Screen() {
       }
     }
 
-    return visiblePages.map((number) => (
-      <button
-        key={number}
-        onClick={() => paginate(number)}
-        className={`mx-1 px-3 py-2 rounded ${currentPage === number ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
-      >
-        {number === ellipsis ? ellipsis : number}
-      </button>
-    ));
+    return (
+      <div className="flex justify-center my-4">
+        {currentPage !== 1 && (
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            className="mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
+          >
+            Previous
+          </button>
+        )}
+        {visiblePages.map((number) => (
+          <button
+            key={number}
+            onClick={() => paginate(number)}
+            className={`mx-1 px-3 py-2 rounded focus:outline-none ${
+              currentPage === number
+                ? "bg-slate-600 text-white"
+                : "bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
+            }`}
+          >
+            {number === ellipsis ? ellipsis : number}
+          </button>
+        ))}
+        {currentPage !== pageNumbers.length && (
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            className="mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
+          >
+            Next
+          </button>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -239,62 +263,7 @@ function Screen() {
               />
             ))}
           </div>
-          <div className="flex justify-center my-4">
-            {currentPage !== 1 && (
-              <button
-                onClick={() => paginate(currentPage - 1)}
-                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
-              >
-                Previous
-              </button>
-            )}
-            <button
-              onClick={() => paginate(1)}
-              className={`mx-1 px-3 py-2 rounded ${currentPage === 1 ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
-            >
-              1
-            </button>
-            {currentPage > 2 && (
-              <button
-                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
-                disabled={true}
-              >
-                ...
-              </button>
-            )}
-            {currentPage > 1 && currentPage < pageNumbers.length && (
-              <button
-                onClick={() => paginate(currentPage)}
-                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
-              >
-                {currentPage}
-              </button>
-            )}
-            {currentPage < pageNumbers.length - 1 && (
-              <button
-                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
-                disabled={true}
-              >
-                ...
-              </button>
-            )}
-            {pageNumbers.length > 1 && (
-              <button
-                onClick={() => paginate(pageNumbers.length)}
-                className={`mx-1 px-3 py-2 rounded ${currentPage === pageNumbers.length ? "bg-slate-600 text-white" : "bg-gray-300 text-gray-800"}`}
-              >
-                {pageNumbers.length}
-              </button>
-            )}
-            {currentPage !== pageNumbers.length && (
-              <button
-                onClick={() => paginate(currentPage + 1)}
-                className={`mx-1 px-3 py-2 rounded bg-gray-300 text-gray-800`}
-              >
-                Next
-              </button>
-            )}
-          </div>
+          {renderPageNumbers()}
         </div>
       </div>
     </div>
