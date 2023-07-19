@@ -28,6 +28,16 @@ function Screen() {
     changeLanguage(language || 'en');
   }, [language]);
 
+  useEffect(() => {
+    getAllPost();
+  }, []);
+
+  useEffect(() => {
+    if (searchQuery === "") {
+      getAllPost();
+    }
+  }, [searchQuery]);
+
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
@@ -65,10 +75,6 @@ function Screen() {
         console.log(error);
       });
   };
-
-  useEffect(() => {
-    getAllPost();
-  }, []);
 
   const comparePositions = (a, b) => {
     if (a.position < b.position) return sortAscending ? -1 : 1;
