@@ -36,21 +36,29 @@ function DropdownList({ companyName, options, handleOptionToggle, filterKey }) {
             <ul className="absolute text-xs rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
               {options.map((option) => (
                 <li key={option.id}>
-                  <label className="flex items-center px-4 py-2">
+                  <label className="flex items-center px-4 w-fit py-2">
                     {isDateFilter ? (
                       <input
-                        type="radio"
-                        className="mr-2"
-                        onChange={() => handleOptionChange(option.id, option.name)}
+                        type="checkbox"
+                        className="mr-2 leading-tight"
+                        name={companyName}
+                        value={option.name}
+                        onChange={() =>
+                          handleOptionChange(option.id, option.name)
+                        }
                       />
                     ) : (
                       <input
                         type="checkbox"
-                        className="mr-2"
-                        onChange={() => handleOptionChange(option.id, option.name)}
+                        className="mr-2 leading-tight"
+                        name={companyName}
+                        value={option.name}
+                        onChange={() =>
+                          handleOptionChange(option.id, option.name)
+                        }
                       />
                     )}
-                    <span className="text-xs font-bold pl-1 text-navy-700 dark:text-white">
+                    <span className="text-gray-700 w-52 dark:text-gray-400">
                       {option.name}
                     </span>
                   </label>

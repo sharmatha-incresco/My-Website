@@ -115,28 +115,58 @@ function Screen() {
 
     setFilterOptions(updatedFilterOptions);
 
-    const queryParams = Object.entries(updatedFilterOptions)
-      .flatMap(([key, options]) =>
-        options.map((option) => `${key}=${option.optionName}`)
-      )
-      .join("&");
+    if (Object.keys(updatedFilterOptions).length === 0) {
+      // If all filters are cleared, retrieve all data from the database
+      getAllPost();
+    } else {
+      const queryParams = Object.entries(updatedFilterOptions)
+        .flatMap(([key, options]) =>
+          options.map((option) => `${key}=${option.optionName}`)
+        )
+        .join("&");
 
-    const endpoint = queryParams ? `job/get/filter?${queryParams}` : "job/get/all";
-    console.log("----------->");
-    axios
-      .get(getAllURL + endpoint)
-      .then((response) => {
-        setAllJob(response.data);
-        setSearchResults(response.data);
-        setCurrentPage(1);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+      const endpoint = queryParams ? `job/get/filter?${queryParams}` : "job/get/all";
+
+      axios
+        .get(getAllURL + endpoint)
+        .then((response) => {
+          setAllJob(response.data);
+          setSearchResults(response.data);
+          setCurrentPage(1);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
- 
+
   const filterByDate = (date) => {
-    const filteredResults = alljob.filter((job) => job.date === date);
+    const currentDate = new Date(); // Get the current date
+  
+    let startDate = new Date(currentDate); // Create a new date object for the start date
+    let endDate = new Date(currentDate); // Create a new date object for the end date
+  
+    // Calculate the start and end dates based on the selected option
+    if (date === 'last24') { // Last 24 hours
+      startDate.setDate(currentDate.getDate() - 1);
+    } else if (date === 'last48') { // Last 48 hours
+      startDate.setDate(currentDate.getDate() - 2);
+    } else if (date === 'last7') { // Last 7 days
+      startDate.setDate(currentDate.getDate() - 7);
+    } else if (date === 'last14') { // Last 14 days
+      startDate.setDate(currentDate.getDate() - 14);
+    }
+  
+    // Filter the jobs based on the calculated date range
+    let filteredResults = alljob.filter((job) => {
+      const jobDate = new Date(job.date); // Assuming job.date is a valid date string
+  
+      // Check if the job date is within the calculated date range
+      return jobDate >= startDate && jobDate <= endDate;
+    });
+  
+    // If the date parameter is not specified or empty, retrieve all jobs
+    
     setSearchResults(filteredResults);
     setCurrentPage(1);
   };
@@ -183,11 +213,10 @@ function Screen() {
           <button
             key={number}
             onClick={() => paginate(number)}
-            className={`mx-1 px-3 py-2 rounded focus:outline-none ${
-              currentPage === number
+            className={`mx-1 px-3 py-2 rounded focus:outline-none ${currentPage === number
                 ? "bg-slate-600 text-white"
                 : "bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
-            }`}
+              }`}
           >
             {number === ellipsis ? ellipsis : number}
           </button>

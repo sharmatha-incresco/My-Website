@@ -2,7 +2,7 @@ import React from "react";
 import DropdownList from "./dropdownlist";
 import { useTranslation } from "react-i18next";
 
-function Sidebar({ handleFilterChange }) {
+function Sidebar({ handleFilterChange, filterByDate }) {
   const { t } = useTranslation();
 
   const filterOptions = [
@@ -30,10 +30,10 @@ function Sidebar({ handleFilterChange }) {
       name: t('sidebar.datePosted.companyName'),
       filterKey: 'date',
       options: [
-        { id: 4, name: t('sidebar.datePosted.options.0.name') },
-        { id: 5, name: t('sidebar.datePosted.options.1.name') },
-        { id: 6, name: t('sidebar.datePosted.options.2.name') },
-        { id: 7, name: t('sidebar.datePosted.options.3.name') },
+        { id: 'last24', name: t('sidebar.datePosted.options.0.name') },
+        { id: 'last48', name: t('sidebar.datePosted.options.1.name') },
+        { id: 'last7', name: t('sidebar.datePosted.options.2.name') },
+        { id: 'last14', name: t('sidebar.datePosted.options.3.name') },
       ],
     },
     {
@@ -69,7 +69,11 @@ function Sidebar({ handleFilterChange }) {
   ];
 
   const handleOptionToggle = (filterKey, optionId, optionName) => {
-    handleFilterChange(filterKey, optionId, optionName);
+    if (filterKey === 'date') {
+      filterByDate(optionId); // Pass the optionId to the filterByDate function
+    } else {
+      handleFilterChange(filterKey, optionId, optionName);
+    }
   };
 
   return (
