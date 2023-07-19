@@ -33,6 +33,13 @@ function Module({ position, company, location ,date}) {
     const daysAgo = differenceInDays(new Date(currentDate), new Date(date));
     return daysAgo;
   };
+  const getPostedText = (daysAgo) => {
+    if (daysAgo === 0) {
+      return "Posted today";
+    } else {
+      return `Posted ${daysAgo} days ago`;
+    }
+  };
   const{t,i18n}=useTranslation(); 
 
 
@@ -82,7 +89,7 @@ function Module({ position, company, location ,date}) {
         {/* <!-- Footer content --> */}
         <div class="flex pt-2 allign-justify text-sm text-gray-400">
           <div class="flex-1 inline-flex items-center">
-            <p class="pl-2"> Posted {calculateDaysAgo(date)} days ago</p>
+            <p class="pl-2">{getPostedText(calculateDaysAgo(date))}</p>
 
             <p class="pl-7"><span>.{applicantsCount} applicants</span></p>
           </div>
