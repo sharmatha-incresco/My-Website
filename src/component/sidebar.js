@@ -28,7 +28,7 @@ function Sidebar({ handleFilterChange }) {
     },
     {
       name: t('sidebar.datePosted.companyName'),
-      filterKey: 'datePosted',
+      filterKey: 'date',
       options: [
         { id: 4, name: t('sidebar.datePosted.options.0.name') },
         { id: 5, name: t('sidebar.datePosted.options.1.name') },
@@ -67,7 +67,8 @@ function Sidebar({ handleFilterChange }) {
       ],
     },
   ];
-const handleOptionToggle = (filterKey, optionId, optionName) => {
+
+  const handleOptionToggle = (filterKey, optionId, optionName) => {
     handleFilterChange(filterKey, optionId, optionName);
   };
 

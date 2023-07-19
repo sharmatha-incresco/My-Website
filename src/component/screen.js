@@ -61,7 +61,9 @@ function Screen() {
     const selectedFilters = Object.values(filterOptions).flat();
     if (selectedFilters.length > 0) {
       endpoint = "job/get/filter";
-      const queryParams = selectedFilters.map((filter) => `${filter.type}=${filter.value}`);
+      const queryParams = selectedFilters.map(
+        (filter) => `${filter.filterKey}=${filter.optionName}`,
+      );
       endpoint += `?${queryParams.join("&")}`;
     }
 
@@ -101,22 +103,26 @@ function Screen() {
       updatedFilterOptions[filterKey] = [];
     }
 
-    const existingOptionIndex = updatedFilterOptions[filterKey].findIndex((option) => option.id === optionId);
+    const existingOptionIndex = updatedFilterOptions[filterKey].findIndex(
+      (option) => option.optionId === optionId
+    );
 
     if (existingOptionIndex !== -1) {
       updatedFilterOptions[filterKey].splice(existingOptionIndex, 1);
     } else {
-      updatedFilterOptions[filterKey].push({ id: optionId, value: optionName });
+      updatedFilterOptions[filterKey].push({ optionId, optionName });
     }
 
     setFilterOptions(updatedFilterOptions);
 
     const queryParams = Object.entries(updatedFilterOptions)
-      .flatMap(([key, options]) => options.map((option) => `${key}=${option.value}`))
+      .flatMap(([key, options]) =>
+        options.map((option) => `${key}=${option.optionName}`)
+      )
       .join("&");
 
     const endpoint = queryParams ? `job/get/filter?${queryParams}` : "job/get/all";
-
+    console.log("----------->");
     axios
       .get(getAllURL + endpoint)
       .then((response) => {
@@ -128,7 +134,7 @@ function Screen() {
         console.log(error);
       });
   };
-
+ 
   const filterByDate = (date) => {
     const filteredResults = alljob.filter((job) => job.date === date);
     setSearchResults(filteredResults);

@@ -41,14 +41,12 @@ function DropdownList({ companyName, options, handleOptionToggle, filterKey }) {
                       <input
                         type="radio"
                         className="mr-2"
-                        checked={option.selected}
                         onChange={() => handleOptionChange(option.id, option.name)}
                       />
                     ) : (
                       <input
                         type="checkbox"
                         className="mr-2"
-                        checked={option.selected}
                         onChange={() => handleOptionChange(option.id, option.name)}
                       />
                     )}
