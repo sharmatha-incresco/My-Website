@@ -13,7 +13,7 @@ function Signin() {
   function signinval() {
     if (validateForm()) {
       axios
-        .post('auth/login', {
+        .post('http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/auth/login', {
           email: email,
           password: password
         })
