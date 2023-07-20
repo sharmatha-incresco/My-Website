@@ -17,7 +17,7 @@ function SignUp() {
   function signupval() {
     if (validateForm()) {
       axios
-        .post("http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/auth/register", {
+        .post("auth/register", {
           email: email,
           password: password,
           name: name, 
