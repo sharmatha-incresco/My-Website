@@ -14,6 +14,7 @@ import Apply from './component/applyform';
 import * as Sentry from "@sentry/react";
 import axios from 'axios';
 import { changeLanguage } from 'i18next';
+import SignUp from './component/signup';
 changeLanguage('ta')
 Sentry.init({
   dsn: "https://d037bc4523fb4e61a1507f54ee6cd7f7@o4505514404806656.ingest.sentry.io/4505514481745920",
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     path:"/applyform",
     element:<Applyform/>,
   },
+  {
+    path:"/signup",
+    element:<SignUp/>
+  }
  
 ]);
 

@@ -12,11 +12,15 @@ import Apply from './component/applyform';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import ErrorBoundary from "./ErrorBoundary";
+import SignUp from './component/signup';
+import SignIn from './component/signin';
 function App() {
  //changeLanguage('ta');
   return (
     <ErrorBoundary>
-        <Screen />
+       
+       <SignIn/>
+        
       </ErrorBoundary>
   );
 }
