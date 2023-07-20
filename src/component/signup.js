@@ -24,7 +24,7 @@ function SignUp() {
         })
         .then(() => {
           alert("SignedUp success");
-          navigate("/students");
+          navigate("/screen");
         })
         .catch((error) => {
           console.error(error);
