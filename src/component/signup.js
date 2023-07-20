@@ -20,7 +20,7 @@ function SignUp() {
         .post("auth/register", {
           email: email,
           password: password,
-          name: name,
+          name: name, 
         })
         .then(() => {
           alert("SignedUp success");
