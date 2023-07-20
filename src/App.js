@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { changeLanguage } from 'i18next';
 import ErrorBoundary from "./ErrorBoundary";
 import SignUp from './component/signup';
-import SignIn from './component/signin';
+import SignIn from './component/login';
 function App() {
  //changeLanguage('ta');
   return (

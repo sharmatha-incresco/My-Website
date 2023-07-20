@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Applyform from './component/applyform';
 import './i18n';
-
+import Screen from './component/screen';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -43,9 +43,13 @@ const router = createBrowserRouter([
     element:<Applyform/>,
   },
   {
+    path:"/screen",
+    element:<Screen/>,
+  },
+  {
     path:"/signup",
-    element:<SignUp/>
-  }
+    element:<SignUp/>,
+  },
  
 ]);
 

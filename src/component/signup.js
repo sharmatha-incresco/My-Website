@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import UserPool from "../UserPool";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -15,7 +14,24 @@ function SignUp() {
     setIsPasswordVisible((prevState) => !prevState);
   }
 
-  
+  function signupval() {
+    if (validateForm()) {
+      axios
+        .post("auth/register", {
+          email: email,
+          password: password,
+          name: name,
+        })
+        .then(() => {
+          alert("SignedUp success");
+          navigate("/students");
+        })
+        .catch((error) => {
+          console.error(error);
+          alert("SignedUp failed");
+        });
+    }
+  }
 
   function validateForm() {
     const emailRegex =/^[\w\.-]+@[\w\.-]+\.\w+$/;
@@ -43,17 +59,6 @@ function SignUp() {
 
     const isValidForm = validateForm();
     setIsButtonDisabled(!isValidForm);
-  }
-  const onSubmit=(event)=>
-  {
-    event.preventDefault();
-    UserPool.signup(email,password,[],null,(err,data)=>{
-        if(err)
-        {
-            console.error(err);
-        }
-        console.log(data);
-    })
   }
 
   return (
@@ -148,7 +153,7 @@ function SignUp() {
           <button
             type="button"
             disabled={!validateForm()} // Disable button if form is not valid
-           
+            onClick={signupval}
             className={`w-full py-2 mt-6 font-semibold text-white transition-all duration-150 ease-in-out bg-slate-400 rounded-md ${
               isButtonDisabled && "opacity-50 cursor-not-allowed"
             }`}
@@ -159,7 +164,7 @@ function SignUp() {
                     {" "}  Not A New Uesr?{" "}
                    <a
                         href="/"
-                        className="font-medium text-slate-500 hover:underline">
+                        className="font-medium text-slate-600 hover:underline">
                        SignIn
                     </a>
                 </p>
