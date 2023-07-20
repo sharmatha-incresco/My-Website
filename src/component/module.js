@@ -3,7 +3,7 @@ import Image from "../applelogo.jpg"
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns';
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import React,{ useState } from "react";
 import Applyform from "./applyform";
 function Module({ position, company, location ,date}) {
   const navigate = useNavigate();
@@ -112,9 +112,10 @@ function Module({ position, company, location ,date}) {
       </div>
       {showForm && (
         <Applyform
-          setApplicantsCount={updateApplicantsCount}
-          setShowForm={setShowForm}
-        />
+        setApplicantsCount={updateApplicantsCount}
+        setShowForm={setShowForm}
+        prevCount={applicantsCount}
+      />
       )}
     </div>
 

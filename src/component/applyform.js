@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Applyform({ setApplicantsCount, setShowForm }) {
+function Applyform({ setApplicantsCount, setShowForm, prevCount }) {
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -9,26 +9,27 @@ function Applyform({ setApplicantsCount, setShowForm }) {
     language: "",
   });
   const [emailError, setEmailError] = useState("");
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      if (!validateEmail(formData.email)) {
-        setEmailError("Invalid email address");
-        return;
-      }
-  
-      try {
-        const response = await fetch(
-          "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/post/create",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(formData),
-          }
-        );
+    if (!validateEmail(formData.email)) {
+      setEmailError("Invalid email address");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/post/create",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       if (response.ok) {
         alert("Application Submitted Successfully");
@@ -39,8 +40,27 @@ function Applyform({ setApplicantsCount, setShowForm }) {
           experience: "",
           language: "",
         });
-        setApplicantsCount((prevCount) => prevCount + 1);
+        setApplicantsCount(prevCount + 1);
         setShowForm(false);
+
+        // Update applicants count in the database
+        try {
+          const jobId = "YOUR_JOB_ID"; // Replace with the actual job ID for this form submission
+          const updateResponse = await fetch(
+            `http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/get/updateApplicantsCount/${jobId}`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(prevCount + 1), // New applicants count
+            }
+          );
+          if (!updateResponse.ok) {
+            alert("Failed to update applicants count in the database");
+          }
+        } catch (error) {
+          console.error("Error updating applicants count", error);
+          alert("Failed to update applicants count in the database");
+        }
       } else {
         alert("Failed to submit application");
       }
@@ -49,23 +69,23 @@ function Applyform({ setApplicantsCount, setShowForm }) {
       alert("Failed to submit application");
     }
   };
+
   const validateEmail = (email) => {
     // Email validation regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   };
-
   return (
     <>
-      <div className='flex items-center justify-center min-h-screen bg-slate-700'>
-        <div className='w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl'>
-          <div className='max-w-md mx-auto space-y-6'>
+      <div className="flex items-center justify-center min-h-screen bg-slate-700">
+        <div className="w-full max-w-lg px-10 py-8 mx-auto bg-white rounded-lg shadow-xl">
+          <div className="max-w-md mx-auto space-y-6">
             <div>
-              <h2 className='text-2xl font-bold'>Submit your application</h2>
-              <p className='my-4 opacity-70'>
+              <h2 className="text-2xl font-bold">Submit your application</h2>
+              <p className="my-4 opacity-70">
                 Fill the following fields to send your application
               </p>
-              <hr className='my-6' />
+              <hr className="my-6" />
               <form onSubmit={handleSubmit}>
                 <label className='uppercase text-sm font-bold opacity-70'>
                   Name
