@@ -23,25 +23,28 @@ function Screen() {
   const [jobsPerPage] = useState(2);
   const [language, setLanguage] = useState('');
   const [filterOptions, setFilterOptions] = useState({});
+  const userSkills = ["JavaScript", "Artificial Intelligence","Css"];
+  // useEffect(() => {
+    
+  // }, [language]);
 
   useEffect(() => {
     changeLanguage(language || 'en');
-  }, [language]);
-
-  useEffect(() => {
+    console.log("userSkills in Screen:");
     getAllPost();
-  }, []);
-
-  useEffect(() => {
     if (searchQuery === "") {
       getAllPost();
     }
-  }, [searchQuery]);
+  }, [searchQuery,language]);
 
+  // useEffect(() => {
+    
+  // }, [searchQuery]);
+  console.log("userSkills in Screen:");
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
-
+  console.log("userSkills in Screen:", userSkills);
   const handleSearch = () => {
     const filteredResults = alljob.filter(
       (job) =>
@@ -297,6 +300,8 @@ function Screen() {
                 location={job.location}
                 date={job.date}
                 applicantsCount={job.applicantsCount}
+                skills={job.skills || []}
+                userSkills={userSkills}
               />
             ))}
           </div>
