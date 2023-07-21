@@ -93,6 +93,7 @@ function Screen() {
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = sortedJobs.slice(indexOfFirstJob, indexOfLastJob);
+  console.log("--------->",currentJobs)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -290,11 +291,12 @@ function Screen() {
           <div>
             {currentJobs.map((job) => (
               <Module
-                key={job.id}
+                jobId={job._id}
                 position={job.position}
                 company={job.company}
                 location={job.location}
                 date={job.date}
+                applicantsCount={job.applicantsCount}
               />
             ))}
           </div>

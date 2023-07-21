@@ -3,23 +3,23 @@ import Image from "../applelogo.jpg"
 import { useNavigate } from "react-router-dom";
 import { formatDistanceToNow, parseISO, differenceInDays } from 'date-fns';
 import { useTranslation } from "react-i18next";
-import React,{ useState } from "react";
+import React, { useState, useEffect } from "react";
 import Applyform from "./applyform";
-function Module({ position, company, location ,date}) {
+import axios from 'axios'; // Import axios
+
+function Module({ jobId, position, company, location, date,applicantsCount }) {
+  console.log(jobId)
   const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  const [applicantsCount, setApplicantsCount] = useState(0);
+  //const [applicantsCount, setApplicantsCount] = useState(0);
   const nav = () => {
     setShowForm(true);
-  };
-  const updateApplicantsCount = (count) => {
-    setApplicantsCount(count);
   };
 
   let postedAgo = '';
   if (date) {
     const parsedDate = parseISO(date);
-  
+
     if (!isNaN(parsedDate)) {
       postedAgo = formatDistanceToNow(parsedDate, { addSuffix: true });
     }
@@ -40,8 +40,20 @@ function Module({ position, company, location ,date}) {
       return `Posted ${daysAgo} days ago`;
     }
   };
-  const{t,i18n}=useTranslation(); 
+  const { t, i18n } = useTranslation();
 
+  // Fetch applicants count from backend
+  // useEffect(() => {
+  //   const fetchApplicantsCount = async () => {
+  //     try {
+  //       const response = await axios.get(`http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/get/updateApplicantsCount/${jobId}`);
+  //       setApplicantsCount(response.data.count);
+  //     } catch (error) {
+  //       console.error('Error fetching applicants count:', error);
+  //     }
+  //   };
+  //   fetchApplicantsCount();
+  // }, [jobId]); // Add jobId as a dependency to re-fetch when the URL changes
 
   return (
     <div className=" w-844 h-204 top-316 left-478 mb-5">
@@ -112,9 +124,10 @@ function Module({ position, company, location ,date}) {
       </div>
       {showForm && (
         <Applyform
-        setApplicantsCount={updateApplicantsCount}
+        jobId={jobId}
+        //setApplicantsCount={setApplicantsCount}
         setShowForm={setShowForm}
-        prevCount={applicantsCount}
+       // prevCount={applicantsCount}
       />
       )}
     </div>

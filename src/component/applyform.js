@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
-function Applyform({ setApplicantsCount, setShowForm, prevCount }) {
+function Applyform({ setApplicantsCount, setShowForm, prevCount ,jobId}) {
+   console.log(jobId)
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -22,12 +23,24 @@ function Applyform({ setApplicantsCount, setShowForm, prevCount }) {
     }
 
     try {
+      // Create a new job post entry in the database
+      const createJobPostDto = {
+        name: formData.name,
+        about: formData.about,
+        email: formData.email,
+        experience: formData.experience,
+        language: formData.language,
+
+      };
+
       const response = await fetch(
         "http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/post/create",
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(formData),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(createJobPostDto),
         }
       );
 
@@ -40,27 +53,9 @@ function Applyform({ setApplicantsCount, setShowForm, prevCount }) {
           experience: "",
           language: "",
         });
-        setApplicantsCount(prevCount + 1);
         setShowForm(false);
-
-        // Update applicants count in the database
-        try {
-          const jobId = "YOUR_JOB_ID"; // Replace with the actual job ID for this form submission
-          const updateResponse = await fetch(
-            `http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/get/updateApplicantsCount/${jobId}`,
-            {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(prevCount + 1), // New applicants count
-            }
-          );
-          if (!updateResponse.ok) {
-            alert("Failed to update applicants count in the database");
-          }
-        } catch (error) {
-          console.error("Error updating applicants count", error);
-          alert("Failed to update applicants count in the database");
-        }
+        handleUpdateApplicantsCount();
+        window.location.reload();
       } else {
         alert("Failed to submit application");
       }
@@ -69,11 +64,24 @@ function Applyform({ setApplicantsCount, setShowForm, prevCount }) {
       alert("Failed to submit application");
     }
   };
-
   const validateEmail = (email) => {
     // Email validation regular expression
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
+  };
+
+  const handleUpdateApplicantsCount = async () => {
+    try {
+      const updateResponse = await fetch(
+        `http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/get/updateApplicantsCount/${jobId}`,
+        {
+          method: "POST",
+        }
+      );
+    } catch (error) {
+      // console.error("Error updating applicants count", error);
+      // alert("Failed to update applicants count in the database");
+    }
   };
   return (
     <>
