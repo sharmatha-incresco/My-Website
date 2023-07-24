@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Topbar from "./topbar";
-import Sidebar from "./sidebar";
-import Module from "./module";
+import Topbar from "./component/topbar";
+import Sidebar from "./component/sidebar";
+import Module from "./component/module";
 import i18next, { changeLanguage } from "i18next";
 import { useTranslation } from "react-i18next";
 
@@ -23,9 +23,9 @@ function Screen() {
   const [jobsPerPage] = useState(2);
   const [language, setLanguage] = useState('');
   const [filterOptions, setFilterOptions] = useState({});
-  const userSkills = ["JavaScript", "Artificial Intelligence","Css"];
+  const userSkills = ["JavaScript", "Artificial Intelligence", "Css"];
   // useEffect(() => {
-    
+
   // }, [language]);
 
   useEffect(() => {
@@ -35,10 +35,10 @@ function Screen() {
     if (searchQuery === "") {
       getAllPost();
     }
-  }, [searchQuery,language]);
+  }, [searchQuery, language]);
 
   // useEffect(() => {
-    
+
   // }, [searchQuery]);
   console.log("userSkills in Screen:");
   const handleLanguageChange = (event) => {
@@ -96,7 +96,7 @@ function Screen() {
   const indexOfLastJob = currentPage * jobsPerPage;
   const indexOfFirstJob = indexOfLastJob - jobsPerPage;
   const currentJobs = sortedJobs.slice(indexOfFirstJob, indexOfLastJob);
-  console.log("--------->",currentJobs)
+  console.log("--------->", currentJobs)
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -146,10 +146,10 @@ function Screen() {
 
   const filterByDate = (date) => {
     const currentDate = new Date(); // Get the current date
-  
+
     let startDate = new Date(currentDate); // Create a new date object for the start date
     let endDate = new Date(currentDate); // Create a new date object for the end date
-  
+
     // Calculate the start and end dates based on the selected option
     if (date === 'last24') { // Last 24 hours
       startDate.setDate(currentDate.getDate() - 1);
@@ -160,17 +160,17 @@ function Screen() {
     } else if (date === 'last14') { // Last 14 days
       startDate.setDate(currentDate.getDate() - 14);
     }
-  
+
     // Filter the jobs based on the calculated date range
     let filteredResults = alljob.filter((job) => {
       const jobDate = new Date(job.date); // Assuming job.date is a valid date string
-  
+
       // Check if the job date is within the calculated date range
       return jobDate >= startDate && jobDate <= endDate;
     });
-  
+
     // If the date parameter is not specified or empty, retrieve all jobs
-    
+
     setSearchResults(filteredResults);
     setCurrentPage(1);
   };
@@ -218,8 +218,8 @@ function Screen() {
             key={number}
             onClick={() => paginate(number)}
             className={`mx-1 px-3 py-2 rounded focus:outline-none ${currentPage === number
-                ? "bg-slate-600 text-white"
-                : "bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
+              ? "bg-slate-600 text-white"
+              : "bg-gray-300 text-gray-800 hover:bg-gray-400 hover:text-gray-900"
               }`}
           >
             {number === ellipsis ? ellipsis : number}

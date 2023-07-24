@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function Applyform({ setApplicantsCount, setShowForm, prevCount ,jobId}) {
-   console.log(jobId)
+function Applyform({ setApplicantsCount, setShowForm, prevCount, jobId }) {
+  console.log(jobId)
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -79,8 +79,7 @@ function Applyform({ setApplicantsCount, setShowForm, prevCount ,jobId}) {
         }
       );
     } catch (error) {
-      // console.error("Error updating applicants count", error);
-      // alert("Failed to update applicants count in the database");
+
     }
   };
   return (
@@ -124,9 +123,8 @@ function Applyform({ setApplicantsCount, setShowForm, prevCount ,jobId}) {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`p-3 mt-2 mb-4 w-full bg-slate-200 rounded ${
-                    emailError ? "border-red-500" : "border-slate-200"
-                  } focus:border-slate-600 focus:outline-none`}
+                  className={`p-3 mt-2 mb-4 w-full bg-slate-200 rounded ${emailError ? "border-red-500" : "border-slate-200"
+                    } focus:border-slate-600 focus:outline-none`}
                 />
                 {emailError && (
                   <p className="text-red-500 text-xs mt-1">{emailError}</p>

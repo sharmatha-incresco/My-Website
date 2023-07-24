@@ -10,9 +10,7 @@ import axios from 'axios'; // Import axios
 function Module({ jobId, position, company, location, date, applicantsCount, skills, userSkills }) {
   console.log(jobId)
   const [skillMatchPercentage, setSkillMatchPercentage] = useState(0);
-  const navigate = useNavigate();
   const [showForm, setShowForm] = useState(false);
-  //const [applicantsCount, setApplicantsCount] = useState(0);
   const nav = () => {
     setShowForm(true);
   };
@@ -58,31 +56,18 @@ function Module({ jobId, position, company, location, date, applicantsCount, ski
     console.log("percentage:", percentage);
     setSkillMatchPercentage(percentage.toFixed(2));
   }, [skills, userSkills]);
-  
-  
-  
-  
-  const circleStyle = { 
-    background: `conic-gradient(rgba(92, 164, 169, 1) ${ skillMatchPercentage}%, rgba(232, 51, 99, 1) 0)`,
+
+
+
+  const circleStyle = {
+    background: `conic-gradient(rgba(92, 164, 169, 1) ${skillMatchPercentage}%, rgba(232, 51, 99, 1) 0)`,
   }
-  
-  // Fetch applicants count from backend
-  // useEffect(() => {
-  //   const fetchApplicantsCount = async () => {
-  //     try {
-  //       const response = await axios.get(`http://ec2-15-206-167-181.ap-south-1.compute.amazonaws.com:3000/job/get/updateApplicantsCount/${jobId}`);
-  //       setApplicantsCount(response.data.count);
-  //     } catch (error) {
-  //       console.error('Error fetching applicants count:', error);
-  //     }
-  //   };
-  //   fetchApplicantsCount();
-  // }, [jobId]); // Add jobId as a dependency to re-fetch when the URL changes
+
 
   return (
     <div className=" w-844 h-204 top-316 left-478 mb-5">
       <div class="header col-span-12 rounded-lg border border-gray-400 bg-gray-700 py-6 ">
-        
+
         <div class="flex pt-2 allign-justify text-sm text-gray-400">
           <img src={Image} class="w-20 h-20 pb-2 pl-2" alt="Logo" />
           <div class="flex-1 inline-flex items-center">
@@ -98,23 +83,23 @@ function Module({ jobId, position, company, location, date, applicantsCount, ski
               </div>
             </div>
             <div class=" flex-1 inline-flex place-items-center pr-3 justify-end">
-        <div>
-          <div className=" text-white ">{t('module.skillMatch')}</div>
-        </div>
-        <div class="">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
-            <div className="flex items-center justify-center  w-full h-full rounded-full z-0" style={circleStyle}>
-              <div className="flex items-center justify-center w-full h-full z-1">
-                <p className="text-white font-bold w-11/12 h-11/12 rounded-full bg-gray-700 p-6">
-                  {skillMatchPercentage}
-                  <span className="font-normal">%</span>
-                </p>
+              <div>
+                <div className=" text-white ">{t('module.skillMatch')}</div>
+              </div>
+              <div class="">
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full">
+                  <div className="flex items-center justify-center  w-full h-full rounded-full z-0" style={circleStyle}>
+                    <div className="flex items-center justify-center w-full h-full z-1">
+                      <p className="text-white font-bold w-11/12 h-11/12 rounded-full bg-gray-700 p-6">
+                        {skillMatchPercentage}
+                        <span className="font-normal">%</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            </div>
           </div>
-        </div>
-        </div>
         </div>
       </div>
       <div class="footer col-span-12 rounded-lg border border-gray-400 bg-gray-600 p-1 ">
@@ -144,11 +129,11 @@ function Module({ jobId, position, company, location, date, applicantsCount, ski
       </div>
       {showForm && (
         <Applyform
-        jobId={jobId}
-        //setApplicantsCount={setApplicantsCount}
-        setShowForm={setShowForm}
-       // prevCount={applicantsCount}
-      />
+          jobId={jobId}
+          //setApplicantsCount={setApplicantsCount}
+          setShowForm={setShowForm}
+        // prevCount={applicantsCount}
+        />
       )}
     </div>
 
