@@ -10,13 +10,13 @@ function App() {
   const [lastName, setLastName] = useState("VENKATESWARAN");
   const [age, setAge] = useState("20");
   const [address, setAddress] = useState(
-    "27, ANGAMUTHU LANE, NEAR MANDAPAM STREET, ERODE , 638001"
+    "27, Angamuthu Lane, Near Mandapam Street, Erode , 638001"
   );
   const [email, setEmail] = useState("sharmatha1823@gmail.com");
   const [contact, setContact] = useState("7904063682");
-  const [tempLine1, setTempLine1] = useState("27, ANGAMUTHU LANE");
-  const [tempLine2, setTempLine2] = useState("NEAR MANDAPAM STREET");
-  const [tempDistrict, setTempDistrict] = useState("ERODE");
+  const [tempLine1, setTempLine1] = useState("27, Angamuthu Lane");
+  const [tempLine2, setTempLine2] = useState("Near Mandapam Street");
+  const [tempDistrict, setTempDistrict] = useState("Erode");
   const [tempPincode, setTempPincode] = useState("638001");
   const [tempEmail, setTempEmail] = useState(email);
   const [tempContact, setTempContact] = useState(contact);
@@ -85,7 +85,7 @@ function App() {
 
         <div className="flex-row md:p-10 lg:p-10 sm:p-10 p-2 lg:justify-center lg:items-start">
           <div className="flex lg:items-center lg:justify-center">
-            <p className=" font-bold text-lg text-red-300">NAME:</p>
+            <p className=" font-bold text-lg text-red-300">Name:</p>
 
             {isEditing ? (
               <>
@@ -111,7 +111,7 @@ function App() {
             )}
           </div>
           <div className="flex lg:items-center lg:justify-center pt-4 pb-4">
-            <p className=" font-bold text-lg  text-red-300">AGE:</p>
+            <p className=" font-bold text-lg  text-red-300">Age:</p>
 
             {isEditing ? (
               <>
@@ -130,7 +130,7 @@ function App() {
             )}
           </div>
           <div className=" lg:flex md:flex lg:items-center lg:justify-center ">
-            <p className=" font-bold text-lg  text-red-300">ADDRESS:</p>
+            <p className=" font-bold text-lg  text-red-300">Address:</p>
 
             {isEditing ? (
               <>
@@ -210,15 +210,17 @@ function App() {
             )}
           </div>
        
-        <div className="flex pt-6 items-center justify-center ">
+        <div className="flex md:pt-6 xl:pt-6 lg:pt-6 pt-2 items-center justify-center ">
           {isEditing && (
             <>
               <button onClick={handleSaveClick}>
                 <BiSave className="w-6 h-6" />
               </button>
-              <button onClick={handleCancelClick} className="pr-2">
+              <div className="pl-10 pt-1">
+              <button onClick={handleCancelClick} className="">
                 <MdOutlineCancel className="w-6 h-6" />
               </button>
+              </div>
             </>
           )}
         </div>
