@@ -29,6 +29,9 @@ function App() {
   const firstNameInputRef = useRef(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [password, setPassword] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+ 
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -63,6 +66,7 @@ function App() {
     setTempDistrict(null);
     setTempPincode(null);
     setIsEditing(false);
+    setSelectedFile("");
   };
   const handleAuth = () => {
     if (password === "sharmatha@18") {
@@ -76,6 +80,13 @@ function App() {
       });
     }
   };
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(URL.createObjectURL(file));
+    }
+  };
+
   useEffect(() => {
     if (isEditing) {
       firstNameInputRef.current.focus();
@@ -91,19 +102,46 @@ function App() {
         <div className="flex justify-center items-start pt-1">
           <div className="  justify-center items-start pt-10 ">
             <div className="rounded-full  overflow-hidden w-32 h-32 bg-gray-200 border-2 border-red-300 flex items-center justify-center">
-              <img
-                src={profile}
-                className="w-32 h-32 object-cover "
-                alt="Profile"
-              />
+              {isEditing ? (
+                <div className="relative group">
+                  <img
+                    src={selectedFile || profile}
+                    className="w-32 h-32 object-cover"
+                    alt="edit Profile"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                    <label
+                      htmlFor="imageInput"
+                      className="rounded-full bg-red-300 p-2 cursor-pointer"
+                    >
+                      <MdEdit className="w-5 h-5 text-white rounded-full" />
+                      <input
+                        type="file"
+                        id="imageInput"
+                        accept="image/*"
+                        onChange={handleChange}
+                        className="hidden"
+                      />
+                    </label>
+                  </div>
+                </div>
+              ) : (
+                <img
+                  src={selectedFile || profile}
+                  className="w-32 h-32 object-cover"
+                  alt="Profile"
+                />
+              )}
             </div>
             <div className="pl-10 pt-2 pb-2">
-              <button
-                onClick={openModal}
-                className="rounded-full bg-red-300 p-2"
-              >
-                <MdEdit className="w-5 h-5 rounded-full" />
-              </button>
+              {!isEditing && (
+                <button
+                  onClick={openModal}
+                  className="rounded-full bg-red-300 p-2"
+                >
+                  <MdEdit className="w-5 h-5 rounded-full" />
+                </button>
+              )}
             </div>
 
             <ReactModal
@@ -269,7 +307,7 @@ function App() {
               </>
             )}
           </div>
-       
+
           <div className="flex md:pt-6 xl:pt-6 lg:pt-6 pt-2 items-center justify-center ">
             {isEditing && (
               <>

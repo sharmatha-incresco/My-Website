@@ -50,29 +50,28 @@ export default function CertificateGalery() {
     };
 
     return (
-      <div className="border-2 items-center  hover:scale-105 transform justify-center transition-transform border-red-300 ">
-        <div className="flex justify-center border-red-300  hover:bg-slate-200">
+      <div className="border-2 items-center justify-center border-red-300 ">
+        <div className="flex justify-center hover:scale-105 transform transition-transform hover:bg-red-100">
           <img
-            alt="certificate"
-            className="avatar  md:h-[300px] md:w-[500px]"
+            className="avatar md:h-[350px] md:w-[500px]  "
             src={src}
             width={imageSize}
             height={imageSize}
             onClick={HandleClick}
           />
         </div>
-
         {isMoadlOpen && (
           <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="modal p-4 bg-red-100 rounded-lg ">
+            <div className="modal p-4 bg-white rounded-lg border-red-300 border-2 ">
               <button className="modal-close" onClick={CloseModal}>
-                <AiFillCloseCircle className="text-red-300 " />
+                <AiFillCloseCircle />
               </button>
               <img
-                alt="certificate modal"
-                className="modal-image hover "
+                className="modal-image "
                 src={src}
-               
+                width={imageSize}
+                height={imageSize}
+                alt="Profile Image"
               />
             </div>
           </div>
@@ -88,11 +87,11 @@ export default function CertificateGalery() {
       </div>
       <div className="flex-grow p-4 overflow-scroll ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-red-300 pb-2 underline ">
+          <h1 className="text-3xl font-bold text-red-300 underline ">
             CERTIFICATES
           </h1>
-          <button onClick={handleAdd}>
-            <MdAddPhotoAlternate className="w-10 h-10 text-red-300 pb-2" />
+          <button onClick={handleAdd} className="">
+            <MdAddPhotoAlternate className="w-10 h-10 hover:scale-150 transform transition-transform " />
           </button>
           <ReactModal
             isOpen={isAdd}
@@ -102,17 +101,22 @@ export default function CertificateGalery() {
             <div className="bg-white  flex flex-col p-4 rounded-lg shadow-lg">
               <button
                 onClick={() => setIsAdd(false)}
-                className="absolute top-2 right-2 text-gray-600 hover:text-red-300"
+                className="absolute top-2 right-2 text-gray-600 hover:text-red-300 "
               >
                 <MdOutlineCancel />
               </button>
-              <div >
+              <div>
                 <h2 className="text-red-300 font-bold">Add Image:</h2>
-                <input type="file" onChange={handleChange} />
+                <input type="file"  className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded" onChange={handleChange} />
                 {selectedFile && (
                   <>
                     <img src={selectedFile} alt="Selected" />
-                    <button onClick={handleAddImage} className="text-gray-600 hover:text-red-300 font-semibold pt-5 ">Add</button>
+                    <button
+                      onClick={handleAddImage}
+                      className="text-red-300 font-semibold pt-5 "
+                    >
+                      Add
+                    </button>
                   </>
                 )}
               </div>

@@ -26,12 +26,10 @@ export default function Education() {
               <img
                 className="avatar border-2 border-lime-400  md:h-[300px] md:w-[500px]"
                 src={img}
-                width="500"
-                height="500"
               />
             </a>
           </div>
-          <div className="flex-col flex justify-between">
+          <div className="flex-col overflow-scroll flex justify-between">
             <div className="flex">
               <BsCalendarWeekFill className="w-5 h-5 text-red-300 " />
               <p className=" font-semibold text-red-300 text-base pl-1 pr-4">
@@ -127,4 +125,3 @@ export default function Education() {
     </div>
   );
 }
-
