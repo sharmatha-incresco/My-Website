@@ -16,10 +16,12 @@ import ReactModal from "react-modal";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function CertificateGalery() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [description, setDescription] = useState();
   const handleAdd = () => {
     setIsAdd(true);
     setSelectedFile(null);
@@ -30,6 +32,11 @@ export default function CertificateGalery() {
   };
 
   const handleAddImage = () => {
+    toast.success("Sucessfully Certificate Added", {
+      hideProgressBar: true,
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 1000,
+    });
     setIsAdd(false);
     handleClose();
   };
@@ -39,8 +46,9 @@ export default function CertificateGalery() {
       setSelectedFile(URL.createObjectURL(file));
     }
   };
-  function Profile({ src, imageSize = 500 }) {
+  function Profile({ src, imageSize = 500, description }) {
     const [isMoadlOpen, setModalOpen] = useState(false);
+    const [emojiCounts, setEmojiCounts] = useState({ claps: 0, thumbsUp: 0, thumbsDown: 0 });
 
     const HandleClick = () => {
       setModalOpen(true);
@@ -48,15 +56,19 @@ export default function CertificateGalery() {
     const CloseModal = () => {
       setModalOpen(false);
     };
+    const handleEmojiClick = (emoji) => {
+      const updatedEmojiCounts = { ...emojiCounts };
+      updatedEmojiCounts[emoji] += 1;
+      setEmojiCounts(updatedEmojiCounts);
+    };
+  
 
     return (
       <div className="border-2 items-center justify-center border-red-300 ">
         <div className="flex justify-center hover:scale-105 transform transition-transform hover:bg-red-100">
           <img
-            className="avatar md:h-[350px] md:w-[500px]  "
+            className="avatar md:h-[350px] md:w-[500px]"
             src={src}
-            width={imageSize}
-            height={imageSize}
             onClick={HandleClick}
           />
         </div>
@@ -73,6 +85,12 @@ export default function CertificateGalery() {
                 height={imageSize}
                 alt="Profile Image"
               />
+              <div className="p-4 md:text-base text-xs">{description}</div>
+              <div className="flex text-2xl justify-between ">
+              <button onClick={() => handleEmojiClick('claps')}>👏 {emojiCounts.claps}</button>
+              <button onClick={() => handleEmojiClick('thumbsUp')}>👍 {emojiCounts.thumbsUp}</button>
+              <button onClick={() => handleEmojiClick('thumbsDown')}>👎 {emojiCounts.thumbsDown}</button>
+            </div>
             </div>
           </div>
         )}
@@ -90,7 +108,7 @@ export default function CertificateGalery() {
           <h1 className="text-3xl font-bold text-red-300 underline ">
             CERTIFICATES
           </h1>
-          <button onClick={handleAdd} className="">
+          <button onClick={handleAdd} >
             <MdAddPhotoAlternate className="w-10 h-10 hover:scale-150 transform transition-transform " />
           </button>
           <ReactModal
@@ -107,10 +125,21 @@ export default function CertificateGalery() {
               </button>
               <div>
                 <h2 className="text-red-300 font-bold">Add Image:</h2>
-                <input type="file"  className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded" onChange={handleChange} />
+                <input
+                  type="file"
+                  className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded"
+                  onChange={handleChange}
+                />
                 {selectedFile && (
                   <>
                     <img src={selectedFile} alt="Selected" />
+                    <div className="p-4">
+                      <input
+                        placeholder="Description"
+                        onChange={(e) => setDescription(e.target.value)}
+                        className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded w-full"
+                      />
+                    </div>
                     <button
                       onClick={handleAddImage}
                       className="text-red-300 font-semibold pt-5 "
@@ -124,39 +153,75 @@ export default function CertificateGalery() {
           </ReactModal>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 p-10 gap-10">
-          <Profile src={certificate1} />
+          <Profile
+            src={certificate1}
+            description="This is one of my participant certificate in Great Learning"
+          />
           <div>
-            <Profile src={certificate2} />
+            <Profile
+              src={certificate2}
+              description="This is one of my participant certificate in Great Learning"
+            />
           </div>
           <div>
-            <Profile src={certificate3} />
+            <Profile
+              src={certificate3}
+              description="This is one of my participant certificate in Kongu Engineering College"
+            />
           </div>
           <div>
-            <Profile src={certificate4} />
+            <Profile
+              src={certificate4}
+              description="This is one of my participant certificate in PALS presentation"
+            />
           </div>
           <div>
-            <Profile src={certificate5} />
+            <Profile
+              src={certificate5}
+              description="This is one of my participant certificate in Nipam Awareness program"
+            />
           </div>
           <div>
-            <Profile src={certificate6} />
+            <Profile
+              src={certificate6}
+              description="This is one of my participant certificate in Presentation in my college club"
+            />
           </div>
           <div>
-            <Profile src={certificate7} />
+            <Profile
+              src={certificate7}
+              description="This is one of my participant certificate in 5days Ethical Hacking workshop"
+            />
           </div>
           <div>
-            <Profile src={certificate8} />
+            <Profile
+              src={certificate8}
+              description="This is one of my certificate in RDBMS"
+            />
           </div>
           <div>
-            <Profile src={certificate9} />
+            <Profile
+              src={certificate9}
+              description="This is one of my certificate in Java Training"
+            />
           </div>
           <div>
-            <Profile src={certificate10} />
+            <Profile
+              src={certificate10}
+              description="This is one of my participant certificate in Unreal Game Engine"
+            />
           </div>
           <div>
-            <Profile src={certificate11} />
+            <Profile
+              src={certificate11}
+              description="This is one of my participant certificate in Rotract club of my college"
+            />
           </div>
-          {selectedFile && <Profile src={selectedFile} />}
+          {selectedFile && (
+            <Profile src={selectedFile} description={description} />
+          )}
         </div>
+        <ToastContainer/>
       </div>
       <div className="">
         <Footer />

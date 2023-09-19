@@ -26,11 +26,10 @@ function App() {
   const [tempFirstName, setTempFirstName] = useState(firstName);
   const [tempLastName, setTempLastName] = useState(lastName);
   const [isEditing, setIsEditing] = useState(false);
-  const firstNameInputRef = useRef(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
- 
+  const firstNameInputRef = useRef(null);
 
   const openModal = () => {
     setModalIsOpen(true);
