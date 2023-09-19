@@ -4,6 +4,9 @@ import Topbar from "./pages/topbar";
 import profile from "./profile.jpeg";
 import { MdEdit, MdOutlineCancel } from "react-icons/md";
 import { BiSave } from "react-icons/bi";
+import ReactModal from "react-modal";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [firstName, setFirstName] = useState("SHARMATHA");
@@ -24,6 +27,16 @@ function App() {
   const [tempLastName, setTempLastName] = useState(lastName);
   const [isEditing, setIsEditing] = useState(false);
   const firstNameInputRef = useRef(null);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [password, setPassword] = useState("");
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setPassword("");
+  };
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -36,6 +49,7 @@ function App() {
     setTempLastName(lastName);
     setContact(tempContact);
     setEmail(tempEmail);
+    setPassword("");
     const newAddress = [tempLine1, tempLine2, tempDistrict, tempPincode]
       .filter(Boolean)
       .join(", ");
@@ -50,7 +64,18 @@ function App() {
     setTempPincode(null);
     setIsEditing(false);
   };
-
+  const handleAuth = () => {
+    if (password === "sharmatha@18") {
+      handleEditClick();
+      setModalIsOpen(false);
+    } else {
+      toast.error("Sorry Wrong Password", {
+        hideProgressBar: true,
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
+    }
+  };
   useEffect(() => {
     if (isEditing) {
       firstNameInputRef.current.focus();
@@ -74,12 +99,47 @@ function App() {
             </div>
             <div className="pl-10 pt-2 pb-2">
               <button
-                onClick={handleEditClick}
-                className="rounded-full bg-red-300  p-2"
+                onClick={openModal}
+                className="rounded-full bg-red-300 p-2"
               >
                 <MdEdit className="w-5 h-5 rounded-full" />
               </button>
             </div>
+
+            <ReactModal
+              isOpen={modalIsOpen}
+              onRequestClose={closeModal}
+              contentLabel="Authentication Modal"
+              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+            >
+              <div className="bg-white flex flex-col p-4 rounded-lg shadow-lg">
+                <button
+                  onClick={closeModal}
+                  className="absolute top-2 right-2 text-gray-600 hover:text-red-300"
+                >
+                  <MdOutlineCancel />
+                </button>
+                <p className="font-semibold text-2xl text-red-300 text-center pt-4 ">
+                  Hii Sharmatha 🤝
+                </p>
+                <div className=" pl-4 p-5">
+                  <p className=" font-bold text-lg  text-red-300">Password:</p>
+                  <input
+                    placeholder="Enter your password"
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded"
+                  />
+                </div>
+                <div className="inline-flex justify-center items-center ">
+                  <button
+                    onClick={handleAuth}
+                    className="flex bottom-2 text-red-300 "
+                  >
+                    <p className="font-semibold">SignIn 🔐</p>
+                  </button>
+                </div>
+              </div>
+            </ReactModal>
           </div>
         </div>
 
@@ -137,7 +197,7 @@ function App() {
                 <input
                   type="text"
                   placeholder="Line 1"
-                  value={tempLine1 || ""}
+                  value={tempLine1}
                   onChange={(e) => setTempLine1(e.target.value)}
                   ref={firstNameInputRef}
                   className="border-2 border-red-300 focus:outline-none focus:border-red-300 px-1 py-1 rounded"
@@ -210,23 +270,26 @@ function App() {
             )}
           </div>
        
-        <div className="flex pt-6 items-center justify-center ">
-          {isEditing && (
-            <>
-              <button onClick={handleSaveClick}>
-                <BiSave className="w-6 h-6" />
-              </button>
-              <button onClick={handleCancelClick} className="pr-2">
-                <MdOutlineCancel className="w-6 h-6" />
-              </button>
-            </>
-          )}
-        </div>
+          <div className="flex md:pt-6 xl:pt-6 lg:pt-6 pt-2 items-center justify-center ">
+            {isEditing && (
+              <>
+                <button onClick={handleSaveClick}>
+                  <BiSave className="w-6 h-6" />
+                </button>
+                <div className="pl-10 pt-1">
+                  <button onClick={handleCancelClick} className="">
+                    <MdOutlineCancel className="w-6 h-6" />
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
       <div>
         <Footer />
       </div>
+      <ToastContainer />
     </div>
   );
 }
