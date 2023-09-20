@@ -7,6 +7,7 @@ import { BiSave } from "react-icons/bi";
 import ReactModal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useForm, Controller } from "react-hook-form";
 import {
   Card,
   CardHeader,
@@ -32,28 +33,25 @@ function App() {
     "Reading📖",
   ];
   const skill = ["Java", "React", "C", "Python"];
-  const [firstName, setFirstName] = useState("SHARMATHA");
-  const [lastName, setLastName] = useState("VENKATESWARAN");
-  const [age, setAge] = useState("20");
-  const [address, setAddress] = useState(
-    "27, ANGAMUTHU LANE, NEAR MANDAPAM STREET, ERODE , 638001"
-  );
-  const [email, setEmail] = useState("sharmatha1823@gmail.com");
-  const [contact, setContact] = useState("7904063682");
-  const [tempLine1, setTempLine1] = useState("27, ANGAMUTHU LANE");
-  const [tempLine2, setTempLine2] = useState("NEAR MANDAPAM STREET");
-  const [tempDistrict, setTempDistrict] = useState("ERODE");
-  const [tempPincode, setTempPincode] = useState("638001");
-  const [tempEmail, setTempEmail] = useState(email);
-  const [tempContact, setTempContact] = useState(contact);
-  const [tempFirstName, setTempFirstName] = useState(firstName);
-  const [tempLastName, setTempLastName] = useState(lastName);
+
   const [isEditing, setIsEditing] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
-  const firstNameInputRef = useRef(null);
-
+  const { handleSubmit, control, reset, formState } = useForm({
+    defaultValues: {
+      firstName: "SHARMATHA",
+      lastName: "VENKATESWARAN",
+      age: "20",
+      tempLine1: "27, ANGAMUTHU LANE",
+      tempLine2: "NEAR MANDAPAM STREET",
+      tempDistrict: "ERODE",
+      tempPincode: "638001",
+      tempContact: "7904063682",
+      tempEmail: "sharmatha1823@gmail.com",
+    },
+  });
+ 
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -67,26 +65,11 @@ function App() {
     setIsEditing(true);
   };
 
-  const handleSaveClick = () => {
-    setFirstName(tempFirstName);
-    setLastName(tempLastName);
-    setTempFirstName(firstName);
-    setTempLastName(lastName);
-    setContact(tempContact);
-    setEmail(tempEmail);
-    setPassword("");
-    const newAddress = [tempLine1, tempLine2, tempDistrict, tempPincode]
-      .filter(Boolean)
-      .join(", ");
-    setAddress(newAddress);
+  const handleSaveClick = (data) => {
     setIsEditing(false);
   };
-
   const handleCancelClick = () => {
-    setTempLine1(null);
-    setTempLine2(null);
-    setTempDistrict(null);
-    setTempPincode(null);
+    reset(); 
     setIsEditing(false);
     setSelectedFile("");
   };
@@ -108,12 +91,6 @@ function App() {
       setSelectedFile(URL.createObjectURL(file));
     }
   };
-
-  useEffect(() => {
-    if (isEditing) {
-      firstNameInputRef.current.focus();
-    }
-  }, [isEditing]);
 
   function Badge({ size, className, children }) {
     const badgeClasses = `rounded-full text-white px-4 py-1 font-normal ${size} ${className}`;
@@ -214,166 +191,223 @@ function App() {
                 </div>
               </div>
             </div>
-            <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2">
-              <CardBody>
-                <div className="flex flex-col  ">
-                  <div>
-                    <p className=" font-bold text-lg text-red-200">NAME:</p>
+            <form onSubmit={handleSubmit(handleSaveClick)}>
+              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2">
+                <CardBody>
+                  <div className="flex flex-col  ">
+                    <div>
+                      <p className=" font-bold text-lg text-red-200">NAME:</p>
 
-                    {isEditing ? (
-                      <>
-                        <div className="flex">
-                          <input
-                            type="text"
-                            value={tempFirstName}
-                            onChange={(e) => setTempFirstName(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
-                          />
-                          <input
-                            type="text"
-                            value={tempLastName}
-                            onChange={(e) => setTempLastName(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
-                          />
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="pl-3 text-lg">{`${firstName.toUpperCase()} ${lastName.toUpperCase()}`}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className="">
-                    <p className=" font-bold text-lg  text-red-200">AGE:</p>
+                      {isEditing ? (
+                        <>
+                          <div className="flex">
+                            <Controller
+                              name="firstName"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
+                                />
+                              )}
+                            />
+                            <Controller
+                              name="lastName"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
+                                />
+                              )}
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <p className="pl-3 text-lg">{`${formState.defaultValues.firstName} ${formState.defaultValues.lastName}`}</p>
+                        </>
+                      )}
+                    </div>
+                    <div className="">
+                      <p className=" font-bold text-lg  text-red-200">AGE:</p>
 
-                    {isEditing ? (
-                      <>
-                        <input
-                          type="text"
-                          value={age}
-                          onChange={(e) => setAge(e.target.value)}
-                          ref={firstNameInputRef}
-                          className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <p className="pl-3 text-lg">{age}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className="  ">
-                    <p className=" font-bold text-lg  text-red-200">ADDRESS:</p>
+                      {isEditing ? (
+                        <>
+                          <Controller
+                            name="age"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => (
+                              <input
+                                {...field}
+                                type="text"
+                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                              />
+                            )}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <p className="pl-3 text-lg">
+                            {formState.defaultValues.age}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className="  ">
+                      <p className=" font-bold text-lg  text-red-200">
+                        ADDRESS:
+                      </p>
 
-                    {isEditing ? (
-                      <>
-                        <div className="flex">
-                          <input
-                            type="text"
-                            placeholder="Line 1"
-                            value={tempLine1}
-                            onChange={(e) => setTempLine1(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                      {isEditing ? (
+                        <>
+                          <div className="flex">
+                            <Controller
+                              name="tempLine1"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  placeholder="Line 1"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                              )}
+                            />
+                            <Controller
+                              name="tempLine2"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  placeholder="Line 2"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                              )}
+                            />
+                          </div>
+                          <div className="flex">
+                            <Controller
+                              name="tempDistrict"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  placeholder="District"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                              )}
+                            />
+                            <Controller
+                              name="tempPincode"
+                              control={control}
+                              defaultValue=""
+                              render={({ field }) => (
+                                <input
+                                  {...field}
+                                  type="text"
+                                  placeholder="Pincode"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                              )}
+                            />
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <p className="pl-3 text-lg">{`${formState.defaultValues.tempLine1},${formState.defaultValues.tempLine2},${formState.defaultValues.tempDistrict},${formState.defaultValues.tempPincode} `}</p>
+                        </>
+                      )}
+                    </div>
+                    <div className="">
+                      <p className=" font-bold text-lg  text-red-200">Ph.No:</p>
+                      {isEditing ? (
+                        <>
+                          <Controller
+                            name="tempContact"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => (
+                              <input
+                                {...field}
+                                type="tel"
+                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                              />
+                            )}
                           />
-                          <input
-                            type="text"
-                            placeholder="Line 2"
-                            value={tempLine2 || ""}
-                            onChange={(e) => setTempLine2(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                        </>
+                      ) : (
+                        <>
+                          <p className="pl-3 text-lg">
+                            {formState.defaultValues.tempContact}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className="">
+                      <p className=" font-bold text-lg  text-red-200">Email:</p>
+                      {isEditing ? (
+                        <>
+                          <Controller
+                            name="tempEmail"
+                            control={control}
+                            defaultValue=""
+                            render={({ field }) => (
+                              <input
+                                {...field}
+                                type="email"
+                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                              />
+                            )}
                           />
-                        </div>
-                        <div className="flex">
-                          <input
-                            type="text"
-                            placeholder="District"
-                            value={tempDistrict || ""}
-                            onChange={(e) => setTempDistrict(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                          />
-                          <input
-                            type="text"
-                            placeholder="Pincode"
-                            value={tempPincode || ""}
-                            onChange={(e) => setTempPincode(e.target.value)}
-                            ref={firstNameInputRef}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                          />
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        <p className="pl-3 text-lg">{address}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className="">
-                    <p className=" font-bold text-lg  text-red-200">Ph.No:</p>
-                    {isEditing ? (
-                      <>
-                        <input
-                          value={tempContact}
-                          ref={firstNameInputRef}
-                          onChange={(e) => setTempContact(e.target.value)}
-                          type="tel"
-                          className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <p className="pl-3 text-lg">{contact}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className="">
-                    <p className=" font-bold text-lg  text-red-200">Email:</p>
-                    {isEditing ? (
-                      <>
-                        <input
-                          value={tempEmail}
-                          ref={firstNameInputRef}
-                          onChange={(e) => setTempEmail(e.target.value)}
-                          type="email"
-                          className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                        />
-                      </>
-                    ) : (
-                      <>
-                        <p className="pl-3 text-lg">{email}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className="flex  items-center justify-center ">
-                    {isEditing && (
-                      <>
-                        <button onClick={handleSaveClick}>
-                          <BiSave className="w-6 h-6" />
-                        </button>
-                        <div className="pl-10 pt-1">
-                          <button onClick={handleCancelClick} className="">
-                            <MdOutlineCancel className="w-6 h-6" />
+                        </>
+                      ) : (
+                        <>
+                          <p className="pl-3 text-lg">
+                            {formState.defaultValues.tempEmail}
+                          </p>
+                        </>
+                      )}
+                    </div>
+                    <div className="flex  items-center justify-center ">
+                      {isEditing && (
+                        <>
+                          <button type="submit">
+                            <BiSave className="w-6 h-6" />
                           </button>
-                        </div>
-                      </>
-                    )}
+                          <div className="pl-10 pt-1">
+                            <button onClick={handleCancelClick} className="">
+                              <MdOutlineCancel className="w-6 h-6" />
+                            </button>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </CardBody>
-              <CardFooter className="pt-0">
-              <ul className="grid grid-cols-2 gap-4">
-                  {skill.map(skill=>(
-                    <Badge size="sm" className="my-custom-class">
-                    {skill}
-                  </Badge>
-                  ))}
-                </ul>
-              </CardFooter>
-            </Card>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <ul className="grid grid-cols-2 gap-4">
+                    {skill.map((skill, index) => (
+                      <li key={index}>
+                        <Badge size="sm" className="my-custom-class">
+                          {skill}
+                        </Badge>
+                      </li>
+                    ))}
+                  </ul>
+                </CardFooter>
+              </Card>
+            </form>
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
@@ -455,7 +489,7 @@ function App() {
           </div>
         </div>
       </div>
-      <div >
+      <div>
         <Footer />
       </div>
       <ToastContainer />
