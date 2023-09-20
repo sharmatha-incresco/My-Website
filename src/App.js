@@ -30,7 +30,7 @@ function App() {
     "Shuttle 🏸",
     "Reading📖",
   ];
-  const skill = ["Java", "React", "C", "Problem Solving"];
+  const skill = ["Java", "React", "C", "Python"];
   const [firstName, setFirstName] = useState("SHARMATHA");
   const [lastName, setLastName] = useState("VENKATESWARAN");
   const [age, setAge] = useState("20");
