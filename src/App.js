@@ -20,6 +20,7 @@ import img1 from "./img1.jpeg";
 import img2 from "./img2.jpeg";
 import img3 from "./img3.jpeg";
 import img4 from "./img4.jpeg";
+import img5 from "./img5.jpeg";
 
 import { Carousel } from "@material-tailwind/react";
 function App() {
@@ -419,6 +420,7 @@ function App() {
                     <img src={img2} alt="image2" className="object-cover" />
                     <img src={img3} alt="image3" className="object-cover" />
                     <img src={img4} alt="image4" className="object-cover" />
+                    <img src={img5} alt="image5" className="object-cover" />
                   </Carousel>
                 </CardBody>
               </Card>
