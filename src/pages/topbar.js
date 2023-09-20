@@ -13,7 +13,7 @@ export default function Topbar() {
       : "bg-transparent text-black";
 
   return (
-    <div className="flex gap-4 justify-between p-4 bg-red-300">
+    <div className="flex gap-4 justify-between p-4 bg-red-200">
       <button onClick={() => navigate("/home")} className={`flex gap-2 hover hover:bg-red-100 rounded-lg ${buttonClass("/home")}`}>
         <HiHome className="w-6 h-6" />
         <p className="hidden md:block lg:block">Home</p>

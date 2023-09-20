@@ -2,7 +2,7 @@ import { BsGithub, BsLinkedin, BsInstagram } from "react-icons/bs";
 
 export default function Footer() {
   return (
-    <div className="flex gap-4 justify-between p-4 bg-red-300">
+    <div className="flex gap-4 justify-between p-4 bg-red-200">
       <a href="https://github.com/sharmatha-incresco">
         <div className="flex gap-2 hover hover:bg-red-100 rounded-lg ">
           <BsGithub className="w-6 h-6" />
