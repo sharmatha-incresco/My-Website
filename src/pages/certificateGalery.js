@@ -17,7 +17,7 @@ import ReactModal from "react-modal";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
-import { MdAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
+import { MdOutlineAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 
 export default function CertificateGalery() {
@@ -145,7 +145,7 @@ export default function CertificateGalery() {
             onClick={handleAdd}
             className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200 shadow-md shadow-gray-500"
           >
-            <MdAddPhotoAlternate className="w-10 h-10 rounded-full" />
+            <MdOutlineAddPhotoAlternate className="w-10 h-10 " />
           </button>
           <ReactModal
             isOpen={modalIsOpen}
