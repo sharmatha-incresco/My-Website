@@ -11,7 +11,72 @@ import mednucleus from "../mednucleus.jpeg";
 import greenclub from "../greenclub.jpeg";
 import pylamp from "../pylamp.jpeg";
 import pals from "../pals.jpeg";
+import React, { useState } from "react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { ToastContainer, toast } from "react-toastify";
+import ReactModal from "react-modal";
+
+import {
+  MdAddHomeWork,
+  MdOutlineCancel,
+} from "react-icons/md";
 function Experience() {
+  const [isAdd, setIsAdd] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [role, setRole] = useState();
+  const [company, setCompany] = useState();
+  const [duration, setDuration] = useState();
+  const [place, setPlace] = useState();
+  const [type, setType] = useState();
+  const [website,setWebsite]=useState();
+  const [location,setLocation]=useState();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showPassword, setShowpassword] = useState(false);
+  const [password, setPassword] = useState("");
+  const handleAdd = () => {
+    setModalIsOpen(true);
+    setSelectedFile(null);
+  };
+
+  const handleClose = () => {
+    setIsAdd(false);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setPassword("");
+  };
+  const handleAuth = () => {
+    if (password === "sharmatha@18") {
+      setIsAdd(true);
+      setModalIsOpen(false);
+    } else {
+      toast.error("Sorry Wrong Password", {
+        hideProgressBar: true,
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
+    }
+  };
+
+  const handleAddImage = () => {
+    toast.success("Sucessfully Certificate Added", {
+      hideProgressBar: true,
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 1000,
+    });
+    setIsAdd(false);
+    handleClose();
+  };
+  const handleChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedFile(URL.createObjectURL(file));
+    }
+  };
+  const passwordVisibility = () => {
+    setShowpassword(!showPassword);
+  };
   function Work({
     src,
     role,
@@ -57,8 +122,129 @@ function Experience() {
         <Topbar />
       </div>
       <div className="flex-grow p-4 xl:pl-16 items-center justify-center">
-      <div className="text-3xl text-red-200  font-bold pb-2">
-         EXPERIENCE
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-bold text-red-200 ">EXPERIENCE</h1>
+          <button
+            onClick={handleAdd}
+            className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200 shadow-md shadow-gray-500"
+          >
+            <MdAddHomeWork className="w-10 h-10 rounded-full" />
+          </button>
+          <ReactModal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Authentication Modal"
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+          >
+            <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-gray-600 hover:text-red-200"
+              >
+                <MdOutlineCancel />
+              </button>
+              <p className="font-semibold text-2xl text-red-200 text-center pt-4 ">
+                Hii Sharmatha 🤝
+              </p>
+              <div className=" pl-4 p-5">
+                <p className=" font-bold text-lg  text-red-200">Password:</p>
+                <div className="flex gap-2">
+                  <input
+                    placeholder="Enter your password"
+                    type={showPassword ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                  />
+
+                  <button onClick={passwordVisibility} className="">
+                    {showPassword ? (
+                      <AiFillEyeInvisible className="text-red-300 text-lg" />
+                    ) : (
+                      <AiFillEye className="text-red-300 text-lg" />
+                    )}
+                  </button>
+                </div>
+              </div>
+              <div className="inline-flex justify-center items-center ">
+                <button
+                  onClick={handleAuth}
+                  className="flex bottom-2 text-red-200 "
+                >
+                  <p className="font-semibold">SignIn 🔐</p>
+                </button>
+              </div>
+            </div>
+          </ReactModal>
+          <ReactModal
+            isOpen={isAdd}
+            contentLabel="Authentication Modal"
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-scroll "
+          >
+            <div className="bg-white  flex flex-col p-4 rounded-lg shadow-md">
+              <button
+                onClick={() => setIsAdd(false)}
+                className="absolute top-2 right-2 text-gray-600 hover:text-red-200 "
+              >
+                <MdOutlineCancel />
+              </button>
+              <div>
+                <h2 className="text-red-200 font-bold">Add logo:</h2>
+                <input
+                  type="file"
+                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                  onChange={handleChange}
+                />
+                {selectedFile && (
+                  <>
+                    <img src={selectedFile} alt="Selected" />
+                    <div className="grid grid-cols-2 gap-2 p-4">
+                      <input
+                        placeholder="Role"
+                        onChange={(e) => setRole(e.target.value)}
+                        className="border-2  border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Company"
+                        onChange={(e) => setCompany(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Website"
+                        onChange={(e) => setWebsite(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Duration"
+                        onChange={(e) => setDuration(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Place"
+                        onChange={(e) => setPlace(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Type"
+                        onChange={(e) => setType(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                      <input
+                        placeholder="Location"
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                      />
+                    </div>
+                    <button
+                      onClick={handleAddImage}
+                      className="text-red-200 font-semibold pt-5 "
+                    >
+                      Add
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+          </ReactModal>
         </div>
         <div className="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
           <Work
@@ -132,7 +318,20 @@ function Experience() {
             location="https://maps.app.goo.gl/TZ3A8tLxULhucNJK6?g_st=iw"
             website="https://velalarengg.ac.in/"
           />
+          {selectedFile && (
+            <Work
+              src={selectedFile}
+              place={place}
+              type={type}
+              company={company}
+              role={role}
+              duration={duration}
+              location={location}
+              website={website}
+            />
+          )}
         </div>
+        <ToastContainer />
       </div>
       <div className="">
         <Footer />
