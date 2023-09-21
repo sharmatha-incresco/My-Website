@@ -66,7 +66,7 @@ export default function CertificateGalery() {
   
 
     return (
-      <div className="border-2 items-center justify-center xl:rounded-xl border-red-200 ">
+      <div className="border-2 items-center justify-center xl:rounded-xl border-red-200 shadow-md shadow-gray-500 ">
         <div className="flex justify-center hover:scale-105 xl:rounded-lg transform bg-red-100 transition-transform hover:bg-white hover:border-2 hover:border-red-100">
           <img
             className="avatar md:h-[450px] md:w-[500px] h-56"
@@ -108,7 +108,7 @@ export default function CertificateGalery() {
       </div>
       <div className="flex-grow p-4 overflow-scroll ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-red-200 underline ">
+          <h1 className="text-3xl font-bold text-red-200  ">
             CERTIFICATES
           </h1>
           <button onClick={handleAdd} >
@@ -119,7 +119,7 @@ export default function CertificateGalery() {
             contentLabel="Authentication Modal"
             className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
           >
-            <div className="bg-white  flex flex-col p-4 rounded-lg shadow-lg">
+            <div className="bg-white  flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={() => setIsAdd(false)}
                 className="absolute top-2 right-2 text-gray-600 hover:text-red-200 "

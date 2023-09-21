@@ -18,7 +18,7 @@ export default function Education() {
     percentege,
   }) {
     return (
-      <div className="border-2 border-red-200 p-4 lg:w-[1024px] bg-red-100 hover:scale-105 transform transition-transform hover:bg-white ">
+      <div className="border-2 border-red-200 p-4 lg:w-[1024px] bg-red-100 hover:scale-105 transform transition-transform hover:bg-white rounded-xl shadow-md shadow-gray-500 ">
         <div className="text-xl pb-3 font-semibold ">{name}</div>
         <div className="flex md:flex-row lg:flex-row flex-col  gap-10">
           <div>
@@ -72,7 +72,7 @@ export default function Education() {
         <Topbar />
       </div>
       <div className="flex-grow justify-center items-center p-4">
-        <div className="text-3xl text-red-200 underline font-bold pb-2">
+        <div className="text-3xl text-red-200 font-bold pb-2">
           EDUCATION
         </div>
         <div className="flex justify-center items-center ">
