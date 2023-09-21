@@ -12,6 +12,7 @@ import certificate9 from "../certi9.jpg";
 import certificate10 from "../certi10.jpg";
 import certificate11 from "../certi11.jpg";
 import certificate12 from "../certi12.jpeg";
+import certificate13 from "../certi13.jpeg";
 import ReactModal from "react-modal";
 
 import { useState } from "react";
@@ -65,8 +66,8 @@ export default function CertificateGalery() {
   
 
     return (
-      <div className="border-2 items-center justify-center rounded-xl border-red-200 ">
-        <div className="flex justify-center hover:scale-105 rounded-lg transform bg-red-100 transition-transform hover:bg-white hover:border-2 hover:border-red-100">
+      <div className="border-2 items-center justify-center xl:rounded-xl border-red-200 ">
+        <div className="flex justify-center hover:scale-105 xl:rounded-lg transform bg-red-100 transition-transform hover:bg-white hover:border-2 hover:border-red-100">
           <img
             className="avatar md:h-[450px] md:w-[500px] h-56"
             src={src}
@@ -223,6 +224,12 @@ export default function CertificateGalery() {
             <Profile
               src={certificate12}
               description="This is one of my certificate for the second price in paper presentation of EDC & IIC cell of my college"
+            />
+          </div>
+          <div>
+            <Profile
+              src={certificate13}
+              description="This is the certificate for the posting of PRO in green club of my college"
             />
           </div>
           {selectedFile && (
