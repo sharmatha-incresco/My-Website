@@ -60,7 +60,7 @@ function Experience() {
   };
 
   const handleAddImage = () => {
-    toast.success("Sucessfully Certificate Added", {
+    toast.success("Sucessfully Experience Added", {
       hideProgressBar: true,
       position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 1000,
