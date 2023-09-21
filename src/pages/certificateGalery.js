@@ -65,8 +65,8 @@ export default function CertificateGalery() {
   
 
     return (
-      <div className="border-2 items-center justify-center border-red-200 ">
-        <div className="flex justify-center hover:scale-105 transform transition-transform hover:bg-red-100">
+      <div className="border-2 items-center justify-center rounded-xl border-red-200 ">
+        <div className="flex justify-center hover:scale-105 rounded-lg transform bg-red-100 transition-transform hover:bg-white hover:border-2 hover:border-red-100">
           <img
             className="avatar md:h-[450px] md:w-[500px] h-56"
             src={src}
@@ -81,7 +81,7 @@ export default function CertificateGalery() {
                 <AiFillCloseCircle />
               </button>
               <img
-                className="modal-image "
+                className="modal-image"
                 src={src}
                 width={imageSize}
                 height={imageSize}
@@ -222,7 +222,7 @@ export default function CertificateGalery() {
           <div>
             <Profile
               src={certificate12}
-              description="This is one of my participant certificate in Rotract club of my college"
+              description="This is one of my certificate for the second price in paper presentation of EDC & IIC cell of my college"
             />
           </div>
           {selectedFile && (

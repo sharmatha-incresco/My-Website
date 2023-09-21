@@ -18,7 +18,7 @@ export default function Education() {
     percentege,
   }) {
     return (
-      <div className="border-2 border-red-200 p-4 lg:w-[1024px] hover:scale-105 transform transition-transform hover:bg-red-100 ">
+      <div className="border-2 border-red-200 p-4 lg:w-[1024px] bg-red-100 hover:scale-105 transform transition-transform hover:bg-white ">
         <div className="text-xl pb-3 font-semibold ">{name}</div>
         <div className="flex md:flex-row lg:flex-row flex-col  gap-10">
           <div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, {  useState} from "react";
 import Footer from "./pages/footer";
 import Topbar from "./pages/topbar";
 import profile from "./profile.jpeg";
@@ -118,9 +118,9 @@ function App() {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <label
                         htmlFor="imageInput"
-                        className="rounded-full bg-red-200 p-2 cursor-pointer"
+                        className="rounded-full bg-red-200 p-2 cursor-pointer "
                       >
-                        <MdEdit className="w-5 h-5 text-white rounded-full" />
+                        <MdEdit className="w-5 h-5 text-white rounded-full " />
                         <input
                           type="file"
                           id="imageInput"
@@ -145,7 +145,7 @@ function App() {
                     {!isEditing && (
                       <button
                         onClick={openModal}
-                        className="rounded-full bg-red-200 p-2"
+                        className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200"
                       >
                         <MdEdit className="w-5 h-5 text-white rounded-full" />
                       </button>
@@ -174,6 +174,7 @@ function App() {
                         </p>
                         <input
                           placeholder="Enter your password"
+                          type="password"
                           onChange={(e) => setPassword(e.target.value)}
                           className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
                         />
@@ -192,7 +193,7 @@ function App() {
               </div>
             </div>
             <form onSubmit={handleSubmit(handleSaveClick)}>
-              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2">
+              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
                 <CardBody>
                   <div className="flex flex-col  ">
                     <div>
@@ -411,7 +412,7 @@ function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 ">
+            <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
               <CardHeader
                 color="blue-gray"
                 className="relative h-40 w-40 border-red-100 border-2"
@@ -423,19 +424,20 @@ function App() {
                 />
               </CardHeader>
               <CardBody>
-                <Typography variant="h5" color="blue-gray" className="mb-2">
+                <Typography variant="h5" className="mb-2 text-gray-600">
                   Front End Developer
                 </Typography>
                 <Typography>
-                  I am good in teamwork. I finished many webinar courses and I
-                  learned basis of different programming languages and
-                  interested in problem solving. Learning with android app
-                  development.
+                  I excel in teamwork and have completed numerous webinar
+                  courses, gaining a solid foundation in various programming
+                  languages. My passion lies in problem-solving, with a
+                  particular focus on React for front-end development. I'm
+                  dedicated to honing my skills in this area.
                 </Typography>
               </CardBody>
             </Card>
             <div className="lg:pl-2">
-              <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 ">
+              <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 ">
                 <CardHeader className="relative  w-10 border-red-100 border-2">
                   <div>
                     <span
@@ -449,7 +451,7 @@ function App() {
                 </CardHeader>
 
                 <CardBody className="pt-1">
-                  <Carousel className="rounded-xl ">
+                  <Carousel className="rounded-xl bg-red-100 ">
                     <img src={img1} alt="image1" className=" object-cover" />
                     <img src={img2} alt="image2" className="object-cover" />
                     <img src={img3} alt="image3" className="object-cover" />
@@ -460,7 +462,7 @@ function App() {
               </Card>
             </div>
             <div className="xl:pl-56">
-              <Card className="mt-6 bg-red-100 md:w-96 lg:w-80 xl:w-96 h-56 border-red-200 border-2 ">
+              <Card className="mt-6 bg-red-100 md:w-96 lg:w-80 xl:w-96 h-56 border-red-200 border-2hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
                 <CardHeader
                   color="blue-gray"
                   className="relative flex h-40 w-28 border-red-100 border-2"
