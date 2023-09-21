@@ -14,7 +14,7 @@ import certificate11 from "../certi11.jpg";
 import certificate12 from "../certi12.jpeg";
 import certificate13 from "../certi13.jpeg";
 import ReactModal from "react-modal";
-
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
@@ -24,13 +24,33 @@ export default function CertificateGalery() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [description, setDescription] = useState();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [showPassword, setShowpassword] = useState(false);
+  const [password, setPassword] = useState("");
   const handleAdd = () => {
-    setIsAdd(true);
+    setModalIsOpen(true);
     setSelectedFile(null);
   };
 
   const handleClose = () => {
     setIsAdd(false);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setPassword("");
+  };
+  const handleAuth = () => {
+    if (password === "sharmatha@18") {
+      setIsAdd(true);
+      setModalIsOpen(false);
+    } else {
+      toast.error("Sorry Wrong Password", {
+        hideProgressBar: true,
+        position: toast.POSITION.BOTTOM_CENTER,
+        autoClose: 1000,
+      });
+    }
   };
 
   const handleAddImage = () => {
@@ -48,9 +68,16 @@ export default function CertificateGalery() {
       setSelectedFile(URL.createObjectURL(file));
     }
   };
+  const passwordVisibility = () => {
+    setShowpassword(!showPassword);
+  };
   function Profile({ src, imageSize = 500, description }) {
     const [isMoadlOpen, setModalOpen] = useState(false);
-    const [emojiCounts, setEmojiCounts] = useState({ claps: 0, thumbsUp: 0, thumbsDown: 0 });
+    const [emojiCounts, setEmojiCounts] = useState({
+      claps: 0,
+      thumbsUp: 0,
+      thumbsDown: 0,
+    });
 
     const HandleClick = () => {
       setModalOpen(true);
@@ -63,7 +90,6 @@ export default function CertificateGalery() {
       updatedEmojiCounts[emoji] += 1;
       setEmojiCounts(updatedEmojiCounts);
     };
-  
 
     return (
       <div className="border-2 items-center justify-center xl:rounded-xl border-red-200 shadow-md shadow-gray-500 ">
@@ -90,10 +116,16 @@ export default function CertificateGalery() {
               />
               <div className="p-4 md:text-base text-xs">{description}</div>
               <div className="flex text-2xl justify-between ">
-              <button onClick={() => handleEmojiClick('claps')}>👏 {emojiCounts.claps}</button>
-              <button onClick={() => handleEmojiClick('thumbsUp')}>👍 {emojiCounts.thumbsUp}</button>
-              <button onClick={() => handleEmojiClick('thumbsDown')}>👎 {emojiCounts.thumbsDown}</button>
-            </div>
+                <button onClick={() => handleEmojiClick("claps")}>
+                  👏 {emojiCounts.claps}
+                </button>
+                <button onClick={() => handleEmojiClick("thumbsUp")}>
+                  👍 {emojiCounts.thumbsUp}
+                </button>
+                <button onClick={() => handleEmojiClick("thumbsDown")}>
+                  👎 {emojiCounts.thumbsDown}
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -108,12 +140,58 @@ export default function CertificateGalery() {
       </div>
       <div className="flex-grow p-4 overflow-scroll ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-red-200  ">
-            CERTIFICATES
-          </h1>
-          <button onClick={handleAdd} >
-            <MdAddPhotoAlternate className="w-10 h-10 hover:scale-150 transform transition-transform " />
+          <h1 className="text-3xl font-bold text-red-200  ">CERTIFICATES</h1>
+          <button
+            onClick={handleAdd}
+            className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200 shadow-md shadow-gray-500"
+          >
+            <MdAddPhotoAlternate className="w-10 h-10 rounded-full" />
           </button>
+          <ReactModal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Authentication Modal"
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+          >
+            <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-gray-600 hover:text-red-200"
+              >
+                <MdOutlineCancel />
+              </button>
+              <p className="font-semibold text-2xl text-red-200 text-center pt-4 ">
+                Hii Sharmatha 🤝
+              </p>
+              <div className=" pl-4 p-5">
+                <p className=" font-bold text-lg  text-red-200">Password:</p>
+                <div className="flex gap-2">
+                  <input
+                    placeholder="Enter your password"
+                    type={showPassword ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                  />
+
+                  <button onClick={passwordVisibility} className="">
+                    {showPassword ? (
+                      <AiFillEyeInvisible className="text-red-300 text-lg" />
+                    ) : (
+                      <AiFillEye className="text-red-300 text-lg" />
+                    )}
+                  </button>
+                </div>
+              </div>
+              <div className="inline-flex justify-center items-center ">
+                <button
+                  onClick={handleAuth}
+                  className="flex bottom-2 text-red-200 "
+                >
+                  <p className="font-semibold">SignIn 🔐</p>
+                </button>
+              </div>
+            </div>
+          </ReactModal>
           <ReactModal
             isOpen={isAdd}
             contentLabel="Authentication Modal"
@@ -236,7 +314,7 @@ export default function CertificateGalery() {
             <Profile src={selectedFile} description={description} />
           )}
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </div>
       <div className="">
         <Footer />

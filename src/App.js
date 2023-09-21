@@ -152,7 +152,7 @@ function App() {
                         onClick={openModal}
                         className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200 shadow-md shadow-gray-500"
                       >
-                        <MdEdit className="w-5 h-5 text-white rounded-full" />
+                        <MdEdit className="w-5 h-5 rounded-full" />
                       </button>
                     )}
                   </div>
@@ -468,7 +468,7 @@ function App() {
                 />
               </CardHeader>
               <CardBody>
-                <Typography variant="h5" className="mb-2 text-gray-600">
+                <Typography variant="h5" className="mb-2 ">
                   Front End Developer
                 </Typography>
                 <Typography>
