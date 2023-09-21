@@ -1,4 +1,4 @@
-import React, {  useState} from "react";
+import React, { useState } from "react";
 import Footer from "./pages/footer";
 import Topbar from "./pages/topbar";
 import profile from "./profile.jpeg";
@@ -24,6 +24,7 @@ import img4 from "./img4.jpeg";
 import img5 from "./img5.jpeg";
 
 import { Carousel } from "@material-tailwind/react";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 function App() {
   const hobby = [
     "Music 🎼",
@@ -38,6 +39,7 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showPassword, setShowpassword] = useState(false);
   const { handleSubmit, control, reset, formState } = useForm({
     defaultValues: {
       firstName: "SHARMATHA",
@@ -51,7 +53,7 @@ function App() {
       tempEmail: "sharmatha1823@gmail.com",
     },
   });
- 
+
   const openModal = () => {
     setModalIsOpen(true);
   };
@@ -69,7 +71,7 @@ function App() {
     setIsEditing(false);
   };
   const handleCancelClick = () => {
-    reset(); 
+    reset();
     setIsEditing(false);
     setSelectedFile("");
   };
@@ -90,6 +92,9 @@ function App() {
     if (file) {
       setSelectedFile(URL.createObjectURL(file));
     }
+  };
+  const passwordVisibility = () => {
+    setShowpassword(!showPassword);
   };
 
   function Badge({ size, className, children }) {
@@ -172,12 +177,22 @@ function App() {
                         <p className=" font-bold text-lg  text-red-200">
                           Password:
                         </p>
-                        <input
-                          placeholder="Enter your password"
-                          type="password"
-                          onChange={(e) => setPassword(e.target.value)}
-                          className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                        />
+                        <div className="flex gap-2">
+                          <input
+                            placeholder="Enter your password"
+                            type={showPassword ? "text" : "password"}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                          />
+
+                          <button onClick={passwordVisibility} className="">
+                            {showPassword ? (
+                              <AiFillEyeInvisible className="text-red-300 text-lg" />
+                            ) : (
+                              <AiFillEye className="text-red-300 text-lg" />
+                            )}
+                          </button>
+                        </div>
                       </div>
                       <div className="inline-flex justify-center items-center ">
                         <button
@@ -338,12 +353,26 @@ function App() {
                             name="tempContact"
                             control={control}
                             defaultValue=""
+                            rules={{
+                              required: "Contact number is required",
+                              pattern: {
+                                value: /^\d{10}$/,
+                                message: "Invalid contact number format",
+                              },
+                            }}
                             render={({ field }) => (
-                              <input
-                                {...field}
-                                type="tel"
-                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                              />
+                              <div>
+                                <input
+                                  {...field}
+                                  type="tel"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                                {formState.errors.tempContact && (
+                                  <p className="text-red-500">
+                                    {formState.errors.tempContact.message}
+                                  </p>
+                                )}
+                              </div>
                             )}
                           />
                         </>
@@ -363,12 +392,27 @@ function App() {
                             name="tempEmail"
                             control={control}
                             defaultValue=""
+                            rules={{
+                              required: "Email is required",
+                              pattern: {
+                                value:
+                                  /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/,
+                                message: "Invalid email format",
+                              },
+                            }}
                             render={({ field }) => (
-                              <input
-                                {...field}
-                                type="email"
-                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
-                              />
+                              <div>
+                                <input
+                                  {...field}
+                                  type="email"
+                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                />
+                                {formState.errors.tempEmail && (
+                                  <p className="text-red-500">
+                                    {formState.errors.tempEmail.message}
+                                  </p>
+                                )}
+                              </div>
                             )}
                           />
                         </>
