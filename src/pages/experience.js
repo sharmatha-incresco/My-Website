@@ -56,7 +56,7 @@ function Experience() {
       <div>
         <Topbar />
       </div>
-      <div className="flex-grow p-4 ">
+      <div className="flex-grow p-4 xl:pl-16 items-center justify-center">
         <div className="grid lg:grid-cols-3 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-4">
           <Work
             src={incresco}
