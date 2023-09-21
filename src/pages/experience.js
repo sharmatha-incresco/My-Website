@@ -134,7 +134,7 @@ function Experience() {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2  border-2 border-red-200 -translate-y-1/2 "
           >
             <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
               <button
@@ -178,7 +178,7 @@ function Experience() {
           <ReactModal
             isOpen={isAdd}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-scroll "
+            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-red-200 overflow-scroll "
           >
             <div className="bg-white  flex flex-col p-4 rounded-lg shadow-md">
               <button
