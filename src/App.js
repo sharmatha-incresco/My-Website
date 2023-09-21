@@ -193,7 +193,7 @@ function App() {
               </div>
             </div>
             <form onSubmit={handleSubmit(handleSaveClick)}>
-              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
+              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
                 <CardBody>
                   <div className="flex flex-col  ">
                     <div>
@@ -412,7 +412,7 @@ function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
+            <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
               <CardHeader
                 color="blue-gray"
                 className="relative h-40 w-40 border-red-100 border-2"
@@ -437,7 +437,7 @@ function App() {
               </CardBody>
             </Card>
             <div className="lg:pl-2">
-              <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 ">
+              <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 ">
                 <CardHeader className="relative  w-10 border-red-100 border-2">
                   <div>
                     <span
@@ -462,7 +462,7 @@ function App() {
               </Card>
             </div>
             <div className="xl:pl-56">
-              <Card className="mt-6 bg-red-100 md:w-96 lg:w-80 xl:w-96 h-56 border-red-200 border-2hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
+              <Card className="mt-6 bg-red-100 md:w-96 lg:w-80 xl:w-96 h-56 border-red-200 border-2hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
                 <CardHeader
                   color="blue-gray"
                   className="relative flex h-40 w-28 border-red-100 border-2"
