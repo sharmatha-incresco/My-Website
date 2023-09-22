@@ -100,7 +100,7 @@ function App() {
   function Badge({ size, className, children }) {
     const badgeClasses = `rounded-full text-white px-4 py-1 font-normal ${size} ${className}`;
 
-    return <span className={`bg-red-200 ${badgeClasses}`}>{children}</span>;
+    return <span className={`bg-blue-200 ${badgeClasses}`}>{children}</span>;
   }
 
   return (
@@ -112,7 +112,7 @@ function App() {
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
           <div className="flex flex-col lg:p-10">
             <div className="flex justify-between">
-              <div className="rounded-full  overflow-hidden w-32 h-32 bg-gray-200 border-2 border-red-200 flex items-center justify-center">
+              <div className="rounded-full  overflow-hidden w-32 h-32 bg-gray-200 border-2 border-blue-200 flex items-center justify-center">
                 {isEditing ? (
                   <div className="relative group">
                     <img
@@ -123,7 +123,7 @@ function App() {
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100">
                       <label
                         htmlFor="imageInput"
-                        className="rounded-full bg-red-200 p-2 cursor-pointer "
+                        className="rounded-full bg-blue-200 p-2 cursor-pointer "
                       >
                         <MdEdit className="w-5 h-5 text-white rounded-full " />
                         <input
@@ -150,7 +150,7 @@ function App() {
                     {!isEditing && (
                       <button
                         onClick={openModal}
-                        className="rounded-full bg-red-100 p-2 border-red-200 border-2 hover:scale-105 transform transition-transform hover:bg-red-100 hover:border-2 hover:border-red-200 shadow-md shadow-gray-500"
+                        className="rounded-full bg-blue-100 hover:bg-white p-2 border-blue-200 border-2 hover:scale-105 transform transition-transform hover:border-2 hover:border-blue-200 shadow-md shadow-gray-500"
                       >
                         <MdEdit className="w-5 h-5 rounded-full" />
                       </button>
@@ -166,15 +166,15 @@ function App() {
                     <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
                       <button
                         onClick={closeModal}
-                        className="absolute top-2 right-2 text-gray-600 hover:text-red-200"
+                        className="absolute top-2 right-2 text-gray-600 hover:text-blue-200"
                       >
                         <MdOutlineCancel />
                       </button>
-                      <p className="font-semibold text-2xl text-red-200 text-center pt-4 ">
+                      <p className="font-semibold text-2xl text-blue-200 text-center pt-4 ">
                         Hii Sharmatha 🤝
                       </p>
                       <div className=" pl-4 p-5">
-                        <p className=" font-bold text-lg  text-red-200">
+                        <p className=" font-bold text-lg  text-blue-200">
                           Password:
                         </p>
                         <div className="flex gap-2">
@@ -182,14 +182,14 @@ function App() {
                             placeholder="Enter your password"
                             type={showPassword ? "text" : "password"}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                            className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                           />
 
                           <button onClick={passwordVisibility} className="">
                             {showPassword ? (
-                              <AiFillEyeInvisible className="text-red-300 text-lg" />
+                              <AiFillEyeInvisible className="text-blue-300 text-lg" />
                             ) : (
-                              <AiFillEye className="text-red-300 text-lg" />
+                              <AiFillEye className="text-blue-300 text-lg" />
                             )}
                           </button>
                         </div>
@@ -197,7 +197,7 @@ function App() {
                       <div className="inline-flex justify-center items-center ">
                         <button
                           onClick={handleAuth}
-                          className="flex bottom-2 text-red-200 "
+                          className="flex bottom-2 text-blue-200 "
                         >
                           <p className="font-semibold">SignIn 🔐</p>
                         </button>
@@ -208,11 +208,11 @@ function App() {
               </div>
             </div>
             <form onSubmit={handleSubmit(handleSaveClick)}>
-              <Card className="mt-6 bg-red-100  overflow-scroll md:w-96 lg:w-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 shadow-md shadow-gray-500">
+              <Card className="mt-6 bg-blue-100  overflow-scroll md:w-96 lg:w-96 border-blue-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500">
                 <CardBody>
                   <div className="flex flex-col  ">
                     <div>
-                      <p className=" font-bold text-lg text-red-200">NAME:</p>
+                      <p className=" font-bold text-lg text-blue-200">NAME:</p>
 
                       {isEditing ? (
                         <>
@@ -225,7 +225,7 @@ function App() {
                                 <input
                                   {...field}
                                   type="text"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded "
                                 />
                               )}
                             />
@@ -237,7 +237,7 @@ function App() {
                                 <input
                                   {...field}
                                   type="text"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded "
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded "
                                 />
                               )}
                             />
@@ -250,7 +250,7 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  text-red-200">AGE:</p>
+                      <p className=" font-bold text-lg  text-blue-200">AGE:</p>
 
                       {isEditing ? (
                         <>
@@ -262,7 +262,7 @@ function App() {
                               <input
                                 {...field}
                                 type="text"
-                                className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded w-full"
+                                className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
                               />
                             )}
                           />
@@ -276,7 +276,7 @@ function App() {
                       )}
                     </div>
                     <div className="  ">
-                      <p className=" font-bold text-lg  text-red-200">
+                      <p className=" font-bold text-lg  text-blue-200">
                         ADDRESS:
                       </p>
 
@@ -292,7 +292,7 @@ function App() {
                                   {...field}
                                   type="text"
                                   placeholder="Line 1"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                               )}
                             />
@@ -305,7 +305,7 @@ function App() {
                                   {...field}
                                   type="text"
                                   placeholder="Line 2"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                               )}
                             />
@@ -320,7 +320,7 @@ function App() {
                                   {...field}
                                   type="text"
                                   placeholder="District"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                               )}
                             />
@@ -333,7 +333,7 @@ function App() {
                                   {...field}
                                   type="text"
                                   placeholder="Pincode"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                               )}
                             />
@@ -346,7 +346,9 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  text-red-200">Ph.No:</p>
+                      <p className=" font-bold text-lg  text-blue-200">
+                        Ph.No:
+                      </p>
                       {isEditing ? (
                         <>
                           <Controller
@@ -365,10 +367,10 @@ function App() {
                                 <input
                                   {...field}
                                   type="tel"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                                 {formState.errors.tempContact && (
-                                  <p className="text-red-500">
+                                  <p className="text-blue-500">
                                     {formState.errors.tempContact.message}
                                   </p>
                                 )}
@@ -385,7 +387,9 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  text-red-200">Email:</p>
+                      <p className=" font-bold text-lg  text-blue-200">
+                        Email:
+                      </p>
                       {isEditing ? (
                         <>
                           <Controller
@@ -405,10 +409,10 @@ function App() {
                                 <input
                                   {...field}
                                   type="email"
-                                  className="border-2 border-red-200 focus:outline-none focus:border-red-200 px-1 py-1 rounded"
+                                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
                                 />
                                 {formState.errors.tempEmail && (
-                                  <p className="text-red-500">
+                                  <p className="text-blue-500">
                                     {formState.errors.tempEmail.message}
                                   </p>
                                 )}
@@ -456,10 +460,10 @@ function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 shadow-md shadow-gray-500">
+            <Card className="mt-6 bg-blue-100 md:w-96 xl:w-96 lg:w-64 h-96 border-blue-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500">
               <CardHeader
                 color="blue-gray"
-                className="relative h-40 w-40 border-red-100 border-2"
+                className="relative h-40 w-40 border-blue-100 border-2"
               >
                 <img
                   src={skills}
@@ -481,8 +485,8 @@ function App() {
               </CardBody>
             </Card>
             <div className="lg:pl-2">
-              <Card className="mt-6 bg-red-100 md:w-96 xl:w-96 lg:w-64 h-96 border-red-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100 shadow-md shadow-gray-500 ">
-                <CardHeader className="relative  w-10 border-red-100 border-2">
+              <Card className="mt-6 bg-blue-100 md:w-96 xl:w-96 lg:w-64 h-96 border-blue-200 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500 ">
+                <CardHeader className="relative  w-10 border-blue-100 border-2">
                   <div>
                     <span
                       role="img"
@@ -495,7 +499,7 @@ function App() {
                 </CardHeader>
 
                 <CardBody className="pt-1">
-                  <Carousel className="rounded-xl bg-red-100 ">
+                  <Carousel className="rounded-xl bg-blue-100 ">
                     <img src={img1} alt="image1" className=" object-cover" />
                     <img src={img2} alt="image2" className="object-cover" />
                     <img src={img3} alt="image3" className="object-cover" />
@@ -506,10 +510,10 @@ function App() {
               </Card>
             </div>
             <div className="xl:pl-56 pb-3">
-              <Card className="mt-6 bg-red-100 md:w-96 lg:w-80 xl:w-96 h-56 border-red-200 border-2hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform hover:bg-white hover:border-2 hover:border-red-100">
+              <Card className="mt-6 bg-blue-100 md:w-96 lg:w-80 xl:w-96 h-56 border-blue-200 border-2hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100">
                 <CardHeader
                   color="blue-gray"
-                  className="relative flex h-40 w-28 border-red-100 border-2"
+                  className="relative flex h-40 w-28 border-blue-100 border-2"
                 >
                   <img
                     src={hobbies}

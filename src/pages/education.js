@@ -18,7 +18,7 @@ export default function Education() {
     percentege,
   }) {
     return (
-      <div className="border-2 border-red-200 p-4 lg:w-[1024px] bg-red-100 hover:scale-105 transform transition-transform hover:bg-white rounded-xl shadow-md shadow-gray-500 ">
+      <div className="border-2 border-blue-200 p-4 lg:w-[1024px] bg-blue-100 hover:scale-105 transform transition-transform hover:bg-white rounded-xl shadow-md shadow-gray-500 ">
         <div className="text-xl pb-3 font-semibold ">{name}</div>
         <div className="flex md:flex-row lg:flex-row flex-col  gap-10">
           <div>
@@ -32,30 +32,30 @@ export default function Education() {
           </div>
           <div className="flex-col overflow-scroll flex justify-between">
             <div className="flex">
-              <BsCalendarWeekFill className="w-5 h-5 text-red-200 " />
-              <p className=" font-semibold text-red-200 text-base pl-1 pr-4">
+              <BsCalendarWeekFill className="w-5 h-5 text-blue-200 " />
+              <p className=" font-semibold text-blue-200 text-base pl-1 pr-4">
                 Year :
               </p>
               {year}
             </div>
             <div className="flex pt-5 pb-5 ">
-              <MdMenuBook className="w-6 h-6 text-red-200" />
-              <p className=" font-semibold text-red-200 text-base pl-1 pr-4">
+              <MdMenuBook className="w-6 h-6 text-blue-200" />
+              <p className=" font-semibold text-blue-200 text-base pl-1 pr-4">
                 Course:
               </p>
               {std}
             </div>
             <div className="flex  pb-5 ">
-              <BsBookmarkStarFill className="w-5 h-5 text-red-200" />
-              <p className=" font-semibold text-red-200 text-base pl-1 pr-4">
+              <BsBookmarkStarFill className="w-5 h-5 text-blue-200" />
+              <p className=" font-semibold text-blue-200 text-base pl-1 pr-4">
                 Percentege:
               </p>
               {percentege}
             </div>
             <a href={location}>
               <div className="flex">
-                <MdLocationPin className="w-6 h-6 text-red-200" />
-                <p className="font-semibold text-red-200 text-base pr-4">
+                <MdLocationPin className="w-6 h-6 text-blue-200" />
+                <p className="font-semibold text-blue-200 text-base pr-4">
                   Location:
                 </p>
                 {place}
@@ -72,7 +72,7 @@ export default function Education() {
         <Topbar />
       </div>
       <div className="flex-grow justify-center items-center p-4">
-        <div className="text-3xl text-red-200 font-bold pb-2">
+        <div className="text-3xl text-blue-200 font-bold pb-2">
           EDUCATION
         </div>
         <div className="flex justify-center items-center ">
