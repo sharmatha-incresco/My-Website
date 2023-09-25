@@ -36,3 +36,55 @@
     transform: rotate(360deg);
   }
 }
+
+.backround {
+  color: #f76f91; 
+}
+.custom-bar{
+  background-color: #ffb3c6; 
+  color: black;
+}
+.custom-bar-hover{
+  border: 2px solid #f76f91; 
+  color: black;
+}
+.custom-barhover:hover{
+  border: solid #f76f91; 
+  color: black; 
+}
+
+.custom-carousel{
+  background-color: #ffb3c6; 
+}
+.custom-card {
+  background-color: #ffb3c6; 
+  border: 2px solid #f76f91; 
+  color: black;
+
+}
+.custom-card:hover{
+  background-color: #ffff; 
+  border: 2px solid #f76f91; 
+}
+.custom-input {
+  border: 2px solid #f76f91; 
+  color: black; 
+}
+.custom-input:hover{
+  background-color: #ffb3c6; 
+}
+.custom-hover{
+  color: white;
+  border: 2px solid #f76f91; 
+}
+.custom-hover:hover{
+  color: #ffffff; 
+}
+.custom-badge{
+  background-color: #f76f91; 
+  border: 2px solid #ffb3c6; 
+  color: white;
+}
+.custom-view{
+  border: 2px solid #f76f91; 
+}

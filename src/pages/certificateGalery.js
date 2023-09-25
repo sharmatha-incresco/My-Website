@@ -92,8 +92,8 @@ export default function CertificateGalery() {
     };
 
     return (
-      <div className="border-2 items-center justify-center xl:rounded-xl border-blue-200 shadow-md shadow-gray-500 ">
-        <div className="flex justify-center hover:scale-105 xl:rounded-lg transform bg-blue-100 transition-transform hover:bg-white hover:border-2 hover:border-blue-100">
+      <div className="border-2 items-center justify-center xl:rounded-xl custom-card shadow-md shadow-gray-500 ">
+        <div className="flex justify-center hover:scale-105 xl:rounded-lg transform custom-carousel transition-transform custom-card  ">
           <img
             className="avatar md:h-[450px] md:w-[500px] h-56"
             src={src}
@@ -102,8 +102,8 @@ export default function CertificateGalery() {
           />
         </div>
         {isMoadlOpen && (
-          <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-            <div className="modal p-4 bg-white rounded-lg border-blue-200 border-2 ">
+          <div className="fixed inset-0 flex items-center justify-center  z-50 bg-black bg-opacity-50">
+            <div className="modal p-4 bg-white rounded-lg custom-view  border-2 ">
               <button className="modal-close" onClick={CloseModal}>
                 <AiFillCloseCircle />
               </button>
@@ -140,10 +140,10 @@ export default function CertificateGalery() {
       </div>
       <div className="flex-grow p-4 overflow-scroll ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-blue-200  ">CERTIFICATES</h1>
+          <h1 className="text-3xl font-bold backround  ">CERTIFICATES</h1>
           <button
             onClick={handleAdd}
-            className="rounded-full bg-blue-100 p-2 border-blue-200 border-2 hover:scale-105 transform transition-transform hover:bg-blue-100 hover:border-2 hover:border-blue-200 shadow-md shadow-gray-500"
+            className="rounded-full custom-input  p-2  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
           >
             <MdOutlineAddPhotoAlternate className="w-10 h-10 " />
           </button>
@@ -151,33 +151,33 @@ export default function CertificateGalery() {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform  border-2 border-blue-200 -translate-x-1/2 -translate-y-1/2 "
+            className="fixed custom-card rounded-lg top-1/2 left-1/2 transform  border-2  -translate-x-1/2 -translate-y-1/2 "
           >
             <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={closeModal}
-                className="absolute top-2 right-2 text-gray-600 hover:text-blue-200"
+                className="absolute top-2 right-2 text-gray-600 "
               >
                 <MdOutlineCancel />
               </button>
-              <p className="font-semibold text-2xl text-blue-200 text-center pt-4 ">
+              <p className="font-semibold text-2xl backround text-center pt-4 ">
                 Hii Sharmatha 🤝
               </p>
               <div className=" pl-4 p-5">
-                <p className=" font-bold text-lg  text-blue-200">Password:</p>
+                <p className=" font-bold text-lg  backround">Password:</p>
                 <div className="flex gap-2">
                   <input
                     placeholder="Enter your password"
                     type={showPassword ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
+                    className="border-2 custom-input focus:outline-none  px-1 py-1 rounded"
                   />
 
                   <button onClick={passwordVisibility} className="">
                     {showPassword ? (
-                      <AiFillEyeInvisible className="text-blue-300 text-lg" />
+                      <AiFillEyeInvisible className="backround text-lg" />
                     ) : (
-                      <AiFillEye className="text-blue-300 text-lg" />
+                      <AiFillEye className="backround text-lg" />
                     )}
                   </button>
                 </div>
@@ -185,7 +185,7 @@ export default function CertificateGalery() {
               <div className="inline-flex justify-center items-center ">
                 <button
                   onClick={handleAuth}
-                  className="flex bottom-2 text-blue-200 "
+                  className="flex bottom-2 backround "
                 >
                   <p className="font-semibold">SignIn 🔐</p>
                 </button>
@@ -195,20 +195,20 @@ export default function CertificateGalery() {
           <ReactModal
             isOpen={isAdd}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform  border-2 border-blue-200 -translate-x-1/2 -translate-y-1/2 "
+            className="fixed top-1/2 left-1/2 transform rounded-lg  border-2 custom-card -translate-x-1/2 -translate-y-1/2 "
           >
             <div className="bg-white  flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={() => setIsAdd(false)}
-                className="absolute top-2 right-2 text-gray-600 hover:text-blue-200 "
+                className="absolute top-2 right-2 text-gray-600  "
               >
                 <MdOutlineCancel />
               </button>
               <div>
-                <h2 className="text-blue-200 font-bold">Add Image:</h2>
+                <h2 className="backround font-bold">Add Image:</h2>
                 <input
                   type="file"
-                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
+                  className="border-2 custom-input focus:outline-none px-1 py-1 rounded"
                   onChange={handleChange}
                 />
                 {selectedFile && (
@@ -218,12 +218,12 @@ export default function CertificateGalery() {
                       <input
                         placeholder="Description"
                         onChange={(e) => setDescription(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2  focus:outline-none custom-input px-1 py-1 rounded w-full"
                       />
                     </div>
                     <button
                       onClick={handleAddImage}
-                      className="text-blue-200 font-semibold pt-5 "
+                      className="backround font-semibold pt-5 "
                     >
                       Add
                     </button>
