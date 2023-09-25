@@ -6,6 +6,7 @@ import { BsCalendarWeekFill, BsBookmarkStarFill } from "react-icons/bs";
 import gg from "../gg.jpeg";
 import vellalar from "../vellalar.jpeg";
 import urc from "../urc.jpeg";
+import AnnaiMarry from "../annaimarry.jpeg"
 export default function Education() {
   function Institution({
     name,
@@ -115,6 +116,16 @@ export default function Education() {
               website="http://urcpmhss.edu.in/"
               location="https://goo.gl/maps/96twi98NtPWPqMmX7"
               place="Palayapalayam,Erode"
+              percentege="90%"
+            />
+             <Institution
+              name="Annai Mary Convent School"
+              img={AnnaiMarry}
+              year="2006-2013"
+              std="6th,7th,8th"
+              website="https://www.justdial.com/Erode/Annai-Mary-Nursury-Primary-School-Para/9999P4295-4295-101029191826-Y3J6_BZDET"
+              location="https://maps.app.goo.gl/k9sjFr4Y4bpDPJu96"
+              place="Marapalam,Erode"
               percentege="90%"
             />
           </div>
