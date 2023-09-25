@@ -16,9 +16,7 @@ import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import ReactModal from "react-modal";
 
-import {
-  MdOutlineCancel,
-} from "react-icons/md";
+import { MdOutlineCancel } from "react-icons/md";
 import { BsBuildingAdd } from "react-icons/bs";
 function Experience() {
   const [isAdd, setIsAdd] = useState(false);
@@ -28,8 +26,8 @@ function Experience() {
   const [duration, setDuration] = useState();
   const [place, setPlace] = useState();
   const [type, setType] = useState();
-  const [website,setWebsite]=useState();
-  const [location,setLocation]=useState();
+  const [website, setWebsite] = useState();
+  const [location, setLocation] = useState();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [showPassword, setShowpassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -78,10 +76,6 @@ function Experience() {
     setShowpassword(!showPassword);
   };
   function Work({
-
-
-
-
     src,
     role,
     company,
@@ -92,8 +86,8 @@ function Experience() {
     website,
   }) {
     return (
-      <Card className="mt-6 bg-blue-100 md:w-96 xl:w-96 lg:w-64 h-96 border-blue-200 border-2 hover:scale-105 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100">
-        <CardHeader className="relative h-40 w-40 border-blue-100 border-2 p-3">
+      <Card className="mt-6 custom-card md:w-96 xl:w-96 lg:w-64 h-96  border-2 hover:scale-105 transform transition-transform  hover:border-2 ">
+        <CardHeader className="relative h-40 w-40 custom-input border-2 p-3">
           <a href={website}>
             <img src={src} className="w-full h-full object-cover " alt="wrk" />
           </a>
@@ -127,10 +121,10 @@ function Experience() {
       </div>
       <div className="flex-grow p-4 xl:pl-16 items-center justify-center">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold text-blue-200 ">EXPERIENCE</h1>
+          <h1 className="text-3xl font-bold backround">EXPERIENCE</h1>
           <button
             onClick={handleAdd}
-            className="rounded-full bg-blue-100 p-2 border-blue-200 border-2 hover:scale-105 transform transition-transform hover:bg-blue-100 hover:border-2 hover:border-blue-200 shadow-md shadow-gray-500"
+            className="rounded-full custom-input p-2 border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
           >
             <BsBuildingAdd className="w-10 h-10 " />
           </button>
@@ -138,33 +132,33 @@ function Experience() {
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2  border-2 border-blue-200 -translate-y-1/2 "
+            className="fixed top-1/2 rounded-lg left-1/2 transform -translate-x-1/2  border-2 custom-card -translate-y-1/2 "
           >
             <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={closeModal}
-                className="absolute top-2 right-2 text-gray-600 hover:text-blue-200"
+                className="absolute top-2 right-2 text-gray-600 "
               >
                 <MdOutlineCancel />
               </button>
-              <p className="font-semibold text-2xl text-blue-200 text-center pt-4 ">
+              <p className="font-semibold text-2xl backround text-center pt-4 ">
                 Hii Sharmatha 🤝
               </p>
               <div className=" pl-4 p-5">
-                <p className=" font-bold text-lg  text-blue-200">Password:</p>
+                <p className=" font-bold text-lg  backround">Password:</p>
                 <div className="flex gap-2">
                   <input
                     placeholder="Enter your password"
                     type={showPassword ? "text" : "password"}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
+                    className="border-2 custom-input focus:outline-none  px-1 py-1 rounded"
                   />
 
                   <button onClick={passwordVisibility} className="">
                     {showPassword ? (
-                      <AiFillEyeInvisible className="text-blue-300 text-lg" />
+                      <AiFillEyeInvisible className="backround text-lg" />
                     ) : (
-                      <AiFillEye className="text-blue-300 text-lg" />
+                      <AiFillEye className="backround text-lg" />
                     )}
                   </button>
                 </div>
@@ -172,7 +166,7 @@ function Experience() {
               <div className="inline-flex justify-center items-center ">
                 <button
                   onClick={handleAuth}
-                  className="flex bottom-2 text-blue-200 "
+                  className="flex bottom-2 backround "
                 >
                   <p className="font-semibold">SignIn 🔐</p>
                 </button>
@@ -182,20 +176,20 @@ function Experience() {
           <ReactModal
             isOpen={isAdd}
             contentLabel="Authentication Modal"
-            className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 border-blue-200 overflow-scroll "
+            className="fixed top-1/2 rounded-lg left-1/2 transform -translate-x-1/2 -translate-y-1/2 border-2 custom-card overflow-scroll "
           >
             <div className="bg-white  flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={() => setIsAdd(false)}
-                className="absolute top-2 right-2 text-gray-600 hover:text-blue-200 "
+                className="absolute top-2 right-2 text-gray-600 "
               >
                 <MdOutlineCancel />
               </button>
               <div>
-                <h2 className="text-blue-200 font-bold">Add logo:</h2>
+                <h2 className="backround font-bold">Add logo:</h2>
                 <input
                   type="file"
-                  className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded"
+                  className="border-2 custom-input focus:outline-none  px-1 py-1 rounded"
                   onChange={handleChange}
                 />
                 {selectedFile && (
@@ -205,42 +199,42 @@ function Experience() {
                       <input
                         placeholder="Role"
                         onChange={(e) => setRole(e.target.value)}
-                        className="border-2  border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2  custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Company"
                         onChange={(e) => setCompany(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Website"
                         onChange={(e) => setWebsite(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Duration"
                         onChange={(e) => setDuration(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Place"
                         onChange={(e) => setPlace(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Type"
                         onChange={(e) => setType(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                       <input
                         placeholder="Location"
                         onChange={(e) => setLocation(e.target.value)}
-                        className="border-2 border-blue-200 focus:outline-none focus:border-blue-200 px-1 py-1 rounded w-full"
+                        className="border-2 custom-input focus:outline-none  px-1 py-1 rounded w-full"
                       />
                     </div>
                     <button
                       onClick={handleAddImage}
-                      className="text-blue-200 font-semibold pt-5 "
+                      className="backround font-semibold pt-5 "
                     >
                       Add
                     </button>
