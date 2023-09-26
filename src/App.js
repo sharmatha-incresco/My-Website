@@ -42,12 +42,12 @@ function App() {
   const [showPassword, setShowpassword] = useState(false);
   const { handleSubmit, control, reset, formState } = useForm({
     defaultValues: {
-      firstName: "SHARMATHA",
-      lastName: "VENKATESWARAN",
+      firstName: "Sharmatha",
+      lastName: "Venkateswaran",
       age: "20",
-      tempLine1: "27, ANGAMUTHU LANE",
-      tempLine2: "NEAR MANDAPAM STREET",
-      tempDistrict: "ERODE",
+      tempLine1: "27, Angamuthu Lane",
+      tempLine2: "Near Mandapam Street",
+      tempDistrict: "Erode",
       tempPincode: "638001",
       tempContact: "7904063682",
       tempEmail: "sharmatha1823@gmail.com",
@@ -213,7 +213,7 @@ function App() {
                 <CardBody>
                   <div className="flex flex-col  ">
                     <div>
-                      <p className=" font-bold backround  text-lg ">NAME:</p>
+                      <p className=" font-bold backround text-lg ">NAME:</p>
 
                       {isEditing ? (
                         <>
@@ -226,7 +226,7 @@ function App() {
                                 <input
                                   {...field}
                                   type="text"
-                                  className="border-2  focus:outline-none 
+                                  className="border-2 focus:outline-none 
                                   custom-input px-1 py-1 rounded "
                                 />
                               )}
@@ -248,7 +248,7 @@ function App() {
                         </>
                       ) : (
                         <>
-                          <p className="pl-3 text-lg">{`${formState.defaultValues.firstName} ${formState.defaultValues.lastName}`}</p>
+                          <p className="pl-3 text-lg ">{`${formState.defaultValues.firstName} ${formState.defaultValues.lastName}`}</p>
                         </>
                       )}
                     </div>
