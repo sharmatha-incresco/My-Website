@@ -19,7 +19,7 @@ import { useState } from "react";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { MdOutlineAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
-
+import { darktheme} from '../globalstate'; 
 export default function CertificateGalery() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -132,9 +132,12 @@ export default function CertificateGalery() {
       </div>
     );
   }
+  const containerStyle = {
+    backgroundColor: darktheme ? "#181818" : "white",
+  };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" style={containerStyle}>
       <div>
         <Topbar />
       </div>
@@ -145,7 +148,7 @@ export default function CertificateGalery() {
             onClick={handleAdd}
             className="rounded-full custom-input  p-2  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
           >
-            <MdOutlineAddPhotoAlternate className="w-10 h-10 " />
+            <MdOutlineAddPhotoAlternate className="w-10 h-10 " style={{ color: darktheme ? "white" : "black" }}/>
           </button>
           <ReactModal
             isOpen={modalIsOpen}

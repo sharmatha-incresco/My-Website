@@ -3,7 +3,7 @@ import Footer from "./pages/footer";
 import Topbar from "./pages/topbar";
 import profile from "./profile.jpeg";
 import { MdEdit, MdOutlineCancel } from "react-icons/md";
-import { BiSave } from "react-icons/bi";
+import { BiSave, BiSun } from "react-icons/bi";
 import ReactModal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +25,8 @@ import img5 from "./img5.jpeg";
 import "./App.css";
 import { Carousel } from "@material-tailwind/react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { HiOutlineMoon } from "react-icons/hi";
+import { useDarktheme } from "./globalstate";
 function App() {
   const hobby = [
     "Music 🎼",
@@ -34,7 +36,7 @@ function App() {
     "Reading📖",
   ];
   const skill = ["Java", "React", "C", "Python"];
-
+  const [darktheme, toggleTheme] = useDarktheme();
   const [isEditing, setIsEditing] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [password, setPassword] = useState("");
@@ -102,13 +104,37 @@ function App() {
 
     return <span className={`bg-blue-200 ${badgeClasses}`}>{children}</span>;
   }
+  console.log(darktheme);
+  const containerStyle = {
+    backgroundColor: darktheme ? "#181818" : "white",
+  };
 
   return (
-    <div className="flex flex-col min-h-screen max-h-screen">
-      <div>
+    <div
+      className="flex flex-col min-h-screen max-h-screen"
+      style={containerStyle}
+    >
+      <div >
         <Topbar />
+        <div className="flex justify-end items-center">
+          {!darktheme ? (
+            <button onClick={() => toggleTheme(true)} className="pt-2 pr-2 ">
+              <HiOutlineMoon
+                className="w-7 h-7"
+                style={{ color: darktheme ? "white" : "black" }}
+              />
+            </button>
+          ) : (
+            <button onClick={() => toggleTheme(false)} className="pt-2 pr-2">
+              <BiSun
+                className="w-7 h-7"
+                style={{ color: darktheme ? "white" : "black" }}
+              />
+            </button>
+          )}
+        </div>
       </div>
-      <div className="flex-grow p-4 xl:p-0">
+      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
           <div className="flex flex-col lg:p-10">
             <div className="flex justify-between">
@@ -152,7 +178,10 @@ function App() {
                         onClick={openModal}
                         className="rounded-full custom-input p-2  border-2 hover:scale-105 transform transition-transform hover:border-2  shadow-md shadow-gray-500"
                       >
-                        <MdEdit className="w-5 h-5 background rounded-full" />
+                        <MdEdit
+                          className="w-5 h-5 background rounded-full"
+                          style={{ color: darktheme ? "white" : "black" }}
+                        />
                       </button>
                     )}
                   </div>
@@ -163,7 +192,7 @@ function App() {
                     contentLabel="Authentication Modal"
                     className="fixed custom-card rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
                   >
-                    <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
+                    <div className="flex flex-col p-4 rounded-lg shadow-md ">
                       <button
                         onClick={closeModal}
                         className="absolute top-2  right-2 text-gray-600"
@@ -239,7 +268,7 @@ function App() {
                                 <input
                                   {...field}
                                   type="text"
-                                 className="border-2  focus:outline-none 
+                                  className="border-2  focus:outline-none 
                                   custom-input px-1 py-1 rounded "
                                 />
                               )}
@@ -279,9 +308,7 @@ function App() {
                       )}
                     </div>
                     <div className="  ">
-                      <p className=" font-bold text-lg  backround ">
-                        ADDRESS:
-                      </p>
+                      <p className=" font-bold text-lg  backround ">ADDRESS:</p>
 
                       {isEditing ? (
                         <>
@@ -349,9 +376,7 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  backround">
-                        Ph.No:
-                      </p>
+                      <p className=" font-bold text-lg  backround">Ph.No:</p>
                       {isEditing ? (
                         <>
                           <Controller
@@ -390,9 +415,7 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  backround">
-                        Email:
-                      </p>
+                      <p className=" font-bold text-lg  backround">Email:</p>
                       {isEditing ? (
                         <>
                           <Controller
