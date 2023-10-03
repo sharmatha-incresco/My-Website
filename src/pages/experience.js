@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { ToastContainer, toast } from "react-toastify";
 import ReactModal from "react-modal";
-
+import { darktheme } from "../globalstate";
 import { MdOutlineCancel } from "react-icons/md";
 import { BsBuildingAdd } from "react-icons/bs";
 function Experience() {
@@ -114,8 +114,12 @@ function Experience() {
       </Card>
     );
   }
+  const containerStyle = {
+    backgroundColor: darktheme ? "#181818" : "white",
+  };
+
   return (
-    <div className="flex flex-col  min-h-screen">
+    <div className="flex flex-col  min-h-screen" style={containerStyle}>
       <div>
         <Topbar />
       </div>
@@ -126,7 +130,7 @@ function Experience() {
             onClick={handleAdd}
             className="rounded-full custom-input p-2 border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
           >
-            <BsBuildingAdd className="w-10 h-10 " />
+            <BsBuildingAdd className="w-10 h-10 " style={{ color: darktheme ? "white" : "black" }} />
           </button>
           <ReactModal
             isOpen={modalIsOpen}

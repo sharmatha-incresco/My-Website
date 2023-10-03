@@ -7,6 +7,7 @@ import gg from "../gg.jpeg";
 import vellalar from "../vellalar.jpeg";
 import urc from "../urc.jpeg";
 import AnnaiMarry from "../annaimarry.jpeg"
+import { darktheme} from '../globalstate'; 
 export default function Education() {
   function Institution({
     name,
@@ -67,8 +68,12 @@ export default function Education() {
       </div>
     );
   }
+  const containerStyle = {
+    backgroundColor: darktheme ? "#181818" : "white",
+  };
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" style={containerStyle}>
       <div>
         <Topbar />
       </div>
