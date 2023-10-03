@@ -114,18 +114,18 @@ function App() {
       className="flex flex-col min-h-screen max-h-screen"
       style={containerStyle}
     >
-      <div >
+      <div>
         <Topbar />
-        <div className="flex justify-end items-center">
+        <div className="flex justify-end items-center pr-1 pt-2">
           {!darktheme ? (
-            <button onClick={() => toggleTheme(true)} className="pt-2 pr-2 ">
+            <button onClick={() => toggleTheme(true)} className="rounded-full custom-input  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 ">
               <HiOutlineMoon
                 className="w-7 h-7"
                 style={{ color: darktheme ? "white" : "black" }}
               />
             </button>
           ) : (
-            <button onClick={() => toggleTheme(false)} className="pt-2 pr-2">
+            <button onClick={() => toggleTheme(false)} className="rounded-full  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 ">
               <BiSun
                 className="w-7 h-7"
                 style={{ color: darktheme ? "white" : "black" }}
@@ -134,6 +134,7 @@ function App() {
           )}
         </div>
       </div>
+
       <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
           <div className="flex flex-col lg:p-10">
