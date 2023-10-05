@@ -8,6 +8,7 @@ import ReactModal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useForm, Controller } from "react-hook-form";
+import { SketchPicker } from "react-color";
 import {
   Card,
   CardHeader,
@@ -27,6 +28,7 @@ import { Carousel } from "@material-tailwind/react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { HiOutlineMoon } from "react-icons/hi";
 import { useDarktheme } from "./globalstate";
+import { useCardColor } from "./useCardColor";
 function App() {
   const hobby = [
     "Music 🎼",
@@ -42,6 +44,8 @@ function App() {
   const [password, setPassword] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowpassword] = useState(false);
+  const [cardColor, changeCardColor] = useCardColor();
+  const [showColorPicker, setShowColorPicker] = useState(false);
   const { handleSubmit, control, reset, formState } = useForm({
     defaultValues: {
       firstName: "Sharmatha",
@@ -104,11 +108,12 @@ function App() {
 
     return <span className={`bg-blue-200 ${badgeClasses}`}>{children}</span>;
   }
-  console.log(darktheme);
   const containerStyle = {
     backgroundColor: darktheme ? "#181818" : "white",
   };
-
+  const handleColorChange = (color) => {
+    changeCardColor(color.hex);
+  };
   return (
     <div
       className="flex flex-col min-h-screen max-h-screen"
@@ -116,30 +121,55 @@ function App() {
     >
       <div>
         <Topbar />
-        <div className="flex justify-end items-center pr-1 pt-2">
+       </div>
+
+      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
+      <div className="flex justify-end items-center pr-1 gap-4 pt-2">
           {!darktheme ? (
-            <button onClick={() => toggleTheme(true)} className="rounded-full custom-input  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 ">
+            <button
+              onClick={() => toggleTheme(true)}
+              className="rounded-full custom-input  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 "
+            >
               <HiOutlineMoon
                 className="w-7 h-7"
                 style={{ color: darktheme ? "white" : "black" }}
               />
             </button>
           ) : (
-            <button onClick={() => toggleTheme(false)} className="rounded-full  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 ">
+            <button
+              onClick={() => toggleTheme(false)}
+              className="rounded-full  p-1  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500 "
+            >
               <BiSun
                 className="w-7 h-7"
                 style={{ color: darktheme ? "white" : "black" }}
               />
             </button>
           )}
+          <div className="flex justify-end items-center pr-1 pt-2">
+            <button
+              onClick={() => setShowColorPicker(!showColorPicker)}
+              className=" text-3xl hover:scale-105 transform transition-transform  "
+            >
+              🎨
+            </button>
+            {showColorPicker && (
+              <SketchPicker
+                color={cardColor}
+                onChangeComplete={handleColorChange}
+                className="absolute z-50 top-28"
+              />
+            )}
+          </div>
         </div>
-      </div>
-
-      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
+          
           <div className="flex flex-col lg:p-10">
             <div className="flex justify-between">
-              <div className="rounded-full  overflow-hidden w-32 h-32 bg-gray-200 border-2 custom-card flex items-center justify-center">
+              <div
+                className="rounded-full  overflow-hidden w-32 h-32 bg-gray-200 border-2 custom-card flex items-center justify-center"
+                style={{ backgroundColor: cardColor }}
+              >
                 {isEditing ? (
                   <div className="relative group">
                     <img
@@ -191,7 +221,7 @@ function App() {
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
                     contentLabel="Authentication Modal"
-                    className="fixed custom-card rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+                    className="fixed custom-card rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white "
                   >
                     <div className="flex flex-col p-4 rounded-lg shadow-md ">
                       <button
@@ -239,7 +269,10 @@ function App() {
               </div>
             </div>
             <form onSubmit={handleSubmit(handleSaveClick)}>
-              <Card className="mt-6 custom-card overflow-scroll md:w-96 lg:w-96  border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2  shadow-md shadow-gray-500">
+              <Card
+                className="mt-6 custom-card overflow-scroll md:w-96 lg:w-96  border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2  shadow-md shadow-gray-500"
+                style={{ backgroundColor: cardColor }}
+              >
                 <CardBody>
                   <div className="flex flex-col  ">
                     <div>
@@ -487,7 +520,8 @@ function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <Card className="mt-6  md:w-96 xl:w-96 lg:w-64 h-96 custom-card border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500">
+            <Card className="mt-6  md:w-96 xl:w-96 lg:w-64 h-96 custom-card border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-sm shadow-gray-500"
+             style={{ backgroundColor: cardColor }}>
               <CardHeader
                 color="blue-gray"
                 className="relative h-40 w-40 custom-input border-2"
@@ -512,7 +546,8 @@ function App() {
               </CardBody>
             </Card>
             <div className="lg:pl-2">
-              <Card className="mt-6  md:w-96 custom-card xl:w-96 lg:w-64 h-96 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500 ">
+              <Card className="mt-6  md:w-96 custom-card xl:w-96 lg:w-64 h-96 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500 "
+               style={{ backgroundColor: cardColor }}>
                 <CardHeader className="relative  w-10 custom-input border-2">
                   <div>
                     <span
@@ -537,7 +572,8 @@ function App() {
               </Card>
             </div>
             <div className="xl:pl-56 pb-3">
-              <Card className="mt-6 custom-card md:w-96 lg:w-80 xl:w-96 h-56 0 border-2hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform  hover:border-2 ">
+              <Card className="mt-6 custom-card md:w-96 lg:w-80 xl:w-96 h-56  border-2 hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform  hover:border-2 "
+               style={{ backgroundColor: cardColor }}>
                 <CardHeader
                   color="blue-gray"
                   className="relative flex h-40 w-28 custom-input border-2"

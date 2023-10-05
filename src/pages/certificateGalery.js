@@ -20,6 +20,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { MdOutlineAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { darktheme} from '../globalstate'; 
+import { initialCardColor } from "../useCardColor";
 export default function CertificateGalery() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -92,8 +93,8 @@ export default function CertificateGalery() {
     };
 
     return (
-      <div className="border-2 items-center justify-center xl:rounded-xl custom-card shadow-md shadow-gray-500 ">
-        <div className="flex justify-center hover:scale-105 xl:rounded-lg transform custom-carousel transition-transform custom-card  ">
+      <div className="border-2 items-center justify-center xl:rounded-xl  shadow-sm shadow-gray-500 custom-card " style={{backgroundColor:initialCardColor}}>
+        <div className="flex justify-center hover:scale-105 xl:rounded-lg transform custom-carousel transition-transform shadow-sm shadow-gray-500 custom-card " style={{backgroundColor:initialCardColor}}>
           <img
             className="avatar md:h-[450px] md:w-[500px] h-56"
             src={src}

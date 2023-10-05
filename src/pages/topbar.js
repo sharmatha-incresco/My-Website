@@ -3,6 +3,7 @@ import { HiHome, HiAcademicCap, HiIdentification } from "react-icons/hi";
 import { RiGalleryFill } from "react-icons/ri";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../App.css";
+import {initialCardColor } from "../useCardColor";
 export default function Topbar() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,9 +14,9 @@ export default function Topbar() {
     : location.pathname === path2
     ? "custom-bar-hover " 
     : "bg-transparent text-black";
-    
+  
   return (
-    <div className="flex gap-4 justify-between p-4 custom-bar">
+    <div className="flex gap-4 justify-between p-4" style={{ backgroundColor: initialCardColor}} >
       <button onClick={() => navigate("/home")} className={`flex gap-2 hover custom-barhover rounded-lg ${buttonClass("/home","/")} `}>
         <HiHome className="w-6 h-6" />
         <p className="hidden md:block lg:block">Home</p>
