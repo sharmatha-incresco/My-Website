@@ -18,6 +18,7 @@ import ReactModal from "react-modal";
 import { darktheme } from "../globalstate";
 import { MdOutlineCancel } from "react-icons/md";
 import { BsBuildingAdd } from "react-icons/bs";
+import { initialCardColor } from "../useCardColor";
 function Experience() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -86,7 +87,7 @@ function Experience() {
     website,
   }) {
     return (
-      <Card className="mt-6 custom-card md:w-96 xl:w-96 lg:w-64 h-96  border-2 hover:scale-105 transform transition-transform  hover:border-2 ">
+      <Card className="mt-6 custom-card md:w-96 xl:w-96 lg:w-64 h-96  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-sm shadow-gray-500" style={{backgroundColor:initialCardColor}}>
         <CardHeader className="relative h-40 w-40 custom-input border-2 p-3">
           <a href={website}>
             <img src={src} className="w-full h-full object-cover " alt="wrk" />

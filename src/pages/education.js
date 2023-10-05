@@ -8,6 +8,7 @@ import vellalar from "../vellalar.jpeg";
 import urc from "../urc.jpeg";
 import AnnaiMarry from "../annaimarry.jpeg"
 import { darktheme} from '../globalstate'; 
+import { initialCardColor } from "../useCardColor";
 export default function Education() {
   function Institution({
     name,
@@ -20,34 +21,34 @@ export default function Education() {
     percentege,
   }) {
     return (
-      <div className="border-2 custom-card p-4 lg:w-[1024px]  hover:scale-105 transform transition-transform  rounded-xl shadow-md shadow-gray-500 ">
+      <div className="border-2 custom-card p-4 lg:w-[1024px]  hover:scale-105 transform transition-transform  rounded-xl shadow-sm shadow-gray-500 " style={{backgroundColor:initialCardColor}}>
         <div className="text-xl pb-3 font-semibold ">{name}</div>
         <div className="flex md:flex-row lg:flex-row flex-col  gap-10">
           <div>
             <a href={website} className="cursor-pointer">
               <img
-                className="avatar border-2 border-lime-400  md:h-[300px] md:w-[500px]"
+                className="avatar border-2 custom-card md:h-[300px] md:w-[500px] "
                 src={img}
                 alt="education"
               />
             </a>
           </div>
-          <div className="flex-col overflow-scroll flex justify-between">
-            <div className="flex">
+          <div className="flex-col overflow-scroll flex align-middle  justify-between">
+            <div className="flex align-middle">
               <BsCalendarWeekFill className="w-5 h-5 backround " />
               <p className=" font-semibold backround text-base pl-1 pr-4">
                 Year :
               </p>
               {year}
             </div>
-            <div className="flex pt-5 pb-5 ">
+            <div className="flex pt-5 pb-5 align-middle ">
               <MdMenuBook className="w-6 h-6 backround" />
               <p className=" font-semibold backround text-base pl-1 pr-4">
                 Course:
               </p>
               {std}
             </div>
-            <div className="flex  pb-5 ">
+            <div className="flex align-middle  pb-5 ">
               <BsBookmarkStarFill className="w-5 h-5 backround" />
               <p className=" font-semibold backround text-base pl-1 pr-4">
                 Percentege:
@@ -55,7 +56,7 @@ export default function Education() {
               {percentege}
             </div>
             <a href={location}>
-              <div className="flex">
+              <div className="flex align-middle">
                 <MdLocationPin className="w-6 h-6 backround" />
                 <p className="font-semibold backround text-base pr-4">
                   Location:
