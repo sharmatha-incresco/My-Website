@@ -121,10 +121,7 @@ function App() {
     >
       <div>
         <Topbar />
-       </div>
-
-      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
-      <div className="flex justify-end items-center pr-1 gap-4 pt-2">
+        <div className="flex justify-end items-center pr-1 gap-4 pt-2">
           {!darktheme ? (
             <button
               onClick={() => toggleTheme(true)}
@@ -162,6 +159,10 @@ function App() {
             )}
           </div>
         </div>
+       </div>
+
+      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
+     
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
           
           <div className="flex flex-col lg:p-10">
