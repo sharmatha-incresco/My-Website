@@ -561,7 +561,7 @@ function App() {
                 </CardHeader>
 
                 <CardBody className="pt-1">
-                  <Carousel className="rounded-xl custom-carousel">
+                  <Carousel className="rounded-xl">
                     <img src={img1} alt="image1" className=" object-cover" />
                     <img src={img2} alt="image2" className="object-cover" />
                     <img src={img3} alt="image3" className="object-cover" />
