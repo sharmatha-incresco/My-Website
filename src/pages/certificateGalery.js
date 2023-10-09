@@ -21,6 +21,8 @@ import { MdOutlineAddPhotoAlternate, MdOutlineCancel } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { darktheme} from '../globalstate'; 
 import { initialCardColor } from "../useCardColor";
+import { initialTextColor } from "../useTextColor";
+import {initialContentColor} from "../useText"
 export default function CertificateGalery() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -115,8 +117,8 @@ export default function CertificateGalery() {
                 height={imageSize}
                 alt="modal"
               />
-              <div className="p-4 md:text-base text-xs">{description}</div>
-              <div className="flex text-2xl justify-between ">
+              <div className="p-4 md:text-base text-xs" style={{color:initialContentColor}}>{description}</div>
+              <div className="flex text-2xl justify-between " style={{color:initialContentColor}}>
                 <button onClick={() => handleEmojiClick("claps")}>
                   👏 {emojiCounts.claps}
                 </button>
@@ -144,7 +146,7 @@ export default function CertificateGalery() {
       </div>
       <div className="flex-grow p-4 overflow-scroll ">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold backround  ">CERTIFICATES</h1>
+          <h1 className="text-3xl font-bold backround  " style={{color:initialTextColor}}>CERTIFICATES</h1>
           <button
             onClick={handleAdd}
             className="rounded-full custom-input  p-2  border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
@@ -160,15 +162,16 @@ export default function CertificateGalery() {
             <div className="bg-white flex flex-col p-4 rounded-lg shadow-md">
               <button
                 onClick={closeModal}
-                className="absolute top-2 right-2 text-gray-600 "
+                className="absolute top-2 right-2"
+                style={{color:initialTextColor}}
               >
                 <MdOutlineCancel />
               </button>
-              <p className="font-semibold text-2xl backround text-center pt-4 ">
+              <p className="font-semibold text-2xl backround text-center pt-4 " style={{color:initialTextColor}}>
                 Hii Sharmatha 🤝
               </p>
-              <div className=" pl-4 p-5">
-                <p className=" font-bold text-lg  backround">Password:</p>
+              <div className="pl-4 p-5">
+                <p className=" font-bold text-lg  backround" style={{color:initialTextColor}}>Password:</p>
                 <div className="flex gap-2">
                   <input
                     placeholder="Enter your password"
@@ -179,9 +182,9 @@ export default function CertificateGalery() {
 
                   <button onClick={passwordVisibility} className="">
                     {showPassword ? (
-                      <AiFillEyeInvisible className="backround text-lg" />
+                      <AiFillEyeInvisible className="backround text-lg"  style={{color:initialTextColor}} />
                     ) : (
-                      <AiFillEye className="backround text-lg" />
+                      <AiFillEye className="backround text-lg" style={{color:initialTextColor}} />
                     )}
                   </button>
                 </div>
@@ -191,7 +194,7 @@ export default function CertificateGalery() {
                   onClick={handleAuth}
                   className="flex bottom-2 backround "
                 >
-                  <p className="font-semibold">SignIn 🔐</p>
+                  <p className="font-semibold" style={{color:initialTextColor}}>SignIn 🔐</p>
                 </button>
               </div>
             </div>
@@ -206,10 +209,10 @@ export default function CertificateGalery() {
                 onClick={() => setIsAdd(false)}
                 className="absolute top-2 right-2 text-gray-600  "
               >
-                <MdOutlineCancel />
+                <MdOutlineCancel style={{color:initialTextColor}} />
               </button>
               <div>
-                <h2 className="backround font-bold">Add Image:</h2>
+                <h2 className="backround font-bold" style={{color:initialTextColor}}>Add Image:</h2>
                 <input
                   type="file"
                   className="border-2 custom-input focus:outline-none px-1 py-1 rounded"
@@ -228,6 +231,7 @@ export default function CertificateGalery() {
                     <button
                       onClick={handleAddImage}
                       className="backround font-semibold pt-5 "
+                      style={{color:initialTextColor}}
                     >
                       Add
                     </button>
