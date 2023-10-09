@@ -3,7 +3,7 @@ import Footer from "./pages/footer";
 import Topbar from "./pages/topbar";
 import profile from "./profile.jpeg";
 import { MdEdit, MdOutlineCancel } from "react-icons/md";
-import { BiSave, BiSun } from "react-icons/bi";
+import { BiRectangle, BiSave, BiSun, BiText } from "react-icons/bi";
 import ReactModal from "react-modal";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,7 +14,6 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Typography,
 } from "@material-tailwind/react";
 import skills from "./skills.jpg";
 import hobbies from "./hobbies.jpg";
@@ -27,8 +26,11 @@ import "./App.css";
 import { Carousel } from "@material-tailwind/react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { HiOutlineMoon } from "react-icons/hi";
+import { FaHeading } from "react-icons/fa";
 import { useDarktheme } from "./globalstate";
 import { useCardColor } from "./useCardColor";
+import { useTextColor } from "./useTextColor";
+import { useText } from "./useText";
 function App() {
   const hobby = [
     "Music 🎼",
@@ -45,7 +47,12 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowpassword] = useState(false);
   const [cardColor, changeCardColor] = useCardColor();
+  const [textColor, changeTextColor] = useTextColor();
+  const [contentColor, changeContentColor] = useText();
   const [showColorPicker, setShowColorPicker] = useState(false);
+  const [showCard, setShowCard] = useState(false);
+  const [showHeading, setShowHeading] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const { handleSubmit, control, reset, formState } = useForm({
     defaultValues: {
       firstName: "Sharmatha",
@@ -102,17 +109,29 @@ function App() {
   const passwordVisibility = () => {
     setShowpassword(!showPassword);
   };
-
   function Badge({ size, className, children }) {
     const badgeClasses = `rounded-full text-white px-4 py-1 font-normal ${size} ${className}`;
 
-    return <span className={`bg-blue-200 ${badgeClasses}`}>{children}</span>;
+    return (
+      <span
+        className={`${badgeClasses}`}
+        style={{ backgroundColor: textColor, color: contentColor }}
+      >
+        {children}
+      </span>
+    );
   }
   const containerStyle = {
     backgroundColor: darktheme ? "#181818" : "white",
   };
   const handleColorChange = (color) => {
     changeCardColor(color.hex);
+  };
+  const handleTextColorChange = (color) => {
+    changeTextColor(color.hex);
+  };
+  const handleContentColorChange = (color) => {
+    changeContentColor(color.hex);
   };
   return (
     <div
@@ -121,10 +140,10 @@ function App() {
     >
       <div>
         <Topbar />
-       </div>
+      </div>
 
       <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
-      <div className="flex justify-end items-center pr-1 gap-4 pt-2">
+        <div className="flex justify-end items-center pr-1 gap-4 pt-2">
           {!darktheme ? (
             <button
               onClick={() => toggleTheme(true)}
@@ -146,24 +165,87 @@ function App() {
               />
             </button>
           )}
-          <div className="flex justify-end items-center pr-1 pt-2">
+          <div className="flex overflow-scroll justify-end items-center pr-1 pt-2">
             <button
               onClick={() => setShowColorPicker(!showColorPicker)}
-              className=" text-3xl hover:scale-105 transform transition-transform  "
+              className="text-3xl hover:scale-105 transform transition-transform  "
             >
               🎨
             </button>
             {showColorPicker && (
-              <SketchPicker
-                color={cardColor}
-                onChangeComplete={handleColorChange}
-                className="absolute z-50 top-28"
-              />
+              <>
+                <div className=" absolute right-32  gap-5 ">
+                  <div
+                    className="flex flex-col gap-2 absolute top-5 z-50 custom-card p-4 rounded-lg  "
+                    style={{ backgroundColor: cardColor }}
+                  >
+                    <div className="flex gap-2" style={{ color: textColor }}>
+                      <BiRectangle className="w-6 h-6 " />
+                      <button
+                        onClick={() => {
+                          setShowCard(!showCard);
+                          setShowHeading(false);
+                          setShowContent(false);
+                        }}
+                      >
+                        Card
+                      </button>
+                    </div>
+                    <div className="flex gap-2" style={{ color: textColor }}>
+                      <FaHeading className="w-5 h-5 " />
+                      <button
+                        onClick={() => {
+                          setShowHeading(!showHeading);
+                          setShowCard(false);
+                          setShowContent(false);
+                        }}
+                      >
+                        Heading
+                      </button>
+                    </div>
+                    <div className="flex gap-2" style={{ color: textColor }}>
+                      <BiText className="w-7 h-7" />
+                      <button
+                        onClick={() => {
+                          setShowContent(!showContent);
+                          setShowHeading(false);
+                          setShowCard(false);
+                        }}
+                      >
+                        Text
+                      </button>
+                    </div>
+                    {showCard && (
+                      <SketchPicker
+                        color={cardColor}
+                        onChangeComplete={handleColorChange}
+                        className="absolute right-1 z-50  top-10  "
+                      />
+                    )}
+                    {showHeading && (
+                      <SketchPicker
+                        className="absolute right-1 z-50 top-20"
+                        color={textColor}
+                        onChangeComplete={handleTextColorChange}
+                      />
+                    )}
+                    {showContent && (
+                      <SketchPicker
+                        className="absolute right-1 z-50 top-28"
+                        color={contentColor}
+                        onChangeComplete={handleContentColorChange}
+                      />
+                    )}
+                  </div>
+                </div>
+              </>
             )}
           </div>
         </div>
+      </div>
+
+      <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
         <div className="flex overflow-scroll flex-col md:flex-row lg:flex-row  gap-4">
-          
           <div className="flex flex-col lg:p-10">
             <div className="flex justify-between">
               <div
@@ -182,7 +264,10 @@ function App() {
                         htmlFor="imageInput"
                         className="rounded-full custom-badge p-2 cursor-pointer "
                       >
-                        <MdEdit className="w-5 h-5 text-white rounded-full " />
+                        <MdEdit
+                          className="w-7 h-7 rounded-full "
+                          style={{ color: textColor }}
+                        />
                         <input
                           type="file"
                           id="imageInput"
@@ -216,7 +301,6 @@ function App() {
                       </button>
                     )}
                   </div>
-
                   <ReactModal
                     isOpen={modalIsOpen}
                     onRequestClose={closeModal}
@@ -226,16 +310,23 @@ function App() {
                     <div className="flex flex-col p-4 rounded-lg shadow-md ">
                       <button
                         onClick={closeModal}
-                        className="absolute top-2  right-2 text-gray-600"
+                        className="absolute top-2  right-2 "
+                        style={{ color: textColor }}
                       >
                         <MdOutlineCancel />
                       </button>
-                      <p className="font-semibold text-2xl backround text-center pt-4">
+                      <p
+                        className="font-semibold text-2xl backround text-center pt-4"
+                        style={{ color: textColor }}
+                      >
                         Hii Sharmatha 🤝
                       </p>
 
                       <div className=" pl-4 p-5">
-                        <p className=" font-bold text-lg backround ">
+                        <p
+                          className=" font-bold text-lg backround "
+                          style={{ color: textColor }}
+                        >
                           Password:
                         </p>
                         <div className="flex gap-2">
@@ -248,9 +339,15 @@ function App() {
 
                           <button onClick={passwordVisibility} className="">
                             {showPassword ? (
-                              <AiFillEyeInvisible className="backround text-lg" />
+                              <AiFillEyeInvisible
+                                className="backround text-lg"
+                                style={{ color: textColor }}
+                              />
                             ) : (
-                              <AiFillEye className="backround text-lg" />
+                              <AiFillEye
+                                className="backround text-lg"
+                                style={{ color: textColor }}
+                              />
                             )}
                           </button>
                         </div>
@@ -260,7 +357,12 @@ function App() {
                           onClick={handleAuth}
                           className="flex bottom-2 backround "
                         >
-                          <p className="font-semibold">SignIn 🔐</p>
+                          <p
+                            className="font-semibold"
+                            style={{ color: textColor }}
+                          >
+                            SignIn 🔐
+                          </p>
                         </button>
                       </div>
                     </div>
@@ -271,12 +373,17 @@ function App() {
             <form onSubmit={handleSubmit(handleSaveClick)}>
               <Card
                 className="mt-6 custom-card overflow-scroll md:w-96 lg:w-96  border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2  shadow-md shadow-gray-500"
-                style={{ backgroundColor: cardColor }}
+                style={{ backgroundColor: cardColor, color: contentColor }}
               >
                 <CardBody>
-                  <div className="flex flex-col  ">
+                  <div className="flex flex-col ">
                     <div>
-                      <p className=" font-bold backround text-lg ">NAME:</p>
+                      <p
+                        className=" font-bold backround text-lg "
+                        style={{ color: textColor }}
+                      >
+                        NAME:
+                      </p>
 
                       {isEditing ? (
                         <>
@@ -316,7 +423,12 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg backround">AGE:</p>
+                      <p
+                        className=" font-bold text-lg backround"
+                        style={{ color: textColor }}
+                      >
+                        AGE:
+                      </p>
 
                       {isEditing ? (
                         <>
@@ -342,7 +454,12 @@ function App() {
                       )}
                     </div>
                     <div className="  ">
-                      <p className=" font-bold text-lg  backround ">ADDRESS:</p>
+                      <p
+                        className=" font-bold text-lg  backround "
+                        style={{ color: textColor }}
+                      >
+                        ADDRESS:
+                      </p>
 
                       {isEditing ? (
                         <>
@@ -410,7 +527,12 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  backround">Ph.No:</p>
+                      <p
+                        className=" font-bold text-lg  backround"
+                        style={{ color: textColor }}
+                      >
+                        Ph.No:
+                      </p>
                       {isEditing ? (
                         <>
                           <Controller
@@ -449,7 +571,12 @@ function App() {
                       )}
                     </div>
                     <div className="">
-                      <p className=" font-bold text-lg  backround">Email:</p>
+                      <p
+                        className=" font-bold text-lg  backround"
+                        style={{ color: textColor }}
+                      >
+                        Email:
+                      </p>
                       {isEditing ? (
                         <>
                           <Controller
@@ -508,7 +635,11 @@ function App() {
                   <ul className="grid grid-cols-2 gap-4">
                     {skill.map((skill, index) => (
                       <li key={index}>
-                        <Badge size="sm" className="custom-badge">
+                        <Badge
+                          size="sm"
+                          className="custom-badge"
+                          style={{ backgroundColor: textColor }}
+                        >
                           {skill}
                         </Badge>
                       </li>
@@ -520,8 +651,10 @@ function App() {
           </div>
 
           <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
-            <Card className="mt-6  md:w-96 xl:w-96 lg:w-64 h-96 custom-card border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-sm shadow-gray-500"
-             style={{ backgroundColor: cardColor }}>
+            <Card
+              className="mt-6  md:w-96 xl:w-96 lg:w-64 h-96 custom-card border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500"
+              style={{ backgroundColor: cardColor }}
+            >
               <CardHeader
                 color="blue-gray"
                 className="relative h-40 w-40 custom-input border-2"
@@ -533,21 +666,26 @@ function App() {
                 />
               </CardHeader>
               <CardBody>
-                <Typography variant="h5" className="mb-2 backround">
+                <p
+                  className=" font-bold text-lg  backround"
+                  style={{ color: textColor }}
+                >
                   Front End Developer
-                </Typography>
-                <Typography>
+                </p>
+                <p style={{ color: contentColor }}>
                   I excel in teamwork and have completed numerous webinar
                   courses, gaining a solid foundation in various programming
                   languages. My passion lies in problem-solving, with a
                   particular focus on React for front-end development. I'm
                   dedicated to honing my skills in this area.
-                </Typography>
+                </p>
               </CardBody>
             </Card>
             <div className="lg:pl-2">
-              <Card className="mt-6  md:w-96 custom-card xl:w-96 lg:w-64 h-96 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500 "
-               style={{ backgroundColor: cardColor }}>
+              <Card
+                className="mt-6  md:w-96 custom-card xl:w-96 lg:w-64 h-96 border-2 hover:scale-90 transform transition-transform hover:bg-white hover:border-2 hover:border-blue-100 shadow-md shadow-gray-500 "
+                style={{ backgroundColor: cardColor }}
+              >
                 <CardHeader className="relative  w-10 custom-input border-2">
                   <div>
                     <span
@@ -572,8 +710,10 @@ function App() {
               </Card>
             </div>
             <div className="xl:pl-56 pb-3">
-              <Card className="mt-6 custom-card md:w-96 lg:w-80 xl:w-96 h-56  border-2 hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform  hover:border-2 "
-               style={{ backgroundColor: cardColor }}>
+              <Card
+                className="mt-6 custom-card md:w-96 lg:w-80 xl:w-96 h-56  border-2 hover:scale-90 shadow-md  shadow-gray-500 transform transition-transform  hover:border-2 "
+                style={{ backgroundColor: cardColor }}
+              >
                 <CardHeader
                   color="blue-gray"
                   className="relative flex h-40 w-28 custom-input border-2"

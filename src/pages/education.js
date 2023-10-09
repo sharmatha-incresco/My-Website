@@ -6,9 +6,11 @@ import { BsCalendarWeekFill, BsBookmarkStarFill } from "react-icons/bs";
 import gg from "../gg.jpeg";
 import vellalar from "../vellalar.jpeg";
 import urc from "../urc.jpeg";
-import AnnaiMarry from "../annaimarry.jpeg"
-import { darktheme} from '../globalstate'; 
+import AnnaiMarry from "../annaimarry.jpeg";
+import { darktheme } from "../globalstate";
 import { initialCardColor } from "../useCardColor";
+import { initialTextColor } from "../useTextColor";
+import { initialContentColor } from "../useText";
 export default function Education() {
   function Institution({
     name,
@@ -21,8 +23,16 @@ export default function Education() {
     percentege,
   }) {
     return (
-      <div className="border-2 custom-card p-4 lg:w-[1024px]  hover:scale-105 transform transition-transform  rounded-xl shadow-sm shadow-gray-500 " style={{backgroundColor:initialCardColor}}>
-        <div className="text-xl pb-3 font-semibold ">{name}</div>
+      <div
+        className="border-2 custom-card p-4 lg:w-[1024px]  hover:scale-105 transform transition-transform  rounded-xl shadow-sm shadow-gray-500 "
+        style={{ backgroundColor: initialCardColor }}
+      >
+        <div
+          className="text-xl pb-3 font-semibold "
+          style={{ color: initialTextColor }}
+        >
+          {name}
+        </div>
         <div className="flex md:flex-row lg:flex-row flex-col  gap-10">
           <div>
             <a href={website} className="cursor-pointer">
@@ -35,33 +45,57 @@ export default function Education() {
           </div>
           <div className="flex-col overflow-scroll flex align-middle  justify-between">
             <div className="flex align-middle">
-              <BsCalendarWeekFill className="w-5 h-5 backround " />
-              <p className=" font-semibold backround text-base pl-1 pr-4">
+              <BsCalendarWeekFill
+                className="w-5 h-5 backround "
+                style={{ color: initialTextColor }}
+              />
+              <p
+                className=" font-semibold backround text-base pl-1 pr-4"
+                style={{ color: initialTextColor }}
+              >
                 Year :
               </p>
-              {year}
+              <p style={{ color: initialContentColor }}>{year}</p>
             </div>
             <div className="flex pt-5 pb-5 align-middle ">
-              <MdMenuBook className="w-6 h-6 backround" />
-              <p className=" font-semibold backround text-base pl-1 pr-4">
+              <MdMenuBook
+                className="w-6 h-6 backround"
+                style={{ color: initialTextColor }}
+              />
+              <p
+                className=" font-semibold backround text-base pl-1 pr-4"
+                style={{ color: initialTextColor }}
+              >
                 Course:
               </p>
-              {std}
+              <p style={{ color: initialContentColor }}> {std}</p>
             </div>
             <div className="flex align-middle  pb-5 ">
-              <BsBookmarkStarFill className="w-5 h-5 backround" />
-              <p className=" font-semibold backround text-base pl-1 pr-4">
+              <BsBookmarkStarFill
+                className="w-5 h-5 backround"
+                style={{ color: initialTextColor }}
+              />
+              <p
+                className=" font-semibold backround text-base pl-1 pr-4"
+                style={{ color: initialTextColor }}
+              >
                 Percentege:
               </p>
-              {percentege}
+              <p style={{ color: initialContentColor }}>{percentege}</p>
             </div>
             <a href={location}>
               <div className="flex align-middle">
-                <MdLocationPin className="w-6 h-6 backround" />
-                <p className="font-semibold backround text-base pr-4">
+                <MdLocationPin
+                  className="w-6 h-6 backround"
+                  style={{ color: initialTextColor }}
+                />
+                <p
+                  className="font-semibold backround text-base pr-4"
+                  style={{ color: initialTextColor }}
+                >
                   Location:
                 </p>
-                {place}
+                <p style={{ color: initialContentColor }}>{place}</p>
               </div>
             </a>
           </div>
@@ -79,7 +113,10 @@ export default function Education() {
         <Topbar />
       </div>
       <div className="flex-grow justify-center items-center p-4">
-        <div className="text-3xl backround font-bold pb-2">
+        <div
+          className="text-3xl backround font-bold pb-2"
+          style={{ color: initialTextColor }}
+        >
           EDUCATION
         </div>
         <div className="flex justify-center items-center ">
@@ -124,7 +161,7 @@ export default function Education() {
               place="Palayapalayam,Erode"
               percentege="90%"
             />
-             <Institution
+            <Institution
               name="Annai Mary Convent School"
               img={AnnaiMarry}
               year="2006-2013"

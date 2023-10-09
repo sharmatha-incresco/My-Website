@@ -56,30 +56,30 @@ color: black;
   background-color: #bfdbfe; 
 }
 .custom-card {
-  border: 2px solid #52525b; 
+  border: 2px solid black; 
   color: black;
 
 }
 .custom-card:hover{
   background-color: #ffff; 
-  border: 2px solid #52525b; 
+  border: 2px solid black; 
 }
 .custom-input {
-  border: 2px solid #52525b; 
+  border: 2px solid black; 
   color: black; 
 }
 
 .custom-hover{
   color: white;
-  border: 2px solid #52525b; 
+  border: 2px solid black; 
 }
 .custom-hover:hover{
   color: #ffffff; 
 }
 .custom-badge{
-  background-color: #52525b; 
+  
   color: white;
 }
 .custom-view{
-  border: 2px solid #52525b; 
+  border: 2px solid black; 
 }

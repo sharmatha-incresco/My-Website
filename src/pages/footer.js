@@ -1,8 +1,9 @@
 import { BsGithub, BsLinkedin, BsInstagram } from "react-icons/bs";
 import { initialCardColor} from "../useCardColor";
+import { initialTextColor } from "../useTextColor";
 export default function Footer() {
   return (
-    <div className="flex gap-4 justify-between p-4 " style={{backgroundColor:initialCardColor}}>
+    <div className="flex gap-4 justify-between p-4 " style={{backgroundColor:initialCardColor,color:initialTextColor}}>
       <a href="https://github.com/sharmatha-incresco">
         <div className="flex gap-2 hover custom-barhover  rounded-lg ">
           <BsGithub className="w-6 h-6" />

@@ -4,7 +4,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  Typography,
 } from "@material-tailwind/react";
 import incresco from "../incresco.logo.jpeg";
 import mednucleus from "../mednucleus.jpeg";
@@ -19,6 +18,8 @@ import { darktheme } from "../globalstate";
 import { MdOutlineCancel } from "react-icons/md";
 import { BsBuildingAdd } from "react-icons/bs";
 import { initialCardColor } from "../useCardColor";
+import { initialTextColor } from "../useTextColor";
+import { initialContentColor } from "../useText";
 function Experience() {
   const [isAdd, setIsAdd] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -94,22 +95,22 @@ function Experience() {
           </a>
         </CardHeader>
         <CardBody>
-          <div className="flex flex-col justify-between gap-2">
-            <Typography variant="h5" color="blue-gray" className="mb-2">
+          <div className="flex flex-col justify-between gap-2" style={{color:initialContentColor}}>
+            <p  className="text-2xl mb-2 font-bold" style={{color:initialTextColor}}>
               {role}
-            </Typography>
-            <Typography variant="h4" className="mb-2">
+            </p>
+            <p className="text-2xl font-semibold mb-2">
               {company}
-            </Typography>
-            <Typography variant="h5" className="mb-2">
+            </p>
+            <p className=" text-1xl mb-2">
               📆 {duration}
-            </Typography>
-            <Typography variant="h5" className="mb-2">
+            </p>
+            <p className=" text-1xl mb-2">
               <a href={location}>📍 {place}</a>
-            </Typography>
-            <Typography variant="h5" className="mb-2">
+            </p>
+            <p className="text-1xl mb-2">
               💻 {type}
-            </Typography>
+            </p>
           </div>
         </CardBody>
       </Card>
@@ -126,7 +127,7 @@ function Experience() {
       </div>
       <div className="flex-grow p-4 xl:pl-16 items-center justify-center">
         <div className="flex justify-between">
-          <h1 className="text-3xl font-bold backround">EXPERIENCE</h1>
+          <h1 className="text-3xl font-bold backround"  style={{color:initialTextColor}} >EXPERIENCE</h1>
           <button
             onClick={handleAdd}
             className="rounded-full custom-input p-2 border-2 hover:scale-105 transform transition-transform  hover:border-2 shadow-md shadow-gray-500"
@@ -146,11 +147,11 @@ function Experience() {
               >
                 <MdOutlineCancel />
               </button>
-              <p className="font-semibold text-2xl backround text-center pt-4 ">
+              <p className="font-semibold text-2xl backround text-center pt-4  " style={{color:initialTextColor}}>
                 Hii Sharmatha 🤝
               </p>
               <div className=" pl-4 p-5">
-                <p className=" font-bold text-lg  backround">Password:</p>
+                <p className=" font-bold text-lg  backround" style={{color:initialTextColor}} >Password:</p>
                 <div className="flex gap-2">
                   <input
                     placeholder="Enter your password"
@@ -161,9 +162,9 @@ function Experience() {
 
                   <button onClick={passwordVisibility} className="">
                     {showPassword ? (
-                      <AiFillEyeInvisible className="backround text-lg" />
+                      <AiFillEyeInvisible className="backround text-lg" style={{color:initialTextColor}} />
                     ) : (
-                      <AiFillEye className="backround text-lg" />
+                      <AiFillEye className="backround text-lg" style={{color:initialTextColor}} />
                     )}
                   </button>
                 </div>
@@ -173,7 +174,7 @@ function Experience() {
                   onClick={handleAuth}
                   className="flex bottom-2 backround "
                 >
-                  <p className="font-semibold">SignIn 🔐</p>
+                  <p className="font-semibold" style={{color:initialTextColor}}>SignIn 🔐</p>
                 </button>
               </div>
             </div>
@@ -188,10 +189,10 @@ function Experience() {
                 onClick={() => setIsAdd(false)}
                 className="absolute top-2 right-2 text-gray-600 "
               >
-                <MdOutlineCancel />
+                <MdOutlineCancel  style={{color:initialTextColor}}/>
               </button>
               <div>
-                <h2 className="backround font-bold">Add logo:</h2>
+                <h2 className="backround font-bold" style={{color:initialTextColor}}>Add logo:</h2>
                 <input
                   type="file"
                   className="border-2 custom-input focus:outline-none  px-1 py-1 rounded"
@@ -240,6 +241,7 @@ function Experience() {
                     <button
                       onClick={handleAddImage}
                       className="backround font-semibold pt-5 "
+                      style={{color:initialTextColor}}
                     >
                       Add
                     </button>
