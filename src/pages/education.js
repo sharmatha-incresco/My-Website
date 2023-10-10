@@ -11,6 +11,26 @@ import { darktheme } from "../globalstate";
 import { initialCardColor } from "../useCardColor";
 import { initialTextColor } from "../useTextColor";
 import { initialContentColor } from "../useText";
+import { motion } from "framer-motion";
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 export default function Education() {
   function Institution({
     name,
@@ -112,7 +132,7 @@ export default function Education() {
       <div>
         <Topbar />
       </div>
-      <div className="flex-grow justify-center items-center p-4">
+      <div className="flex-grow xl:pl-16 justify-center items-center p-4">
         <div
           className="text-3xl backround font-bold pb-2"
           style={{ color: initialTextColor }}
@@ -120,7 +140,14 @@ export default function Education() {
           EDUCATION
         </div>
         <div className="flex justify-center items-center ">
+        <motion.ul
+          className="container"
+          variants={container}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="grid grid-cols-1 items-center justify-center p-10 gap-4 overflow-scroll">
+          <motion.li className="item" variants={item}>
             <Institution
               name="Velalar College Of Engineering & Technology"
               img={clg}
@@ -131,6 +158,8 @@ export default function Education() {
               place="Thindal,Erode"
               percentege="90%"
             />
+            </motion.li>
+            <motion.li className="item" variants={item}>
             <Institution
               name="Green Graden Mr.Hr.Sec School "
               img={gg}
@@ -141,6 +170,8 @@ export default function Education() {
               place="Perundurai R.S,Erode"
               percentege="80.2%"
             />
+             </motion.li>
+            <motion.li className="item" variants={item}>
             <Institution
               name="Vellalar Girls Mr.Hr.Sec School "
               img={vellalar}
@@ -151,6 +182,8 @@ export default function Education() {
               place="Thindal,Erode"
               percentege="89%"
             />
+             </motion.li>
+            <motion.li className="item" variants={item}>
             <Institution
               name="URC Palaniammal Mr.Hr.Sec School"
               img={urc}
@@ -161,6 +194,8 @@ export default function Education() {
               place="Palayapalayam,Erode"
               percentege="90%"
             />
+             </motion.li>
+            <motion.li className="item" variants={item}>
             <Institution
               name="Annai Mary Convent School"
               img={AnnaiMarry}
@@ -171,7 +206,9 @@ export default function Education() {
               place="Marapalam,Erode"
               percentege="90%"
             />
+            </motion.li>
           </div>
+          </motion.ul>
         </div>
       </div>
       <div className="">
