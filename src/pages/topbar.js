@@ -16,7 +16,7 @@ export default function Topbar() {
     ? "custom-bar-hover " 
     : "bg-transparent text-black";
   return (
-    <div className="flex gap-4 justify-between p-4" style={{ backgroundColor: initialCardColor}} >
+    <div className="flex gap-4 justify-between p-4 " style={{ backgroundColor: initialCardColor}} >
       <button onClick={() => navigate("/home")} className={`flex gap-2 hover custom-barhover rounded-lg ${buttonClass("/home","/")} `}  style={{ color: initialTextColor}}>
         <HiHome className="w-6 h-6" />
         <p className="hidden md:block lg:block">Home</p>

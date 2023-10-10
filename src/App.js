@@ -31,6 +31,7 @@ import { useDarktheme } from "./globalstate";
 import { useCardColor } from "./useCardColor";
 import { useTextColor } from "./useTextColor";
 import { useText } from "./useText";
+import { Popover, PopoverContent, PopoverTrigger } from "./components/popover";
 function App() {
   const hobby = [
     "Music 🎼",
@@ -115,7 +116,7 @@ function App() {
     return (
       <span
         className={`${badgeClasses}`}
-        style={{ backgroundColor: textColor, color: contentColor }}
+        style={{ backgroundColor: contentColor, color: textColor }}
       >
         {children}
       </span>
@@ -141,7 +142,7 @@ function App() {
       <div>
         <Topbar />
       </div>
-
+<div>
       <div className="flex-grow p-4 xl:p-0" style={containerStyle}>
         <div className="flex justify-end items-center pr-1 gap-4 pt-2">
           {!darktheme ? (
@@ -165,82 +166,110 @@ function App() {
               />
             </button>
           )}
-          <div className="flex overflow-scroll justify-end items-center pr-1 pt-2">
-            <button
-              onClick={() => setShowColorPicker(!showColorPicker)}
-              className="text-3xl hover:scale-105 transform transition-transform  "
-            >
-              🎨
-            </button>
-            {showColorPicker && (
-              <>
-                <div className=" absolute right-32  gap-5 ">
-                  <div
-                    className="flex flex-col gap-2 absolute top-5 z-50 custom-card p-4 rounded-lg  "
-                    style={{ backgroundColor: cardColor }}
-                  >
-                    <div className="flex gap-2" style={{ color: textColor }}>
-                      <BiRectangle className="w-6 h-6 " />
-                      <button
-                        onClick={() => {
-                          setShowCard(!showCard);
-                          setShowHeading(false);
-                          setShowContent(false);
-                        }}
-                      >
-                        Card
-                      </button>
+          <Popover>
+            <div className="flex overflow-scroll justify-end items-center pr-1 pt-2">
+              <PopoverTrigger>
+                <button
+                  onClick={() => setShowColorPicker(!showColorPicker)}
+                  className="text-3xl hover:scale-105 transform transition-transform  "
+                >
+                  🎨
+                </button>
+              </PopoverTrigger>
+              <PopoverContent>
+                <>
+                  <div className=" absolute right-32  gap-5 ">
+                    <div
+                      className="flex flex-col gap-2 absolute z-50 custom-card p-4 rounded-lg  "
+                      style={{ backgroundColor: cardColor }}
+                    >
+                      {" "}
+                      <Popover>
+                        <PopoverTrigger>
+                          <div
+                            className="flex gap-2"
+                            style={{ color: textColor }}
+                          >
+                            <BiRectangle className="w-6 h-6 " />{" "}
+                            <button
+                              onClick={() => {
+                                setShowCard(!showCard);
+                                setShowHeading(false);
+                                setShowContent(false);
+                              }}
+                            >
+                              Card
+                            </button>
+                          </div>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <SketchPicker
+                            color={cardColor}
+                            onChangeComplete={handleColorChange}
+                            className="absolute right-1 z-50  "
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <Popover>
+                        <PopoverTrigger>
+                          <div
+                            className="flex gap-2"
+                            style={{ color: textColor }}
+                          >
+                            <FaHeading className="w-5 h-5 " />
+
+                            <button
+                              onClick={() => {
+                                setShowHeading(!showHeading);
+                                setShowCard(false);
+                                setShowContent(false);
+                              }}
+                            >
+                              Heading
+                            </button>
+                          </div>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <SketchPicker
+                            className="absolute right-1 z-50 "
+                            color={textColor}
+                            onChangeComplete={handleTextColorChange}
+                          />
+                        </PopoverContent>
+                      </Popover>
+                      <Popover>
+                        <PopoverTrigger>
+                          <div
+                            className="flex gap-2"
+                            style={{ color: textColor }}
+                          >
+                            <BiText className="w-7 h-7" />
+
+                            <button
+                              onClick={() => {
+                                setShowContent(!showContent);
+                                setShowHeading(false);
+                                setShowCard(false);
+                              }}
+                            >
+                              Text
+                            </button>
+                          </div>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <SketchPicker
+                            className="absolute right-1 z-50 "
+                            color={contentColor}
+                            onChangeComplete={handleContentColorChange}
+                          />
+                        </PopoverContent>
+                      </Popover>
                     </div>
-                    <div className="flex gap-2" style={{ color: textColor }}>
-                      <FaHeading className="w-5 h-5 " />
-                      <button
-                        onClick={() => {
-                          setShowHeading(!showHeading);
-                          setShowCard(false);
-                          setShowContent(false);
-                        }}
-                      >
-                        Heading
-                      </button>
-                    </div>
-                    <div className="flex gap-2" style={{ color: textColor }}>
-                      <BiText className="w-7 h-7" />
-                      <button
-                        onClick={() => {
-                          setShowContent(!showContent);
-                          setShowHeading(false);
-                          setShowCard(false);
-                        }}
-                      >
-                        Text
-                      </button>
-                    </div>
-                    {showCard && (
-                      <SketchPicker
-                        color={cardColor}
-                        onChangeComplete={handleColorChange}
-                        className="absolute right-1 z-50  top-10  "
-                      />
-                    )}
-                    {showHeading && (
-                      <SketchPicker
-                        className="absolute right-1 z-50 top-20"
-                        color={textColor}
-                        onChangeComplete={handleTextColorChange}
-                      />
-                    )}
-                    {showContent && (
-                      <SketchPicker
-                        className="absolute right-1 z-50 top-28"
-                        color={contentColor}
-                        onChangeComplete={handleContentColorChange}
-                      />
-                    )}
                   </div>
-                </div>
-              </>
-            )}
-          </div>
+                </>
+              </PopoverContent>
+            </div>
+          </Popover>
         </div>
       </div>
 
@@ -741,6 +770,7 @@ function App() {
             </div>
           </div>
         </div>
+      </div>
       </div>
       <div>
         <Footer />
